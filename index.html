@@ -1,241 +1,160 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<title>سیستم نوبت‌دهی</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:tahoma}
-body{background:#0b0b0b;color:#fff}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>سیستم نوبت‌دهی</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Tahoma, sans-serif;
+        }
 
-/* header */
-header{
-  height:60px;
-  background:#000;
-  display:flex;
-  align-items:center;
-  padding:0 20px;
-}
-.hamburger{
-  width:30px;
-  cursor:pointer;
-}
-.hamburger span{
-  display:block;
-  height:3px;
-  background:#fff;
-  margin:6px 0;
-  transition:.4s;
-}
+        body {
+            background: #0b0b0b;
+            color: #fff;
+            font-size: 16px;
+        }
 
-/* side menu */
-#menu{
-  position:fixed;
-  top:0;
-  right:-260px;
-  width:260px;
-  height:100%;
-  background:#111;
-  padding:20px;
-  transition:.4s;
-}
-#menu.active{right:0}
-#menu button{
-  width:100%;
-  margin:10px 0;
-  padding:10px;
-  background:#b00020;
-  color:#fff;
-  border:none;
-  cursor:pointer;
-}
+        /* Header */
+        header {
+            height: 60px;
+            background: #000;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            justify-content: space-between;
+        }
 
-/* modal */
-.modal{
-  display:none;
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.7);
-  justify-content:center;
-  align-items:center;
-}
-.modal.active{display:flex}
-.modal-box{
-  background:#111;
-  padding:20px;
-  width:90%;
-  max-width:400px;
-  animation:pop .4s;
-}
-@keyframes pop{
-  from{transform:scale(.8);opacity:0}
-  to{transform:scale(1);opacity:1}
-}
-input,textarea{
-  width:100%;
-  margin:8px 0;
-  padding:8px;
-}
-.btn{
-  background:#b00020;
-  color:#fff;
-  border:none;
-  padding:10px;
-  width:100%;
-  cursor:pointer;
-}
+        .hamburger {
+            width: 30px;
+            cursor: pointer;
+        }
 
-/* dashboard */
-#dashboard{
-  display:none;
-  padding:20px;
-}
-.card{
-  background:#111;
-  padding:15px;
-  margin:10px 0;
-}
+        .hamburger span {
+            display: block;
+            height: 3px;
+            background: #fff;
+            margin: 6px 0;
+            transition: .4s;
+        }
 
-/* support page */
-#support{
-  display:none;
-  padding:40px;
-  text-align:center;
-}
-</style>
-</head>
-<body>
+        .close-btn {
+            font-size: 30px;
+            color: #fff;
+            cursor: pointer;
+            display: none;
+        }
 
-<header>
-  <div class="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </div>
-</header>
+        /* Side Menu */
+        #menu {
+            position: fixed;
+            top: 0;
+            right: -260px;
+            width: 260px;
+            height: 100%;
+            background: #111;
+            padding: 20px;
+            transition: .4s;
+        }
 
-<div id="menu">
-  <button onclick="openAuth()">ثبت نام / ورود</button>
-  <button onclick="openDashboard()">پنل کاربری</button>
-  <button onclick="openTracking()">پیگیری</button>
-  <button onclick="openAbout()">درباره ما</button>
-  <button onclick="openFAQ()">سوالات متداول</button>
-  <button onclick="openSupport()">پشتیبانی</button>
-</div>
+        #menu.active {
+            right: 0;
+        }
 
-<!-- auth modal -->
-<div class="modal" id="authModal">
-  <div class="modal-box">
-    <h3>ثبت نام</h3>
-    <input id="name" placeholder="نام و نام خانوادگی">
-    <input id="nid" placeholder="کد ملی">
-    <input id="phone" placeholder="شماره تماس">
-    <button class="btn" onclick="register()">ثبت نام</button>
-    <hr><br>
-    <h3>ورود</h3>
-    <input id="lname" placeholder="نام خانوادگی">
-    <input id="pass" placeholder="کد ملی">
-    <button class="btn" onclick="login()">ورود</button>
-  </div>
-</div>
+        #menu button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            background: #b00020;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
 
-<!-- about -->
-<div class="modal" id="aboutModal">
-  <div class="modal-box">
-    <p>این وب‌سایت متعلق به دکتر معراج رستگار، پزشکی متعهد و خداترس است.</p>
-    <p>فارغ‌التحصیل از دانشگاه معتبر آلمان.</p>
-    <p>دارای تخصص و تجربه حرفه‌ای در درمان بیماران.</p>
-    <p>متعهد به اخلاق پزشکی.</p>
-    <p>استفاده از متدهای نوین.</p>
-    <p>رضایت بالای بیماران.</p>
-    <p>دقت بالا در تشخیص.</p>
-    <p>ارائه خدمات پزشکی قابل اعتماد.</p>
-  </div>
-</div>
+        #menu button:hover {
+            background: #a1001f;
+        }
 
-<!-- faq -->
-<div class="modal" id="faqModal">
-  <div class="modal-box">
-    <p><b>چطور اعتماد کنیم؟</b><br>با تخصص و اخلاق پزشکی</p>
-    <p><b>اطلاعات ما امنه؟</b><br>بله کاملاً</p>
-    <p><b>چطور پیداتون کنیم؟</b><br>از طریق همین سایت</p>
-    <p><b>نوبت معتبره؟</b><br>دارای کد پیگیری</p>
-    <p><b>لغو نوبت؟</b><br>از پنل کاربری</p>
-    <p><b>استاندارد جهانی؟</b><br>کاملاً</p>
-    <p><b>پشتیبانی؟</b><br>۲۴ ساعته</p>
-    <p><b>چرا شما؟</b><br>تخصص و تعهد</p>
-  </div>
-</div>
+        #menu .close-btn {
+            background: transparent;
+            color: #fff;
+            font-size: 25px;
+            cursor: pointer;
+            display: block;
+            margin-bottom: 20px;
+            text-align: right;
+        }
 
-<!-- tracking -->
-<div class="modal" id="trackModal">
-  <div class="modal-box">
-    <input id="trackCode" placeholder="کد پیگیری">
-    <button class="btn" onclick="checkTrack()">پیگیری</button>
-  </div>
-</div>
+        /* Main Page */
+        #mainPage {
+            display: block;
+            padding: 20px;
+            text-align: center;
+        }
 
-<div id="dashboard">
-  <h2>پنل کاربری</h2>
-  <div class="card" id="userInfo"></div>
-  <div class="card">
-    <h3>سابقه نوبت‌دهی</h3>
-    <div id="appointments"></div>
-  </div>
-</div>
+        #mainPage h1 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
 
-<div id="support">
-  <h2>با پشتیبانی ۲۴ ساعته، هر کجا و هر لحظه</h2><br>
-  <button class="btn" onclick="showSupportForm()">شروع گفتگو</button>
-  <div id="supportForm" style="display:none">
-    <p>چه مشکلی پیش آمده؟</p>
-    <textarea id="problem"></textarea>
-    <button class="btn" onclick="saveProblem()">ثبت مشکل</button>
-  </div>
-</div>
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .7);
+            justify-content: center;
+            align-items: center;
+        }
 
-<script>
-function toggleMenu(){
-  document.getElementById('menu').classList.toggle('active')
-}
-function openAuth(){show('authModal')}
-function openAbout(){show('aboutModal')}
-function openFAQ(){show('faqModal')}
-function openTracking(){show('trackModal')}
+        .modal.active {
+            display: flex;
+        }
 
-function show(id){
-  document.querySelectorAll('.modal').forEach(m=>m.classList.remove('active'))
-  document.getElementById(id).classList.add('active')
-}
+        .modal-box {
+            background: #111;
+            padding: 20px;
+            width: 90%;
+            max-width: 400px;
+            animation: pop .4s;
+        }
 
-function register(){
-  localStorage.user={
-    name:name.value,
-    nid:nid.value,
-    phone:phone.value
-  }
-  alert('ثبت نام شد')
-}
-function login(){
-  let u=localStorage.user?JSON.parse(JSON.stringify(localStorage.user)):null
-  if(u && pass.value===u.nid){
-    openDashboard()
-  }else alert('خطا')
-}
-function openDashboard(){
-  document.getElementById('dashboard').style.display='block'
-  let u=JSON.parse(JSON.stringify(localStorage.user))
-  userInfo.innerHTML=`نام: ${u.name}<br>کد ملی: ${u.nid}<br>شماره: ${u.phone}`
-}
-function checkTrack(){
-  alert('نوبت شما ثبت شده')
-}
-function openSupport(){
-  document.getElementById('support').style.display='block'
-}
-function showSupportForm(){
-  supportForm.style.display='block'
-}
-function saveProblem(){
-  alert('مشکل ثبت شد')
-}
-</script>
-</body>
-</html>
+        @keyframes pop {
+            from {
+                transform: scale(.8);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            margin: 8px 0;
+            padding: 8px;
+            background: #222;
+            color: #fff;
+            border: 1px solid #444;
+        }
+
+        .btn {
+            background: #b00020;
+            color: #fff;
+            border: none;
+            padding: 10px;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #a1001f;
+        }
+    </style>
+</
