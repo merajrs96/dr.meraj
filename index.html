@@ -47,7 +47,6 @@ input[type="submit"]:hover, button:hover { background:#cc0000; transform: scale(
 .floating-btn:hover { transform: scale(1.1); background:#cc0000; }
 
 .auth-form { background:#111; padding:30px; border-radius:15px; max-width:400px; margin:100px auto; box-shadow:0 0 30px #ff0000; position: relative; }
-
 .info-box { background:#111; padding:20px 30px; border-radius:10px; margin-bottom:30px; box-shadow:0 0 20px #ff0000; text-align:center; }
 .faq-item h4 { color:#ff6666; margin-bottom:5px; cursor:default; }
 
@@ -63,6 +62,7 @@ input[type="submit"]:hover, button:hover { background:#cc0000; transform: scale(
 <div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
 <nav class="side-menu" id="sideMenu">
 <ul>
+<li><a onclick="showSection('appointment')">رزرو نوبت</a></li>
 <li><a onclick="openAuth('signup')">ثبت نام</a></li>
 <li><a onclick="openAuth('login')">پنل کاربری</a></li>
 <li><a onclick="showSection('faq')">سوالات متداول</a></li>
@@ -73,7 +73,6 @@ input[type="submit"]:hover, button:hover { background:#cc0000; transform: scale(
 </header>
 
 <main>
-<!-- info کوتاه -->
 <div class="info-box">
 <p>خوش آمدید! مطب دکتر معراج رستگار با تجهیزات پیشرفته و تیم حرفه‌ای آماده ارائه خدمات تخصصی مغز و اعصاب است. ما با دقت و مهارت به بررسی مشکلات بیماران پرداخته و راهکارهای بهبود ارائه می‌کنیم. رزرو نوبت آنلاین برای شما راحتی و سرعت را فراهم می‌کند.</p>
 </div>
@@ -175,11 +174,7 @@ supportForm.addEventListener('submit', function(e){
 function showSection(id){
     const sections = document.querySelectorAll('main section');
     sections.forEach(sec => sec.classList.add('hidden-section'));
-    if(id==='appointment'){
-        document.getElementById('appointment').classList.remove('hidden-section');
-    } else if(document.getElementById(id)){
-        document.getElementById(id).classList.remove('hidden-section');
-    }
+    if(document.getElementById(id)) document.getElementById(id).classList.remove('hidden-section');
     menuToggle.classList.remove('open');
     sideMenu.classList.remove('open');
 }
@@ -207,6 +202,5 @@ function closeAuth(){
     popup.classList.add('hidden-section');
 }
 </script>
-
 </body>
 </html>
