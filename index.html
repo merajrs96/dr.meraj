@@ -1,160 +1,261 @@
 <!DOCTYPE html>
-<html lang="fa" dir="rtl">
+<html lang="fa">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>سیستم نوبت‌دهی</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Tahoma, sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>دکتر معراج رستگار - مغز و اعصاب</title>
+<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: 'Vazirmatn', sans-serif; background-color: #000; color: #fff; line-height: 1.6; overflow-x: hidden; }
+/* Header و منو */
+header { background: linear-gradient(120deg, #ff0000, #660000); text-align: center; padding: 80px 20px 50px 20px; position: relative; overflow: hidden; }
+header::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: url('https://via.placeholder.com/1500x500') center/cover no-repeat; opacity: 0.1; transform: scale(1.2); }
+header h1 { font-size: 3rem; margin-bottom: 15px; animation: slideDown 1s ease-out; position: relative; z-index:1; }
+header p { font-size: 1.2rem; color: #ffcccc; animation: fadeIn 2s ease-out; position: relative; z-index:1; }
+/* منوی سه خطی */
+.menu-toggle { width: 30px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; height: 22px; position: absolute; top: 30px; left: 30px; z-index: 200; }
+.menu-toggle span { display: block; height: 4px; background: #ff0000; border-radius: 2px; transition: all 0.4s ease; }
+.menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+.menu-toggle.open span:nth-child(2) { opacity: 0; }
+.menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+/* منوی کناری */
+.side-menu { position: fixed; top: 0; left: -300px; width: 250px; height: 100%; background-color: #111; box-shadow: 5px 0 20px #ff0000; transition: all 0.5s ease; z-index: 150; padding-top: 80px; }
+.side-menu ul { list-style: none; padding: 0 20px; }
+.side-menu ul li { margin-bottom: 20px; }
+.side-menu ul li a { color: #fff; text-decoration: none; font-size: 1.1rem; transition: 0.3s; }
+.side-menu ul li a:hover { color: #ff0000; }
+.side-menu.open { left: 0; }
+/* بخش‌های اصلی */
+main { max-width: 900px; margin: 50px auto; padding: 0 20px; }
+section { margin-bottom: 70px; opacity:0; transform: translateY(50px); transition: all 1s ease-out; }
+section.visible { opacity:1; transform: translateY(0); }
+h2 { font-size: 2rem; color: #ff0000; margin-bottom: 15px; position: relative; }
+h2::after { content:''; display:block; width:60px; height:4px; background:#ff0000; margin-top:8px; border-radius:3px; }
+p { font-size:1rem; color:#ddd; margin-bottom:15px; }
+/* فرم رزرو */
+form { background-color: #111; padding: 40px 30px; border-radius: 15px; box-shadow: 0 0 30px #ff0000; max-width: 500px; margin: auto; position: relative; }
+input[type="text"], input[type="tel"], input[type="number"] { width:100%; padding:14px; margin-bottom:20px; border:2px solid #ff0000; border-radius:7px; background:#000; color:#fff; font-size:1rem; transition: 0.3s; }
+input[type="text"]:focus, input[type="tel"]:focus, input[type="number"]:focus { border-color:#ff6666; box-shadow:0 0 10px #ff0000; outline:none; }
+input[type="submit"] { width:100%; padding:16px; border:none; border-radius:10px; background:#ff0000; color:#fff; font-size:1.2rem; cursor:pointer; transition: all 0.3s ease; position: relative; overflow: hidden; }
+input[type="submit"]:hover { background:#cc0000; transform: scale(1.05); }
+.success-msg { text-align:center; color:#0f0; margin-top:20px; display:none; font-weight:bold; }
+/* دکمه بالا رفتن صفحه */
+.floating-btn { position: fixed; bottom: 30px; right: 30px; background:#ff0000; color:#fff; padding:15px 20px; border-radius:50px; font-size:1.1rem; cursor:pointer; box-shadow:0 0 20px #ff0000; transition: all 0.3s; z-index:100; }
+.floating-btn:hover { transform: scale(1.1); background:#cc0000; }
+/* انیمیشن‌ها */
+@keyframes slideDown { from { transform: translateY(-50px); opacity:0;} to { transform: translateY(0); opacity:1;} }
+@keyframes fadeIn { from { opacity:0;} to { opacity:1;} }
+/* فرم ثبت نام و ورود */
+#authPopup { display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.9); z-index:300; justify-content:center; align-items:center; }
+#authPopup.active { display:flex; }
+.auth-form { background:#111; padding:30px 25px; border-radius:15px; width:90%; max-width:400px; position:relative; }
+.auth-form h3 { color:#ff0000; text-align:center; margin-bottom:20px; }
+.auth-form input { margin-bottom:15px; }
+.auth-form .toggle-link { color:#ff6666; text-decoration:underline; cursor:pointer; display:block; text-align:center; margin-top:10px; }
+.auth-form .close-popup { position:absolute; top:10px; right:15px; font-size:25px; cursor:pointer; color:#fff; }
+/* داشبورد */
+#dashboard { display:none; background:#111; padding:30px 25px; border-radius:15px; max-width:500px; margin:auto; box-shadow:0 0 30px #ff0000; }
+#dashboard h3 { color:#ff0000; margin-bottom:15px; }
+/* بخش سوالات متداول و پشتیبانی */
+.faq-item { margin-bottom:15px; }
+.faq-item h4 { color:#ff6666; margin-bottom:5px; }
+.support-form { margin-top:10px; }
+</style>
+</head>
+<body>
 
-        body {
-            background: #0b0b0b;
-            color: #fff;
-            font-size: 16px;
-        }
+<header>
+<h1>دکتر معراج رستگار</h1>
+<p>خدا ترس | فوق تخصص مغز و اعصاب آلمان</p>
+<div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+<nav class="side-menu" id="sideMenu">
+<ul>
+<li><a href="#" onclick="openAuth('signup')">ثبت نام</a></li>
+<li><a href="#" onclick="openAuth('login')">پنل کاربری</a></li>
+<li><a href="#faq">سوالات متداول</a></li>
+<li><a href="#about">درباره ما</a></li>
+<li><a href="#support">پشتیبانی</a></li>
+</ul>
+</nav>
+</header>
 
-        /* Header */
-        header {
-            height: 60px;
-            background: #000;
-            display: flex;
-            align-items: center;
-            padding: 0 20px;
-            justify-content: space-between;
-        }
+<main>
+<section class="reveal">
+<h2>مغز و اعصاب چیست؟</h2>
+<p>مغز و اعصاب بخشی از بدن است که وظیفه کنترل تمام عملکردهای بدن و پردازش اطلاعات را بر عهده دارد. مراقبت از این سیستم حیاتی اهمیت ویژه‌ای دارد.</p>
+</section>
+<section class="reveal">
+<h2>چرا تست مغز و اعصاب اهمیت بالایی دارد؟</h2>
+<p>تست‌های مغز و اعصاب به تشخیص زودهنگام مشکلات عصبی کمک می‌کنند و امکان درمان سریع و کاهش عوارض را فراهم می‌کنند. پیشگیری همیشه بهتر از درمان است.</p>
+</section>
+<section class="reveal">
+<h2>خدمات مطب دکتر معراج رستگار</h2>
+<p>ارائه مشاوره تخصصی، بررسی اختلالات عصبی، و درمان‌های پیشرفته مغز و اعصاب با استفاده از تکنولوژی روز دنیا.</p>
+</section>
 
-        .hamburger {
-            width: 30px;
-            cursor: pointer;
-        }
+<!-- فرم رزرو -->
+<section class="reveal">
+<h2>رزرو نوبت</h2>
+<form id="appointmentForm">
+<input type="text" name="name" placeholder="نام و نام خانوادگی" required>
+<input type="tel" name="phone" placeholder="شماره تماس" required>
+<input type="submit" value="رزرو نوبت">
+<div class="success-msg" id="successMsg">پیام شما با موفقیت ثبت شد!</div>
+</form>
+</section>
 
-        .hamburger span {
-            display: block;
-            height: 3px;
-            background: #fff;
-            margin: 6px 0;
-            transition: .4s;
-        }
+<!-- سوالات متداول -->
+<section id="faq" class="reveal">
+<h2>سوالات متداول</h2>
+<div class="faq-item">
+<h4>چه موقع باید به متخصص مغز و اعصاب مراجعه کنم؟</h4>
+<p>اگر سردرد شدید، سرگیجه یا مشکلات حافظه دارید، بهتر است به متخصص مراجعه کنید.</p>
+</div>
+<div class="faq-item">
+<h4>آیا تست‌ها دردناک هستند؟</h4>
+<p>اکثر تست‌ها غیر تهاجمی و بدون درد هستند.</p>
+</div>
+<div class="faq-item">
+<h4>چقدر طول می‌کشد نتایج مشخص شوند؟</h4>
+<p>معمولاً ظرف چند روز نتایج آماده می‌شوند.</p>
+</div>
+</section>
 
-        .close-btn {
-            font-size: 30px;
-            color: #fff;
-            cursor: pointer;
-            display: none;
-        }
+<!-- درباره ما -->
+<section id="about" class="reveal">
+<h2>درباره ما</h2>
+<p>دکتر معراج رستگار، فوق تخصص مغز و اعصاب از آلمان، با بیش از ده سال تجربه در درمان اختلالات عصبی. ایشان با استفاده از تکنولوژی روز دنیا، مشاوره‌های دقیق و درمان‌های موثر ارائه می‌دهند. مطب با تجهیزات پیشرفته و محیطی دوستانه آماده خدمت رسانی به بیماران است. هدف ایشان بهبود کیفیت زندگی و سلامت عصبی مراجعین است. </p>
+</section>
 
-        /* Side Menu */
-        #menu {
-            position: fixed;
-            top: 0;
-            right: -260px;
-            width: 260px;
-            height: 100%;
-            background: #111;
-            padding: 20px;
-            transition: .4s;
-        }
+<!-- پشتیبانی -->
+<section id="support" class="reveal">
+<h2>پشتیبانی</h2>
+<form class="support-form" id="supportForm">
+<input type="text" name="issue" placeholder="مشکل خود را ثبت کنید" required>
+<input type="submit" value="ارسال مشکل">
+<div class="success-msg" id="supportMsg">پیام شما با موفقیت ارسال شد!</div>
+</form>
+</section>
 
-        #menu.active {
-            right: 0;
-        }
+</main>
 
-        #menu button {
-            width: 100%;
-            margin: 10px 0;
-            padding: 10px;
-            background: #b00020;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
+<!-- فرم ثبت نام و ورود پاپ آپ -->
+<div id="authPopup">
+<div class="auth-form" id="signupForm">
+<span class="close-popup" onclick="closeAuth()">×</span>
+<h3>ثبت نام</h3>
+<input type="text" id="regName" placeholder="نام و نام خانوادگی" required>
+<input type="text" id="regPhone" placeholder="شماره تماس" required>
+<input type="text" id="regCode" placeholder="کد ملی" required>
+<input type="submit" value="ثبت نام" onclick="registerUser()">
+<span class="toggle-link" onclick="switchAuth('login')">ورود</span>
+</div>
+<div class="auth-form" id="loginForm">
+<span class="close-popup" onclick="closeAuth()">×</span>
+<h3>ورود</h3>
+<input type="text" id="loginPhone" placeholder="شماره تماس" required>
+<input type="text" id="loginCode" placeholder="کد ملی" required>
+<input type="submit" value="ورود" onclick="loginUser()">
+<span class="toggle-link" onclick="switchAuth('signup')">ثبت نام</span>
+</div>
+</div>
 
-        #menu button:hover {
-            background: #a1001f;
-        }
+<!-- داشبورد -->
+<div id="dashboard">
+<h3>داشبورد کاربری</h3>
+<p id="welcomeMsg"></p>
+</div>
 
-        #menu .close-btn {
-            background: transparent;
-            color: #fff;
-            font-size: 25px;
-            cursor: pointer;
-            display: block;
-            margin-bottom: 20px;
-            text-align: right;
-        }
+<div class="floating-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">بالا برو</div>
 
-        /* Main Page */
-        #mainPage {
-            display: block;
-            padding: 20px;
-            text-align: center;
+<script>
+// فرم رزرو
+const form = document.getElementById('appointmentForm');
+const successMsg = document.getElementById('successMsg');
+form.addEventListener('submit', function(e){
+    e.preventDefault();
+    successMsg.style.display = 'block';
+    form.reset();
+});
+// افکت reveal
+const revealElements = document.querySelectorAll('.reveal');
+window.addEventListener('scroll', () => {
+    const windowHeight = window.innerHeight;
+    revealElements.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top;
+        if(elementTop < windowHeight - 100){
+            el.classList.add('visible');
         }
+    });
+});
+// منوی سه خطی
+const menuToggle = document.getElementById('menuToggle');
+const sideMenu = document.getElementById('sideMenu');
+menuToggle.addEventListener('click', () => {
+    menuToggle.classList.toggle('open');
+    sideMenu.classList.toggle('open');
+});
 
-        #mainPage h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
+// --- فرم ثبت نام و ورود ---
+const authPopup = document.getElementById('authPopup');
+const signupForm = document.getElementById('signupForm');
+const loginForm = document.getElementById('loginForm');
 
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, .7);
-            justify-content: center;
-            align-items: center;
-        }
+function openAuth(type){
+    authPopup.classList.add('active');
+    if(type==='signup'){ signupForm.style.display='block'; loginForm.style.display='none'; }
+    else { signupForm.style.display='none'; loginForm.style.display='block'; }
+}
+function closeAuth(){ authPopup.classList.remove('active'); }
 
-        .modal.active {
-            display: flex;
-        }
+function switchAuth(type){
+    if(type==='signup'){ signupForm.style.display='block'; loginForm.style.display='none'; }
+    else { signupForm.style.display='none'; loginForm.style.display='block'; }
+}
 
-        .modal-box {
-            background: #111;
-            padding: 20px;
-            width: 90%;
-            max-width: 400px;
-            animation: pop .4s;
-        }
+// ثبت نام
+function registerUser(){
+    const name = document.getElementById('regName').value.trim();
+    const phone = document.getElementById('regPhone').value.trim();
+    const code = document.getElementById('regCode').value.trim();
+    if(name && phone && code){
+        const user = {name, phone, code};
+        localStorage.setItem('user', JSON.stringify(user));
+        alert('ثبت نام با موفقیت انجام شد!');
+        closeAuth();
+    } else alert('تمام فیلدها را پر کنید.');
+}
 
-        @keyframes pop {
-            from {
-                transform: scale(.8);
-                opacity: 0;
-            }
+// ورود
+function loginUser(){
+    const phone = document.getElementById('loginPhone').value.trim();
+    const code = document.getElementById('loginCode').value.trim();
+    const user = JSON.parse(localStorage.getItem('user'));
+    if(user && user.phone===phone && user.code===code){
+        closeAuth();
+        document.getElementById('dashboard').style.display='block';
+        document.getElementById('welcomeMsg').innerText=`سلام ${user.name}! خوش آمدید.`;
+    } else alert('شماره تلفن یا کد ملی اشتباه است.');
+}
 
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
+// فرم پشتیبانی
+const supportForm = document.getElementById('supportForm');
+const supportMsg = document.getElementById('supportMsg');
+supportForm.addEventListener('submit', function(e){
+    e.preventDefault();
+    supportMsg.style.display='block';
+    supportForm.reset();
+});
 
-        input,
-        textarea {
-            width: 100%;
-            margin: 8px 0;
-            padding: 8px;
-            background: #222;
-            color: #fff;
-            border: 1px solid #444;
-        }
-
-        .btn {
-            background: #b00020;
-            color: #fff;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            cursor: pointer;
-        }
-
-        .btn:hover {
-            background: #a1001f;
-        }
-    </style>
-</
+// خودکار ورود اگر قبلاً ثبت نام کرده
+window.addEventListener('load', () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if(user){
+        document.getElementById('dashboard').style.display='block';
+        document.getElementById('welcomeMsg').innerText=`سلام ${user.name}! خوش آمدید.`;
+    }
+});
+</script>
+</body>
+</html>
