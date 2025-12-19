@@ -1,0 +1,107 @@
+﻿<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>سایت دکتر معراج رستگار</title>
+<style>
+    body {
+        font-family: Tahoma, sans-serif;
+        background: #f0f4f8;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+    .container {
+        width: 90%;
+        max-width: 800px;
+        margin: 20px auto;
+    }
+    .box {
+        background: white;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 10px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    h1, h2 {
+        color: #0d6efd;
+        text-align: center;
+    }
+    p {
+        text-align: justify;
+        line-height: 1.6;
+    }
+    input, textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        text-align: right;
+    }
+    button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        background: #0d6efd;
+        color: white;
+        cursor: pointer;
+    }
+    button:hover {
+        background: #0b5ed7;
+    }
+    /* عکس */
+    .header-image {
+        width: 100%;
+        max-height: 300px;
+        object-fit: cover;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>سایت دکتر معراج رستگار</h1>
+    
+    <!-- عکس بالای صفحه -->
+    <img src="https.png?text=دکتر+معراج+رستگار" alt="دکتر معراج رستگار" class="header-image">
+
+    <div class="box">
+        <h2>  تحقیقات دکتر معراج رستگار</h2>
+        <p>
+            علم پزشکی مطالعه بدن انسان و روش‌های پیشگیری، تشخیص و درمان بیماری‌هاست. پزشکان با بهره‌گیری از تحقیقات علمی و فناوری‌های نوین، تلاش می‌کنند سلامت بیماران را حفظ کرده و کیفیت زندگی آنان را بهبود بخشند.
+        </p>
+        <p>
+            آموزش پزشکی، پژوهش و مراقبت بالینی سه ستون اصلی این علم هستند. دکتر معراج رستگار متخصص مغز و اعصاب بوده و با تجربه فراوان در حوزه بیماری‌های عصبی و مراقبت از سلامت بیماران فعالیت می‌کند.
+        </p>
+        <p>
+            اهمیت سلامت جسم و ذهن در زندگی روزمره غیرقابل انکار است. با رعایت سبک زندگی سالم، تغذیه مناسب، ورزش منظم و مدیریت استرس، می‌توان کیفیت زندگی را افزایش داد و از بیماری‌های مزمن پیشگیری کرد.
+        </p>
+    </div>
+
+    <div class="box">
+        <h2>رزرو نوبت</h2>
+        <input type="text" id="firstName" placeholder="نام">
+        <input type="text" id="lastName" placeholder="نام خانوادگی">
+        <input type="text" id="phone" placeholder="شماره تماس">
+        <button id="reserveButton">رزرو</button>
+    </div>
+</div>
+
+<script>
+    // پاک کردن فیلدها بعد از رزرو
+    document.getElementById('reserveButton').addEventListener('click', function(){
+        document.getElementById('firstName').value = '';
+        document.getElementById('lastName').value = '';
+        document.getElementById('phone').value = '';
+    });
+</script>
+
+</body>
+</html>
