@@ -4,203 +4,216 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>دکتر معراج رستگار - مغز و اعصاب</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
-* { margin:0; padding:0; box-sizing:border-box; }
-body { font-family: 'Vazirmatn', sans-serif; background-color: #000; color: #fff; line-height: 1.6; overflow-x: hidden; }
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+font-family:'Vazirmatn',sans-serif;
+background:#000;
+color:#fff;
+line-height:1.6;
+overflow-x:hidden
+}
 
-header { background: linear-gradient(120deg, #ff0000, #660000); text-align: center; padding: 80px 20px 50px 20px; position: relative; overflow: hidden; }
-header::before { content: ''; position: absolute; top:0; left:0; width:100%; height:100%; background: url('https://via.placeholder.com/1500x500') center/cover no-repeat; opacity: 0.1; transform: scale(1.2); }
-header h1 { font-size: 3rem; margin-bottom: 15px; animation: slideDown 1s ease-out; position: relative; z-index:1; }
-header p { font-size: 1.2rem; color: #ffcccc; animation: fadeIn 2s ease-out; position: relative; z-index:1; }
+/* ===== Header ===== */
+header{
+background:linear-gradient(120deg,#ff0000,#660000);
+text-align:center;
+padding:80px 20px 50px;
+position:relative;
+overflow:hidden
+}
+header::before{
+content:'';
+position:absolute;
+inset:0;
+background:url('images/clinic1.jpg') center/cover no-repeat;
+opacity:.12;
+transform:scale(1.2)
+}
+header h1{
+font-size:3rem;
+margin-bottom:15px;
+animation:slideDown 1s;
+position:relative;
+z-index:1
+}
+header p{
+font-size:1.2rem;
+color:#ffcccc;
+animation:fadeIn 2s;
+position:relative;
+z-index:1
+}
 
-.menu-toggle { width: 30px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; height: 22px; position: absolute; top: 30px; left: 30px; z-index: 200; }
-.menu-toggle span { display: block; height: 4px; background: #ff0000; border-radius: 2px; transition: all 0.4s ease; }
-.menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
-.menu-toggle.open span:nth-child(2) { opacity: 0; }
-.menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+/* ===== Hamburger ===== */
+.menu-toggle{
+width:30px;height:22px;
+position:absolute;top:30px;left:30px;
+display:flex;flex-direction:column;
+justify-content:space-between;
+cursor:pointer;z-index:200
+}
+.menu-toggle span{
+height:4px;background:#fff;
+border-radius:2px;transition:.4s
+}
+.menu-toggle.open span:nth-child(1){
+transform:rotate(45deg) translate(5px,5px)
+}
+.menu-toggle.open span:nth-child(2){opacity:0}
+.menu-toggle.open span:nth-child(3){
+transform:rotate(-45deg) translate(6px,-6px)
+}
 
-.side-menu { position: fixed; top: 0; left: -300px; width: 250px; height: 100%; background-color: #111; box-shadow: 5px 0 20px #ff0000; transition: all 0.5s ease; z-index: 150; padding-top: 80px; }
-.side-menu ul { list-style: none; padding: 0 20px; }
-.side-menu ul li { margin-bottom: 20px; }
-.side-menu ul li a { color: #fff; text-decoration: none; font-size: 1.1rem; transition: 0.3s; cursor:pointer; }
-.side-menu ul li a:hover { color: #ff0000; }
-.side-menu.open { left: 0; }
+/* ===== Side Menu ===== */
+.side-menu{
+position:fixed;
+top:0;left:-300px;
+width:250px;height:100%;
+background:#111;
+box-shadow:5px 0 20px #ff0000;
+transition:.5s;
+z-index:150;
+padding-top:80px
+}
+.side-menu.open{left:0}
+.side-menu ul{list-style:none;padding:0 20px}
+.side-menu li{margin-bottom:20px}
+.side-menu a{
+color:#fff;
+text-decoration:none;
+font-size:1.1rem
+}
+.side-menu a:hover{color:#ff0000}
 
-main { max-width: 900px; margin: 50px auto; padding: 0 20px; }
-section { margin-bottom: 70px; opacity:0; transform: translateY(50px); transition: all 0.6s ease-out; }
-.section-visible { opacity:1; transform: translateY(0); }
-.hidden-section { display:none; }
+/* ===== Main ===== */
+main{
+max-width:1000px;
+margin:60px auto;
+padding:0 20px
+}
+.info-box{
+background:#111;
+padding:30px;
+border-radius:12px;
+box-shadow:0 0 25px #ff0000;
+text-align:center;
+margin-bottom:60px
+}
 
-h2 { font-size: 2rem; color: #ff0000; margin-bottom: 15px; position: relative; }
-h2::after { content:''; display:block; width:60px; height:4px; background:#ff0000; margin-top:8px; border-radius:3px; }
-p { font-size:1rem; color:#ddd; margin-bottom:15px; }
+/* ===== Gallery ===== */
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:25px
+}
+.gallery img{
+width:100%;
+border-radius:15px;
+box-shadow:0 0 20px #ff0000;
+opacity:0;
+transform:translateY(40px);
+transition:.8s
+}
+.gallery img.show{
+opacity:1;
+transform:translateY(0)
+}
 
-form { background-color: #111; padding: 40px 30px; border-radius: 15px; box-shadow: 0 0 30px #ff0000; max-width: 500px; margin: auto; position: relative; }
-input[type="text"], input[type="tel"] { width:100%; padding:14px; margin-bottom:20px; border:2px solid #ff0000; border-radius:7px; background:#000; color:#fff; font-size:1rem; transition: 0.3s; }
-input[type="text"]:focus, input[type="tel"]:focus { border-color:#ff6666; box-shadow:0 0 10px #ff0000; outline:none; }
-input[type="submit"], button { width:100%; padding:16px; border:none; border-radius:10px; background:#ff0000; color:#fff; font-size:1.2rem; cursor:pointer; transition: all 0.3s ease; margin-top:10px; }
-input[type="submit"]:hover, button:hover { background:#cc0000; transform: scale(1.05); }
-.success-msg { text-align:center; color:#0f0; margin-top:20px; display:none; font-weight:bold; }
+/* ===== Floating Button ===== */
+.floating-btn{
+position:fixed;
+bottom:30px;right:30px;
+background:#ff0000;
+color:#fff;
+padding:15px 20px;
+border-radius:50px;
+cursor:pointer;
+box-shadow:0 0 20px #ff0000;
+transition:.3s;
+z-index:100
+}
+.floating-btn:hover{
+background:#cc0000;
+transform:scale(1.1)
+}
 
-.floating-btn { position: fixed; bottom: 30px; right: 30px; background:#ff0000; color:#fff; padding:15px 20px; border-radius:50px; font-size:1.1rem; cursor:pointer; box-shadow:0 0 20px #ff0000; transition: all 0.3s; z-index:100; }
-.floating-btn:hover { transform: scale(1.1); background:#cc0000; }
-
-.auth-form { background:#111; padding:30px; border-radius:15px; max-width:400px; margin:100px auto; box-shadow:0 0 30px #ff0000; position: relative; }
-.info-box { background:#111; padding:20px 30px; border-radius:10px; margin-bottom:30px; box-shadow:0 0 20px #ff0000; text-align:center; }
-.faq-item h4 { color:#ff6666; margin-bottom:5px; cursor:default; }
-
-@keyframes slideDown { from { transform: translateY(-50px); opacity:0;} to { transform: translateY(0); opacity:1;} }
-@keyframes fadeIn { from { opacity:0;} to { opacity:1;} }
+@keyframes slideDown{
+from{transform:translateY(-50px);opacity:0}
+to{opacity:1}
+}
+@keyframes fadeIn{
+from{opacity:0}
+to{opacity:1}
+}
 </style>
 </head>
+
 <body>
 
 <header>
 <h1>دکتر معراج رستگار</h1>
 <p>خدا ترس | فوق تخصص مغز و اعصاب آلمان</p>
-<div class="menu-toggle" id="menuToggle"><span></span><span></span><span></span></div>
+
+<div class="menu-toggle" id="menuToggle">
+<span></span><span></span><span></span>
+</div>
+
 <nav class="side-menu" id="sideMenu">
 <ul>
-<li><a onclick="showSection('appointment')">رزرو نوبت</a></li>
-<li><a onclick="openAuth('signup')">ثبت نام</a></li>
-<li><a onclick="openAuth('login')">پنل کاربری</a></li>
-<li><a onclick="showSection('faq')">سوالات متداول</a></li>
-<li><a onclick="showSection('about')">درباره ما</a></li>
-<li><a onclick="showSection('support')">پشتیبانی</a></li>
+<li><a href="reserve.html">رزرو نوبت</a></li>
+<li><a href="register.html">ثبت نام</a></li>
+<li><a href="login.html">پنل کاربری</a></li>
+<li><a href="faq.html">سوالات متداول</a></li>
+<li><a href="about.html">درباره ما</a></li>
+<li><a href="support.html">پشتیبانی</a></li>
 </ul>
 </nav>
 </header>
 
 <main>
 <div class="info-box">
-<p>خوش آمدید! مطب دکتر معراج رستگار با تجهیزات پیشرفته و تیم حرفه‌ای آماده ارائه خدمات تخصصی مغز و اعصاب است. ما با دقت و مهارت به بررسی مشکلات بیماران پرداخته و راهکارهای بهبود ارائه می‌کنیم. رزرو نوبت آنلاین برای شما راحتی و سرعت را فراهم می‌کند.</p>
+<p>
+مطب دکتر معراج رستگار با بهره‌گیری از دانش روز، تجهیزات پیشرفته
+و رویکردی انسانی، آماده ارائه خدمات تخصصی مغز و اعصاب است.
+</p>
 </div>
 
-<section id="appointment" class="section-visible">
-<h2>رزرو نوبت</h2>
-<form id="appointmentForm">
-<input type="text" name="name" placeholder="نام و نام خانوادگی" required>
-<input type="tel" name="phone" placeholder="شماره تماس" required>
-<input type="submit" value="رزرو نوبت">
-<div class="success-msg" id="successMsg">پیام شما با موفقیت ثبت شد!</div>
-</form>
+<section class="gallery">
+<img src="images/clinic1.jpg" alt="مطب">
+<img src="images/clinic2.jpg" alt="تجهیزات">
+<img src="images/doctor.jpg" alt="دکتر معراج رستگار">
 </section>
-
-<section id="about" class="hidden-section">
-<h2>درباره ما</h2>
-<p>دکتر معراج رستگار، فوق تخصص مغز و اعصاب از آلمان، با بیش از ده سال تجربه در درمان اختلالات عصبی است. ایشان با دقت و مهارت بالا به بررسی مشکلات بیماران پرداخته و راهکارهای تخصصی ارائه می‌دهد. دکتر رستگار با علم به روز و تکنولوژی نوین، همیشه بهترین روش‌های درمانی را به بیماران ارائه می‌کند. اخلاق حرفه‌ای، صبر و دقت در تشخیص، باعث اعتماد بیماران شده است. مطب مجهز به امکانات پیشرفته و محیطی دوستانه برای بیماران است. هدف اصلی ایشان بهبود کیفیت زندگی و سلامت عصبی مراجعین است. بیماران با اطمینان کامل می‌توانند تحت مراقبت و درمان دکتر رستگار قرار گیرند.</p>
-</section>
-
-<section id="faq" class="hidden-section">
-<h2>سوالات متداول</h2>
-<div class="faq-item">
-<h4>چه موقع باید به متخصص مغز و اعصاب مراجعه کنم؟</h4>
-<p>در صورت سردردهای شدید، سرگیجه یا مشکلات حافظه بهتر است به متخصص مراجعه کنید.</p>
-</div>
-<div class="faq-item">
-<h4>آیا تست‌ها دردناک هستند؟</h4>
-<p>اکثر تست‌ها غیر تهاجمی و بدون درد هستند.</p>
-</div>
-<div class="faq-item">
-<h4>آیا نتایج تست‌ها فوری مشخص می‌شوند؟</h4>
-<p>معمولاً ظرف چند روز نتایج آماده می‌شوند.</p>
-</div>
-<div class="faq-item">
-<h4>چگونه می‌توانم نوبت رزرو کنم؟</h4>
-<p>با استفاده از فرم رزرو آنلاین در صفحه اصلی به راحتی می‌توانید نوبت خود را ثبت کنید.</p>
-</div>
-<div class="faq-item">
-<h4>هزینه مشاوره چقدر است؟</h4>
-<p>هزینه مشاوره بستگی به نوع درمان و زمان جلسه دارد و هنگام مراجعه اطلاع داده می‌شود.</p>
-</div>
-<div class="faq-item">
-<h4>آیا بیماران خارجی هم می‌توانند مراجعه کنند؟</h4>
-<p>بله، مطب آماده پذیرش بیماران داخلی و خارجی با هماهنگی قبلی است.</p>
-</div>
-<div class="faq-item">
-<h4>آیا داروهای تجویزی دارای عوارض هستند؟</h4>
-<p>داروها با دقت تجویز می‌شوند و هرگونه عارضه احتمالی قبل از مصرف به بیمار توضیح داده می‌شود.</p>
-</div>
-<div class="faq-item">
-<h4>چقدر طول می‌کشد تا درمان تاثیر بگذارد؟</h4>
-<p>بسته به نوع بیماری و درمان، معمولاً از چند روز تا چند هفته تاثیرات مشاهده می‌شوند.</p>
-</div>
-</section>
-
-<section id="support" class="hidden-section">
-<h2>پشتیبانی</h2>
-<p style="margin-bottom:15px;">پشتیبانی ۲۴ ساعته آماده پاسخگویی به سوالات و مشکلات شماست. هر زمان نیاز داشتید، می‌توانید پیام خود را ثبت کنید.</p>
-<form id="supportForm">
-<input type="text" name="issue" placeholder="مشکل خود را ثبت کنید" required>
-<input type="submit" value="ارسال مشکل">
-<div class="success-msg" id="supportMsg">پیام شما با موفقیت ارسال شد!</div>
-</form>
-</section>
-
-<div id="authPopup" class="hidden-section"></div>
 </main>
 
-<div class="floating-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">بالا برو</div>
+<div class="floating-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+↑
+</div>
 
 <script>
-// منوی همبرگری
-const menuToggle = document.getElementById('menuToggle');
-const sideMenu = document.getElementById('sideMenu');
-menuToggle.addEventListener('click', () => {
-    menuToggle.classList.toggle('open');
-    sideMenu.classList.toggle('open');
-});
+const menuToggle=document.getElementById('menuToggle');
+const sideMenu=document.getElementById('sideMenu');
 
-// فرم رزرو
-const form = document.getElementById('appointmentForm');
-const successMsg = document.getElementById('successMsg');
-form.addEventListener('submit', function(e){
-    e.preventDefault();
-    successMsg.style.display='block';
-    form.reset();
-});
+menuToggle.onclick=()=>{
+menuToggle.classList.toggle('open');
+sideMenu.classList.toggle('open');
+};
 
-// فرم پشتیبانی
-const supportForm = document.getElementById('supportForm');
-const supportMsg = document.getElementById('supportMsg');
-supportForm.addEventListener('submit', function(e){
-    e.preventDefault();
-    supportMsg.style.display='block';
-    supportForm.reset();
-});
-
-// نمایش بخش‌ها
-function showSection(id){
-    const sections = document.querySelectorAll('main section');
-    sections.forEach(sec => sec.classList.add('hidden-section'));
-    if(document.getElementById(id)) document.getElementById(id).classList.remove('hidden-section');
-    menuToggle.classList.remove('open');
-    sideMenu.classList.remove('open');
+// موشن عکس‌ها
+const imgs=document.querySelectorAll('.gallery img');
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(e=>{
+if(e.isIntersecting){
+e.target.classList.add('show');
 }
+});
+},{threshold:.3});
 
-// ثبت نام / ورود پاپ‌آپ
-function openAuth(type){
-    const popup = document.getElementById('authPopup');
-    popup.innerHTML = '';
-    popup.classList.remove('hidden-section');
-    popup.innerHTML = `
-    <div class="auth-form">
-        <h2>${type==='signup'?'ثبت نام':'ورود'}</h2>
-        <form id="authForm">
-            <input type="text" name="fullname" placeholder="نام و نام خانوادگی" required>
-            ${type==='signup'?'<input type="text" name="nationalId" placeholder="کد ملی" required>':''}
-            <input type="tel" name="phone" placeholder="شماره تماس" required>
-            <input type="submit" value="${type==='signup'?'ثبت نام':'ورود'}">
-            <button type="button" onclick="closeAuth()">بستن</button>
-        </form>
-    </div>`;
-}
-
-function closeAuth(){
-    const popup = document.getElementById('authPopup');
-    popup.classList.add('hidden-section');
-}
+imgs.forEach(img=>observer.observe(img));
 </script>
+
 </body>
 </html>
