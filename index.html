@@ -1,221 +1,140 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>دکتر معراج رستگار - مغز و اعصاب</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
-
+<title>Nexora</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{
-font-family:'Vazirmatn',sans-serif;
-background:#000;
-color:#fff;
-line-height:1.6;
-overflow-x:hidden
-}
+  /* Reset & Basic Styles */
+  * {margin:0; padding:0; box-sizing:border-box; font-family:'Roboto', sans-serif;}
+  body {background-color:#111; color:#fff;}
+  a {color:inherit; text-decoration:none;}
 
-/* ===== Header ===== */
-header{
-background:linear-gradient(120deg,#ff0000,#660000);
-text-align:center;
-padding:80px 20px 50px;
-position:relative;
-overflow:hidden
-}
-header::before{
-content:'';
-position:absolute;
-inset:0;
-background:url('images/dok.jpg') center/cover no-repeat;
-opacity:.12;
-transform:scale(1.2)
-}
-header h1{
-font-size:3rem;
-margin-bottom:15px;
-animation:slideDown 1s;
-position:relative;
-z-index:1
-}
-header p{
-font-size:1.2rem;
-color:#ffcccc;
-animation:fadeIn 2s;
-position:relative;
-z-index:1
-}
+  /* Header */
+  header {
+    display:flex; justify-content:space-between; align-items:center;
+    padding:20px 40px; background:#111; position:fixed; width:100%; top:0; z-index:1000;
+  }
+  .logo {font-size:2em; font-weight:700; color:#ff003c;}
+  .slogan {font-size:0.9em; color:#fff; margin-top:4px;}
+  
+  /* Hamburger Menu */
+  .hamburger {cursor:pointer; width:30px; height:22px; display:flex; flex-direction:column; justify-content:space-between;}
+  .bar {height:4px; background:#fff; border-radius:2px; transition:0.3s;}
+  .menu {position:fixed; top:0; right:-300px; width:300px; height:100%; background:#111; transition:0.5s; padding:50px 20px; display:flex; flex-direction:column;}
+  .menu.active {right:0;}
+  .menu a {margin:20px 0; font-size:1.2em;}
+  .menu-buttons {margin-bottom:30px;}
+  .menu-buttons button {margin-right:10px; padding:5px 10px; cursor:pointer; background:#ff003c; border:none; color:#fff; border-radius:4px;}
 
-/* ===== Hamburger ===== */
-.menu-toggle{
-width:30px;height:22px;
-position:absolute;top:30px;left:30px;
-display:flex;flex-direction:column;
-justify-content:space-between;
-cursor:pointer;z-index:200
-}
-.menu-toggle span{
-height:4px;background:#fff;
-border-radius:2px;transition:.4s
-}
-.menu-toggle.open span:nth-child(1){
-transform:rotate(45deg) translate(5px,5px)
-}
-.menu-toggle.open span:nth-child(2){opacity:0}
-.menu-toggle.open span:nth-child(3){
-transform:rotate(-45deg) translate(6px,-6px)
-}
+  /* Intro */
+  .intro {text-align:center; padding:160px 20px 60px 20px;}
+  .intro-text {font-size:1.2em; line-height:1.5; max-width:700px; margin:0 auto;}
 
-/* ===== Side Menu ===== */
-.side-menu{
-position:fixed;
-top:0;left:-300px;
-width:250px;height:100%;
-background:#111;
-box-shadow:5px 0 20px #ff0000;
-transition:.5s;
-z-index:150;
-padding-top:80px
-}
-.side-menu.open{left:0}
-.side-menu ul{list-style:none;padding:0 20px}
-.side-menu li{margin-bottom:20px}
-.side-menu a{
-color:#fff;
-text-decoration:none;
-font-size:1.1rem
-}
-.side-menu a:hover{color:#ff0000}
+  /* Services */
+  .services {display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:40px; padding:40px;}
+  .service-box {background:#1a1a1a; padding:20px; border-radius:12px; text-align:center; transition:0.3s; cursor:pointer;}
+  .service-box:hover {transform:translateY(-5px); box-shadow:0 5px 20px rgba(255,0,60,0.5);}
+  .service-box img {width:60px; margin-bottom:10px;}
+  .service-box h3 {margin:10px 0; color:#ff003c;}
+  .service-box p {font-size:0.9em; color:#ccc;}
 
-/* ===== Main ===== */
-main{
-max-width:1000px;
-margin:60px auto;
-padding:0 20px
-}
-.info-box{
-background:#111;
-padding:30px;
-border-radius:12px;
-box-shadow:0 0 25px #ff0000;
-text-align:center;
-margin-bottom:60px
-}
+  /* Brand Box */
+  .brand-box {background:#222; padding:30px; margin:40px 20px; border-radius:12px; text-align:center; font-size:0.95em; line-height:1.6;}
 
-/* ===== Gallery ===== */
-.gallery{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:25px
-}
-.gallery img{
-width:100%;
-border-radius:15px;
-box-shadow:0 0 20px #ff0000;
-opacity:0;
-transform:translateY(40px);
-transition:.8s
-}
-.gallery img.show{
-opacity:1;
-transform:translateY(0)
-}
+  /* Footer */
+  footer {background:#111; padding:20px; text-align:center; display:flex; flex-direction:column; gap:10px;}
+  footer a {color:#ff003c; font-weight:500;}
 
-/* ===== Floating Button ===== */
-.floating-btn{
-position:fixed;
-bottom:30px;right:30px;
-background:#ff0000;
-color:#fff;
-padding:15px 20px;
-border-radius:50px;
-cursor:pointer;
-box-shadow:0 0 20px #ff0000;
-transition:.3s;
-z-index:100
-}
-.floating-btn:hover{
-background:#cc0000;
-transform:scale(1.1)
-}
-
-@keyframes slideDown{
-from{transform:translateY(-50px);opacity:0}
-to{opacity:1}
-}
-@keyframes fadeIn{
-from{opacity:0}
-to{opacity:1}
-}
+  /* Animations */
+  .fade-in {opacity:0; animation:fadeIn 1s forwards;}
+  @keyframes fadeIn {to{opacity:1;}}
 </style>
 </head>
-
 <body>
 
 <header>
-<h1>دکتر معراج رستگار خداترس</h1>
-<p>| فوق تخصص مغز و اعصاب آلمان</p>
-
-<div class="menu-toggle" id="menuToggle">
-<span></span><span></span><span></span>
-</div>
-
-<nav class="side-menu" id="sideMenu">
-<ul>
-<li><a href="reserve.html">رزرو نوبت</a></li>
-<li><a href="register.html">ثبت نام</a></li>
-<li><a href="login.html">پنل کاربری</a></li>
-<li><a href="faq.html">سوالات متداول</a></li>
-<li><a href="about.html">درباره ما</a></li>
-<li><a href="support.html">پشتیبانی</a></li>
-</ul>
-</nav>
+  <div>
+    <div class="logo">NEXORA</div>
+    <div class="slogan">the next ora of digital experience</div>
+  </div>
+  <div class="hamburger" onclick="toggleMenu()">
+    <div class="bar"></div>
+    <div class="bar"></div>
+    <div class="bar"></div>
+  </div>
 </header>
 
-<main>
-<div class="info-box">
-<p>
- خوش امدید 
-مطب دکتر معراج رستگار با بهره‌گیری از دانش روز، تجهیزات پیشرفته
-و رویکردی انسانی، آماده ارائه خدمات تخصصی مغز و اعصاب است کافیست با رزرو نوبت انلاین به راحتی ویزیت شود.
-</p>
+<div class="menu" id="menu">
+  <div class="menu-buttons">
+    <button onclick="goHome()">Home</button>
+    <button onclick="goBack()">Back</button>
+  </div>
+  <a href="#">Sign Up / Log In</a>
+  <a href="#">Dashboard</a>
+  <a href="#">About Us</a>
+  <a href="#">FAQ</a>
+  <a href="#">Support</a>
 </div>
 
-<section class="gallery">
-<img src="images/dok.jpg" alt="مطب">
-<img src="images/dokijon.jpg" alt="تجهیزات">
-<img src="images/untitled.jpg" alt="دکتر معراج رستگار">
+<section class="intro fade-in">
+  <p class="intro-text">
+    The Nexora team is proud to provide services to our clients with 3 years of experience and 24/7 support in all website services.
+  </p>
 </section>
-</main>
 
-<div class="floating-btn" onclick="window.scrollTo({top:0,behavior:'smooth'})">
-↑
+<section class="services">
+  <div class="service-box fade-in">
+    <img src="https://img.icons8.com/ios-filled/100/ff003c/domain.png" alt="Site Creation">
+    <h3>Site Creation</h3>
+    <p>We build responsive and fast websites tailored to your needs.</p>
+  </div>
+  <div class="service-box fade-in">
+    <img src="https://img.icons8.com/ios-filled/100/ff003c/design.png" alt="Web Design">
+    <h3>Web Design</h3>
+    <p>Creative designs that attract and engage your visitors.</p>
+  </div>
+  <div class="service-box fade-in">
+    <img src="https://img.icons8.com/ios-filled/100/ff003c/automation.png" alt="Automation">
+    <h3>Website Automation</h3>
+    <p>Automate your workflows for efficiency and reliability.</p>
+  </div>
+  <div class="service-box fade-in">
+    <img src="https://img.icons8.com/ios-filled/100/ff003c/landing-page.png" alt="Landing Page">
+    <h3>Landing Page</h3>
+    <p>Landing pages designed to convert visitors into clients.</p>
+  </div>
+  <div class="service-box fade-in">
+    <img src="https://img.icons8.com/ios-filled/100/ff003c/lock.png" alt="Security">
+    <h3>Website Security</h3>
+    <p>Protecting your website from threats with advanced security.</p>
+  </div>
+</section>
+
+<div class="brand-box fade-in">
+  Nexora is committed to delivering top-notch digital experiences. With years of expertise and a passion for innovation, we provide comprehensive solutions that empower your online presence. Our mission is to help businesses thrive in the digital world.
 </div>
+
+<footer>
+  <a href="#">News</a>
+  <a href="#">About Us</a>
+  <a href="#">FAQ</a>
+  <a href="#">Support</a>
+  <a href="#">E-mail</a>
+</footer>
 
 <script>
-const menuToggle=document.getElementById('menuToggle');
-const sideMenu=document.getElementById('sideMenu');
-
-menuToggle.onclick=()=>{
-menuToggle.classList.toggle('open');
-sideMenu.classList.toggle('open');
-};
-
-// موشن عکس‌ها
-const imgs=document.querySelectorAll('.gallery img');
-const observer=new IntersectionObserver(entries=>{
-entries.forEach(e=>{
-if(e.isIntersecting){
-e.target.classList.add('show');
-}
-});
-},{threshold:.3});
-
-imgs.forEach(img=>observer.observe(img));
+  function toggleMenu(){
+    document.getElementById('menu').classList.toggle('active');
+  }
+  function goHome(){
+    window.location.href = '#';
+  }
+  function goBack(){
+    window.history.back();
+  }
 </script>
 
 </body>
-</html>
-
+     </html>
