@@ -8,7 +8,7 @@
 <style>
 :root {
   --bg-color: #ffffff;
-  --text-color: #1b3a2e; /* سبز دلنشین متن */
+  --text-color: #1f4d3f; /* سبز دلنشین متن */
   --accent-start: #05652d; 
   --accent-end: #00d084;   
   --secondary-color: #f0f9f4;
@@ -84,11 +84,12 @@ nav a:hover { color: var(--accent-end); }
   display:flex;
   align-items:center;
   gap:10px;
+  font-size:14px;
 }
 
 .toggle-btn {
-  width:40px;
-  height:20px;
+  width:35px;
+  height:18px;
   background:#ccc;
   border-radius:10px;
   position: relative;
@@ -99,8 +100,8 @@ nav a:hover { color: var(--accent-end); }
 .toggle-btn::after {
   content:'';
   position:absolute;
-  width:18px;
-  height:18px;
+  width:16px;
+  height:16px;
   background:#fff;
   border-radius:50%;
   top:1px;
@@ -109,7 +110,7 @@ nav a:hover { color: var(--accent-end); }
 }
 
 .toggle-btn.active { background: var(--accent-end); }
-.toggle-btn.active::after { left:21px; }
+.toggle-btn.active::after { left:18px; }
 
 /* Responsive */
 @media(max-width:768px){
@@ -123,21 +124,22 @@ nav a:hover { color: var(--accent-end); }
     background-color: var(--bg-color);
     flex-direction: column;
     align-items: flex-start;
-    padding-top:50px;
+    padding-top:60px;
     gap:20px;
     transition: right 0.4s ease;
+    z-index: 999;
   }
   nav.open { right:0; }
 }
 
 /* HERO */
 .hero {
-  padding:100px 20px 60px 20px;
+  padding:120px 20px 60px 20px;
   text-align:left;
 }
 
 .hero h1 {
-  font-size:48px;
+  font-size:50px;
   font-weight:700;
   background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
   -webkit-background-clip: text;
@@ -147,8 +149,9 @@ nav a:hover { color: var(--accent-end); }
 
 .hero p {
   font-size:20px;
-  max-width:600px;
-  margin-top:20px;
+  max-width:650px;
+  margin-top:25px;
+  line-height:1.6;
   opacity:0;
   animation: fadeIn 1.5s forwards 0.5s;
 }
@@ -156,12 +159,12 @@ nav a:hover { color: var(--accent-end); }
 .hero .cta {
   background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
   color:#fff;
-  padding:12px 28px;
+  padding:14px 32px;
   font-size:18px;
   border:none;
   border-radius:8px;
   cursor:pointer;
-  margin-top:20px;
+  margin-top:25px;
   transition: transform 0.3s;
 }
 
@@ -170,10 +173,11 @@ nav a:hover { color: var(--accent-end); }
 /* INFO BOX */
 .info-box {
   background: var(--secondary-color);
-  padding:40px 20px;
-  margin:20px 0;
+  padding:45px 25px;
+  margin:25px 0;
   border-radius:16px;
-  line-height:1.6;
+  line-height:1.7;
+  font-size:16px;
 }
 
 /* SERVICES */
@@ -182,29 +186,29 @@ nav a:hover { color: var(--accent-end); }
   flex-wrap:wrap;
   gap:30px;
   justify-content:center;
-  padding:60px 20px;
+  padding:65px 20px;
 }
 
 .card {
   background-color: var(--secondary-color);
   padding:30px 20px;
   border-radius:16px;
-  width:260px;
+  width:270px;
   text-align:center;
   transition: transform 0.3s, box-shadow 0.3s;
   font-family: inherit;
 }
 
 .card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  transform: translateY(-12px);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
 }
 
 .card i {
-  font-size:40px;
+  font-size:42px;
   margin-bottom:15px;
   display:block;
-  font-family: 'FontAwesome', sans-serif; /* جدا کردن فونت آیکون */
+  font-family: 'FontAwesome', sans-serif;
   background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -215,16 +219,16 @@ nav a:hover { color: var(--accent-end); }
   background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
   color:#fff;
   text-align:center;
-  padding:60px 20px;
+  padding:65px 20px;
   border-radius:16px;
-  margin:60px 20px;
+  margin:65px 20px;
 }
 
 .call-to-action button {
   background:#fff;
   color: var(--accent-end);
   border:none;
-  padding:12px 28px;
+  padding:14px 32px;
   font-size:18px;
   border-radius:8px;
   cursor:pointer;
@@ -238,14 +242,16 @@ footer {
   background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
   color: #fff;
   text-align:left;
-  padding:30px 20px;
+  padding:40px 20px;
   font-size:14px;
+  display:flex;
+  flex-direction:column;
+  gap:12px;
 }
 
 footer a {
   display:block;
   color: #fff;
-  margin:10px 0;
   text-decoration:none;
   transition: color 0.3s;
 }
@@ -257,9 +263,9 @@ footer a:hover { color: var(--secondary-color); }
 @keyframes text-fade { from {opacity:0.6;} to {opacity:1;} }
 
 @media(max-width:768px){
-  .hero h1 { font-size:32px; }
-  .hero p { font-size:16px; }
-  .hero .cta { font-size:16px; padding:10px 20px; }
+  .hero h1 { font-size:34px; }
+  .hero p { font-size:17px; }
+  .hero .cta { font-size:16px; padding:12px 24px; }
 }
 </style>
 </head>
@@ -300,12 +306,12 @@ footer a:hover { color: var(--secondary-color); }
 </div>
 
 <section class="services" id="services">
-  <div class="card"><i>🌐</i><h3>Website Creation</h3><p>Professional website setup and deployment to get your business online effortlessly.</p></div>
-  <div class="card"><i>🎨</i><h3>Website Design</h3><p>Creative and responsive designs that captivate visitors and enhance user experience.</p></div>
-  <div class="card"><i>📜</i><h3>Website Automation</h3><p>Automate repetitive tasks and workflows to save time and increase productivity.</p></div>
-  <div class="card"><i>📌</i><h3>Landing Page</h3><p>High-converting landing pages tailored for marketing campaigns and lead generation.</p></div>
-  <div class="card"><i>📈</i><h3>SEO Services</h3><p>Optimize your website to rank higher in search engines and attract more traffic.</p></div>
-  <div class="card"><i>🛡️</i><h3>Website Security</h3><p>Implement advanced security measures to protect your site and customer data.</p></div>
+  <div class="card"><i>🌐</i><h3>Website Creation</h3><p>Professional website setup and deployment to get your business online effortlessly with attention to detail and modern design principles.</p></div>
+  <div class="card"><i>🎨</i><h3>Website Design</h3><p>Creative and responsive designs that captivate visitors, enhance user experience, and reflect your brand identity.</p></div>
+  <div class="card"><i>⚙️</i><h3>Website Automation</h3><p>Automate repetitive tasks and workflows to save time, reduce errors, and increase overall productivity efficiently.</p></div>
+  <div class="card"><i>🏠</i><h3>Landing Page</h3><p>High-converting landing pages tailored for marketing campaigns and lead generation, designed for optimal performance.</p></div>
+  <div class="card"><i>📈</i><h3>SEO Services</h3><p>Optimize your website to rank higher in search engines, attract more traffic, and increase your online visibility effectively.</p></div>
+  <div class="card"><i>🔒</i><h3>Website Security</h3><p>Implement advanced security measures to protect your website, safeguard customer data, and maintain trust and reliability.</p></div>
 </section>
 
 <div class="info-box">
