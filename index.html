@@ -1,487 +1,290 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nexora</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;600;700&display=swap" rel="stylesheet">
+
 <style>
-  /* Reset & Basic Styles */
-  * {margin:0; padding:0; box-sizing:border-box; font-family:'Roboto', sans-serif;}
-  body {background:linear-gradient(135deg,#111,#1a1a1a); color:#fff; overflow-x:hidden;}
-  a {color:inherit; text-decoration:none;}
+/* ===== Base ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Roboto',sans-serif;
+}
 
-  /* Header */
-  header {
-    display:flex; justify-content:space-between; align-items:center;
-    padding:20px 40px; background:#111; position:fixed; width:100%; top:0; z-index:1000;
-    box-shadow:0 2px 10px rgba(0,0,0,0.5);
-  }
-  .logo {font-size:2em; font-weight:700; color:#ff003c;}
-  .slogan {font-size:0.9em; color:#fff; margin-top:4px;}
-  
-  /* Hamburger Menu */
-  .hamburger {cursor:pointer; width:30px; height:22px; display:flex; flex-direction:column; justify-content:space-between; z-index:1001;}
-  .bar {height:4px; background:#fff; border-radius:2px; transition:0.3s;}
-  .menu {
-    position:fixed; top:0; right:-350px; width:350px; height:100%; 
-    background:rgba(17,17,17,0.95); transition:0.5s; padding:80px 30px; 
-    display:flex; flex-direction:column; box-shadow:-2px 0 10px rgba(0,0,0,0.7);
-    z-index:1000;
-  }
-  .menu.active {right:0;}
-  .menu a {margin:25px 0; font-size:1.2em; transition:0.3s;}
-  .menu a:hover {color:#ff003c;}
-  .menu-buttons {margin-bottom:40px;}
-  .menu-buttons button {
-    margin-right:10px; padding:8px 12px; cursor:pointer; 
-    background:#ff003c; border:none; color:#fff; border-radius:5px;
-    transition:0.3s;
-  }
-  .menu-buttons button:hover {background:#ff3366;}
+body{
+  background:linear-gradient(135deg,#0f0f0f,#1b1b1b);
+  color:#eaeaea;
+  overflow-x:hidden;
+}
 
-  /* Intro */
-  .intro {text-align:center; padding:180px 20px 80px 20px;}
-  .intro-text {font-size:1.2em; line-height:1.5; max-width:750px; margin:0 auto; animation:fadeInUp 1s ease forwards; opacity:0;}
+a{color:inherit;text-decoration:none}
 
-  /* Services */
-  .services {display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:40px; padding:40px;}
-  .service-box {
-    background:linear-gradient(135deg,#1a1a1a,#222); padding:25px; border-radius:15px; 
-    text-align:center; transition:0.3s; cursor:pointer; box-shadow:0 5px 15px rgba(255,0,60,0.2);
-    opacity:0; transform:translateY(50px); animation:fadeInUp 1s forwards;
-  }
-  .service-box:hover {transform:translateY(-5px) scale(1.05); box-shadow:0 10px 25px rgba(255,0,60,0.4);}
-  .service-box img {width:70px; margin-bottom:15px;}
-  .service-box h3 {margin:10px 0; color:#ff003c;}
-  .service-box p {font-size:0.9em; color:#ccc;}
+/* ===== Header ===== */
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  background:#111;
+  padding:18px 32px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:1000;
+  box-shadow:0 2px 12px rgba(0,0,0,.6);
+}
 
-  /* Brand Box */
-  .brand-box {background:#222; padding:35px; margin:50px 20px; border-radius:15px; text-align:center; 
-    font-size:0.95em; line-height:1.6; box-shadow:0 5px 20px rgba(255,0,60,0.2); opacity:0; animation:fadeInUp 1.2s ease forwards;}
+.logo{
+  font-size:1.8em;
+  font-weight:700;
+  color:#ff003c;
+}
 
-  /* Footer */
-  footer {
-    position:fixed; bottom:20px; left:20px; background:transparent; padding:10px 0; 
-    display:flex; flex-direction:column; gap:8px; font-size:0.85em;
-    border-top:1px solid #ff003c; max-width:200px;
-  }
-  footer a {color:#ff003c; font-weight:500; transition:0.3s;}
-  footer a:hover {color:#ff6699;}
+.slogan{
+  font-size:.8em;
+  opacity:.85;
+}
 
-  /* Animations */
-  @keyframes fadeInUp {
-    to {opacity:1; transform:translateY(0);}
-  }
+/* ===== Hamburger ===== */
+.hamburger{
+  width:28px;
+  height:20px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  cursor:pointer;
+}
+
+.hamburger span{
+  height:3px;
+  background:#fff;
+  border-radius:2px;
+}
+
+/* ===== Menu ===== */
+.menu{
+  position:fixed;
+  top:0;
+  right:-100%;
+  width:300px;
+  height:100%;
+  background:rgba(15,15,15,.98);
+  padding:90px 28px;
+  transition:.4s ease;
+  z-index:999;
+}
+
+.menu.active{right:0}
+
+.menu a{
+  display:block;
+  margin-bottom:22px;
+  font-size:1.05em;
+  opacity:.85;
+}
+
+.menu a:hover{
+  color:#ff003c;
+  opacity:1;
+}
+
+/* ===== Sections ===== */
+section{
+  margin-bottom:120px;
+}
+
+.container{
+  max-width:1100px;
+  margin:auto;
+  padding:0 24px;
+}
+
+/* ===== Intro ===== */
+.intro{
+  padding-top:160px;
+}
+
+.intro p{
+  max-width:620px;
+  font-size:.95em;
+  line-height:1.8;
+  opacity:.9;
+}
+
+/* ===== Services ===== */
+.services{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+  gap:50px;
+  margin-top:60px;
+}
+
+.service-box{
+  background:#1a1a1a;
+  border-radius:16px;
+  padding:28px;
+  text-align:left;
+  animation:fadeUp .9s ease forwards;
+  opacity:0;
+}
+
+.service-box:nth-child(1){animation-delay:.1s}
+.service-box:nth-child(2){animation-delay:.25s}
+.service-box:nth-child(3){animation-delay:.4s}
+.service-box:nth-child(4){animation-delay:.55s}
+
+.service-box img{
+  width:42px;
+  margin-bottom:18px;
+}
+
+.service-box h3{
+  color:#ff003c;
+  font-size:1.05em;
+  margin-bottom:10px;
+}
+
+.service-box p{
+  font-size:.88em;
+  line-height:1.7;
+  opacity:.85;
+}
+
+/* ===== Brand ===== */
+.brand{
+  background:#151515;
+  border-left:3px solid #ff003c;
+  padding:34px;
+  border-radius:14px;
+}
+
+.brand p{
+  max-width:700px;
+  font-size:.9em;
+  line-height:1.8;
+  opacity:.9;
+}
+
+/* ===== Footer ===== */
+footer{
+  margin-top:140px;
+  padding:40px 24px;
+  border-top:1px solid rgba(255,0,60,.35);
+}
+
+.footer-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:22px;
+  font-size:.85em;
+}
+
+.footer-links a{
+  color:#ff003c;
+  opacity:.8;
+}
+
+.footer-links a:hover{opacity:1}
+
+/* ===== Animations ===== */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(40px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+/* ===== Responsive ===== */
+@media(max-width:600px){
+  header{padding:16px 20px}
+  .intro p{font-size:.9em}
+}
 </style>
 </head>
+
 <body>
 
 <header>
   <div>
     <div class="logo">NEXORA</div>
-    <div class="slogan">the next ora of digital experience</div>
+    <div class="slogan">the next era of digital experience</div>
   </div>
+
   <div class="hamburger" onclick="toggleMenu()">
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div class="bar"></div>
+    <span></span><span></span><span></span>
   </div>
 </header>
 
-<div class="menu" id="menu">
-  <div class="menu-buttons">
-    <button onclick="goHome()">Home</button>
-    <button onclick="goBack()">Back</button>
-  </div>
+<nav class="menu" id="menu">
   <a href="#">Sign Up / Log In</a>
   <a href="#">Dashboard</a>
   <a href="#">About Us</a>
   <a href="#">FAQ</a>
   <a href="#">Support</a>
-</div>
+</nav>
 
 <section class="intro">
-  <p class="intro-text">
-    The Nexora team is proud to provide services to our clients with 3 years of experience and 24/7 support in all website services.
-  </p>
-</section>
-
-<section class="services">
-  <div class="service-box" style="animation-delay:0.1s">
-    <img src="https://img.icons8.com/ios-filled/100/ff003c/domain.png" alt="Site Creation">
-    <h3>Site Creation</h3>
-    <p>We build responsive and fast websites tailored to your needs.</p>
-  </div>
-  <div class="service-box" style="animation-delay:0.2s">
-    <img src="https://img.icons8.com/ios-filled/100/ff003c/design.png" alt="Web Design">
-    <h3>Web Design</h3>
-    <p>Creative designs that attract and engage your visitors.</p>
-  </div>
-  <div class="service-box" style="animation-delay:0.3s">
-    <img src="https://img.icons8.com/ios-filled/100/ff003c/automation.png" alt="Automation">
-    <h3>Website Automation</h3>
-    <p>Automate your workflows for efficiency and reliability.</p>
-  </div>
-  <div class="service-box" style="animation-delay:0.4s">
-    <img src="https://img.icons8.com/ios-filled/100/ff003c/landing-page.png" alt="Landing Page">
-    <h3>Landing Page</h3>
-    <p>Landing pages designed to convert visitors into clients.</p>
-  </div>
-  <div class="service-box" style="animation-delay:0.5s">
-    <img src="https://img.icons8.com/ios-filled/100/ff003c/lock.png" alt="Security">
-    <h3>Website Security</h3>
-    <p>Protecting your website from threats with advanced security.</p>
+  <div class="container">
+    <p>
+      Nexora delivers modern, scalable and automated web solutions with a strong
+      focus on clarity, performance and long-term growth.
+    </p>
   </div>
 </section>
 
-<div class="brand-box">
-  Nexora is committed to delivering top-notch digital experiences. With years of expertise and a passion for innovation, we provide comprehensive solutions that empower your online presence. Our mission is to help businesses thrive in the digital world.
-</div>
+<section>
+  <div class="container services">
+    <div class="service-box">
+      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png">
+      <h3>Website Development</h3>
+      <p>Clean, fast and responsive websites built with scalable structure.</p>
+    </div>
+
+    <div class="service-box">
+      <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png">
+      <h3>UI / UX Design</h3>
+      <p>User-focused design with strong visual hierarchy and clarity.</p>
+    </div>
+
+    <div class="service-box">
+      <img src="https://cdn-icons-png.flaticon.com/512/2920/2920277.png">
+      <h3>Automation Systems</h3>
+      <p>Workflow automation to reduce cost and increase efficiency.</p>
+    </div>
+
+    <div class="service-box">
+      <img src="https://cdn-icons-png.flaticon.com/512/3595/3595455.png">
+      <h3>Landing Pages</h3>
+      <p>Conversion-oriented landing pages with clear messaging.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container brand">
+    <p>
+      Nexora is built on precision, minimalism and long-term thinking.
+      We don’t just design websites — we engineer digital systems that grow with your business.
+    </p>
+  </div>
+</section>
 
 <footer>
-  <a href="#">News</a>
-  <a href="#">About Us</a>
-  <a href="#">FAQ</a>
-  <a href="#">Support</a>
-  <a href="#">E-mail</a>
+  <div class="container footer-links">
+    <a href="#">News</a>
+    <a href="#">About</a>
+    <a href="#">FAQ</a>
+    <a href="#">Support</a>
+    <a href="#">Contact</a>
+  </div>
 </footer>
 
 <script>
-  function toggleMenu(){
-    document.getElementById('menu').classList.toggle('active');
-  }
-  function goHome(){
-    window.location.href = '#';
-  }
-  function goBack(){
-    window.history.back();
-  }
-</script>
-
-</body>
-  </html><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexora</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  /* Reset & Basic Styles */
-  * {margin:0; padding:0; box-sizing:border-box; font-family:'Roboto', sans-serif;}
-  body {background:linear-gradient(135deg,#111,#1a1a1a); color:#fff; overflow-x:hidden;}
-  a {color:inherit; text-decoration:none;}
-
-  /* Header */
-  header {
-    display:flex; justify-content:space-between; align-items:center;
-    padding:20px 40px; background:#111; position:fixed; width:100%; top:0; z-index:1000;
-    box-shadow:0 2px 10px rgba(0,0,0,0.5);
-  }
-  .logo {font-size:2em; font-weight:700; color:#ff003c;}
-  .slogan {font-size:0.9em; color:#fff; margin-top:4px;}
-  
-  /* Hamburger Menu */
-  .hamburger {cursor:pointer; width:30px; height:22px; display:flex; flex-direction:column; justify-content:space-between; z-index:1001;}
-  .bar {height:4px; background:#fff; border-radius:2px; transition:0.3s;}
-  .menu {
-    position:fixed; top:0; right:-350px; width:350px; height:100%; 
-    background:rgba(17,17,17,0.95); transition:0.5s; padding:80px 30px; 
-    display:flex; flex-direction:column; box-shadow:-2px 0 10px rgba(0,0,0,0.7);
-    z-index:1000;
-  }
-  .menu.active {right:0;}
-  .menu a {margin:25px 0; font-size:1.2em; transition:0.3s;}
-  .menu a:hover {color:#ff003c;}
-  .menu-buttons {margin-bottom:40px;}
-  .menu-buttons button {
-    margin-right:10px; padding:8px 12px; cursor:pointer; 
-    background:#ff003c; border:none; color:#fff; border-radius:5px;
-    transition:0.3s;
-  }
-  .menu-buttons button:hover {background:#ff3366;}
-
-  /* Intro */
-  .intro {text-align:center; padding:180px 20px 80px 20px;}
-  .intro-text {font-size:1.2em; line-height:1.5; max-width:750px; margin:0 auto; animation:fadeInUp 1s ease forwards; opacity:0;}
-
-  /* Services */
-  .services {display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:40px; padding:40px;}
-  .service-box {
-    background:linear-gradient(135deg,#1a1a1a,#222); padding:25px; border-radius:15px; 
-    text-align:center; transition:0.3s; cursor:pointer; box-shadow:0 5px 15px rgba(255,0,60,0.2);
-    opacity:0; transform:translateY(50px); animation:fadeInUp 1s forwards;
-  }
-  .service-box:hover {transform:translateY(-5px) scale(1.05); box-shadow:0 10px 25px rgba(255,0,60,0.4);}
-  .service-box img {width:70px; margin-bottom:15px;}
-  .service-box h3 {margin:10px 0; color:#ff003c;}
-  .service-box p {font-size:0.9em; color:#ccc;}
-
-  /* Brand Box */
-  .brand-box {background:#222; padding:35px; margin:50px 20px; border-radius:15px; text-align:center; 
-    font-size:0.95em; line-height:1.6; box-shadow:0 5px 20px rgba(255,0,60,0.2); opacity:0; animation:fadeInUp 1.2s ease forwards;}
-
-  /* Footer */
-  footer {
-    position:fixed; bottom:20px; left:20px; background:transparent; padding:10px 0; 
-    display:flex; flex-direction:column; gap:8px; font-size:0.85em;
-    border-top:1px solid #ff003c; max-width:200px;
-  }
-  footer a {color:#ff003c; font-weight:500; transition:0.3s;}
-  footer a:hover {color:#ff6699;}
-
-  /* Animations */
-  @keyframes fadeInUp {
-    to {opacity:1; transform:translateY(0);}
-  }
-</style>
-</head>
-<body>
-
-<header>
-  <div>
-    <div class="logo">NEXORA</div>
-    <div class="slogan">the next ora of digital experience</div>
-  </div>
-  <div class="hamburger" onclick="toggleMenu()">
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div class="bar"></div>
-  </div>
-</header>
-
-<div class="menu" id="menu">
-  <div class="menu-buttons">
-    <button onclick="goHome()">Home</button>
-    <button onclick="goBack()">Back</button>
-  </div>
-  <a href="#">Sign Up / Log In</a>
-  <a href="#">Dashboard</a>
-  <a href="#">About Us</a>
-  <a href="#">FAQ</a>
-  <a href="#">Support</a>
-</div>
-
-<section class="intro">
-  <p class="intro-text">
-    The Nexora team is proud to provide services to our clients with 3 years of experience and 24/7 support in all website services.
-  </p>
-</section>
-
-<section class="services">
-  <div class="service-box" style="animation-delay:0.1s">
-    <img src="https://img.icons8.com/ios-filled/100/ff003c/domain.png" alt="Site Creation">
-    <h3>Site Creation</h3>
-    <p>We build responsive and fast websites tailored to your needs.</p>
-  </div>
-  <div class="service-box" style="animation-delay:0.2s">
-    <img src="https://img.icons8.com/ios-filled/100/ff003c/design.png" alt="Web Design">
-    <h3>Web Design</h3>
-    <p>Creative designs that attract and engage your visitors.</p>
-  </div>
-  <div class="service-box" style="animation-delay:0.3s">
-    <img src="https://img.icons8.com/ios-filled/100/ff003c/automation.png" alt="Automation">
-    <h3>Website Automation</h3>
-    <p>Automate your workflows for efficiency and reliability.</p>
-  </div>
-  <div class="service-box" style="animation-delay:0.4s">
-    <img src="https://img.icons8.com/ios-filled/100/ff003c/landing-page.png" alt="Landing Page">
-    <h3>Landing Page</h3>
-    <p>Landing pages designed to convert visitors into clients.</p>
-  </div>
-  <div class="service-box" style="animation-delay:0.5s">
-    <img src="https://img.icons8.com/ios-filled/100/ff003c/lock.png" alt="Security">
-    <h3>Website Security</h3>
-    <p>Protecting your website from threats with advanced security.</p>
-  </div>
-</section>
-
-<div class="brand-box">
-  Nexora is committed to delivering top-notch digital experiences. With years of expertise and a passion for innovation, we provide comprehensive solutions that empower your online presence. Our mission is to help businesses thrive in the digital world.
-</div>
-
-<footer>
-  <a href="#">News</a>
-  <a href="#">About Us</a>
-  <a href="#">FAQ</a>
-  <a href="#">Support</a>
-  <a href="#">E-mail</a>
-</footer>
-
-<script>
-  function toggleMenu(){
-    document.getElementById('menu').classList.toggle('active');
-  }
-  function goHome(){
-    window.location.href = '#';
-  }
-  function goBack(){
-    window.history.back();
-  }
-</script>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nexora</title>
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-<style>
-  /* Reset & Basic Styles */
-  * {margin:0; padding:0; box-sizing:border-box; font-family:'Roboto', sans-serif;}
-  body {background:linear-gradient(135deg,#111,#1a1a1a); color:#fff; overflow-x:hidden;}
-  a {color:inherit; text-decoration:none;}
-
-  /* Header */
-  header {
-    display:flex; justify-content:space-between; align-items:center;
-    padding:20px 40px; background:#111; position:fixed; width:100%; top:0; z-index:1000;
-    box-shadow:0 2px 10px rgba(0,0,0,0.5);
-  }
-  .logo {font-size:2em; font-weight:700; color:#ff003c;}
-  .slogan {font-size:0.9em; color:#fff; margin-top:4px;}
-  
-  /* Hamburger Menu */
-  .hamburger {cursor:pointer; width:30px; height:22px; display:flex; flex-direction:column; justify-content:space-between; z-index:1001;}
-  .bar {height:4px; background:#fff; border-radius:2px; transition:0.3s;}
-  .menu {
-    position:fixed; top:0; right:-350px; width:350px; height:100%; 
-    background:rgba(17,17,17,0.95); transition:0.5s; padding:80px 30px; 
-    display:flex; flex-direction:column; box-shadow:-2px 0 10px rgba(0,0,0,0.7);
-    z-index:1000;
-  }
-  .menu.active {right:0;}
-  .menu a {margin:25px 0; font-size:1.2em; transition:0.3s;}
-  .menu a:hover {color:#ff003c;}
-  .menu-buttons {margin-bottom:40px;}
-  .menu-buttons button {
-    margin-right:10px; padding:8px 12px; cursor:pointer; 
-    background:#ff003c; border:none; color:#fff; border-radius:5px;
-    transition:0.3s;
-  }
-  .menu-buttons button:hover {background:#ff3366;}
-
-  /* Intro */
-  .intro {text-align:center; padding:180px 20px 80px 20px;}
-  .intro-text {font-size:1.2em; line-height:1.5; max-width:750px; margin:0 auto; animation:fadeInUp 1s ease forwards; opacity:0;}
-
-  /* Services */
-  .services {display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:40px; padding:40px;}
-  .service-box {
-    background:linear-gradient(135deg,#1a1a1a,#222); padding:25px; border-radius:15px; 
-    text-align:center; transition:0.3s; cursor:pointer; box-shadow:0 5px 15px rgba(255,0,60,0.2);
-    opacity:0; transform:translateY(50px); animation:fadeInUp 1s forwards;
-  }
-  .service-box:hover {transform:translateY(-5px) scale(1.05); box-shadow:0 10px 25px rgba(255,0,60,0.4);}
-  .service-box img {width:70px; margin-bottom:15px;}
-  .service-box h3 {margin:10px 0; color:#ff003c;}
-  .service-box p {font-size:0.9em; color:#ccc;}
-
-  /* Brand Box */
-  .brand-box {background:#222; padding:35px; margin:50px 20px; border-radius:15px; text-align:center; 
-    font-size:0.95em; line-height:1.6; box-shadow:0 5px 20px rgba(255,0,60,0.2); opacity:0; animation:fadeInUp 1.2s ease forwards;}
-
-  /* Footer */
-  footer {
-    position:fixed; bottom:20px; left:20px; background:transparent; padding:10px 0; 
-    display:flex; flex-direction:column; gap:8px; font-size:0.85em;
-    border-top:1px solid #ff003c; max-width:200px;
-  }
-  footer a {color:#ff003c; font-weight:500; transition:0.3s;}
-  footer a:hover {color:#ff6699;}
-
-  /* Animations */
-  @keyframes fadeInUp {
-    to {opacity:1; transform:translateY(0);}
-  }
-</style>
-</head>
-<body>
-
-<header>
-  <div>
-    <div class="logo">NEXORA</div>
-    <div class="slogan">the next ora of digital experience</div>
-  </div>
-  <div class="hamburger" onclick="toggleMenu()">
-    <div class="bar"></div>
-    <div class="bar"></div>
-    <div class="bar"></div>
-  </div>
-</header>
-
-<div class="menu" id="menu">
-  <div class="menu-buttons">
-    <button onclick="goHome()">Home</button>
-    <button onclick="goBack()">Back</button>
-  </div>
-  <a href="#">Sign Up / Log In</a>
-  <a href="#">Dashboard</a>
-  <a href="#">About Us</a>
-  <a href="#">FAQ</a>
-  <a href="#">Support</a>
-</div>
-
-<section class="intro">
-  <p class="intro-text">
-    The Nexora team is proud to provide services to our clients with 3 years of experience and 24/7 support in all website services.
-  </p>
-</section>
-
-<section class="services">
-  <div class="service-box" style="animation-delay:0.1s">
-    <img src="https://img.icons8.com/ios-filled/100/ff003c/domain.png" alt="Site Creation">
-    <h3>Site Creation</h3>
-    <p>We build responsive and fast websites tailored to your needs.</p>
-  </div>
-  <div class="service-box" style="animation-delay:0.2s">
-    <img src="https://img.icons8.com/ios-filled/100/ff003c/design.png" alt="Web Design">
-    <h3>Web Design</h3>
-    <p>Creative designs that attract and engage your visitors.</p>
-  </div>
-  <div class="service-box" style="animation-delay:0.3s">
-    <img src="https://img.icons8.com/ios-filled/100/ff003c/automation.png" alt="Automation">
-    <h3>Website Automation</h3>
-    <p>Automate your workflows for efficiency and reliability.</p>
-  </div>
-  <div class="service-box" style="animation-delay:0.4s">
-    <img src="https://img.icons8.com/ios-filled/100/ff003c/landing-page.png" alt="Landing Page">
-    <h3>Landing Page</h3>
-    <p>Landing pages designed to convert visitors into clients.</p>
-  </div>
-  <div class="service-box" style="animation-delay:0.5s">
-    <img src="https://img.icons8.com/ios-filled/100/ff003c/lock.png" alt="Security">
-    <h3>Website Security</h3>
-    <p>Protecting your website from threats with advanced security.</p>
-  </div>
-</section>
-
-<div class="brand-box">
-  Nexora is committed to delivering top-notch digital experiences. With years of expertise and a passion for innovation, we provide comprehensive solutions that empower your online presence. Our mission is to help businesses thrive in the digital world.
-</div>
-
-<footer>
-  <a href="#">News</a>
-  <a href="#">About Us</a>
-  <a href="#">FAQ</a>
-  <a href="#">Support</a>
-  <a href="#">E-mail</a>
-</footer>
-
-<script>
-  function toggleMenu(){
-    document.getElementById('menu').classList.toggle('active');
-  }
-  function goHome(){
-    window.location.href = '#';
-  }
-  function goBack(){
-    window.history.back();
-  }
+function toggleMenu(){
+  document.getElementById('menu').classList.toggle('active');
+}
 </script>
 
 </body>
