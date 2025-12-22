@@ -1,25 +1,24 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nexora</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-/* =======================
-   VARIABLES
-======================= */
 :root {
   --bg-color: #ffffff;
   --text-color: #0d3f0d;
-  --accent-color: #1abc9c;
-  --secondary-color: #e6f2e6;
+  --accent-start: #05652d; /* سبز تیره حرفه‌ای */
+  --accent-end: #00d084;   /* سبز روشن حرفه‌ای */
+  --secondary-color: #f0f9f4;
 }
 
 body.dark-mode {
   --bg-color: #0d0d0d;
   --text-color: #a3f7b5;
-  --accent-color: #2ecc71;
+  --accent-start: #05652d;
+  --accent-end: #00d084;
   --secondary-color: #1a1a1a;
 }
 
@@ -31,41 +30,25 @@ body {
   transition: all 0.3s ease;
 }
 
-/* =======================
-   HEADER
-======================= */
+/* HEADER */
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 20px 30px;
   position: relative;
+  z-index: 1000;
 }
 
 .logo {
   font-size: 36px;
   font-weight: 700;
   letter-spacing: 1px;
+  background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.logo .x {
-  color: var(--accent-color);
-}
-
-/* =======================
-   DARK/LIGHT TOGGLE
-======================= */
-#mode-toggle {
-  background:none;
-  border:none;
-  font-size:24px;
-  cursor:pointer;
-  color: var(--accent-color);
-}
-
-/* =======================
-   HAMBURGER MENU
-======================= */
 .menu-btn {
   display: none;
   flex-direction: column;
@@ -94,9 +77,39 @@ nav a {
   transition: color 0.3s;
 }
 
-nav a:hover {
-  color: var(--accent-color);
+nav a:hover { color: var(--accent-end); }
+
+/* Dark/Light Toggle */
+.toggle-container {
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
+
+.toggle-btn {
+  width:40px;
+  height:20px;
+  background:#ccc;
+  border-radius:10px;
+  position: relative;
+  cursor:pointer;
+  transition: background 0.3s;
+}
+
+.toggle-btn::after {
+  content:'';
+  position:absolute;
+  width:18px;
+  height:18px;
+  background:#fff;
+  border-radius:50%;
+  top:1px;
+  left:1px;
+  transition: all 0.3s;
+}
+
+.toggle-btn.active { background: var(--accent-end); }
+.toggle-btn.active::after { left:21px; }
 
 /* Responsive */
 @media(max-width:768px){
@@ -114,36 +127,33 @@ nav a:hover {
     gap:30px;
     transition: right 0.4s ease;
   }
-  nav.open {
-    right:0;
-  }
+  nav.open { right:0; }
 }
 
-/* =======================
-   HERO SECTION
-======================= */
+/* HERO */
 .hero {
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  padding:100px 20px;
-  gap:20px;
+  padding:100px 20px 60px 20px;
+  text-align:left;
 }
 
 .hero h1 {
   font-size:48px;
   font-weight:700;
+  background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: text-fade 2s ease-in-out infinite alternate;
 }
 
 .hero p {
   font-size:20px;
   max-width:600px;
+  opacity:0;
+  animation: fadeIn 1.5s forwards 0.5s;
 }
 
 .hero .cta {
-  background: var(--accent-color);
+  background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
   color:#fff;
   padding:12px 28px;
   font-size:18px;
@@ -153,13 +163,18 @@ nav a:hover {
   transition: transform 0.3s;
 }
 
-.hero .cta:hover {
-  transform: scale(1.05);
+.hero .cta:hover { transform: scale(1.05); }
+
+/* INFO BOX */
+.info-box {
+  background: var(--secondary-color);
+  padding:40px 20px;
+  margin:20px 0;
+  border-radius:16px;
+  line-height:1.6;
 }
 
-/* =======================
-   SERVICES SECTION
-======================= */
+/* SERVICES */
 .services {
   display:flex;
   flex-wrap:wrap;
@@ -185,14 +200,14 @@ nav a:hover {
 .card i {
   font-size:40px;
   margin-bottom:15px;
-  color: var(--accent-color);
+  background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-/* =======================
-   CTA SECTION
-======================= */
+/* CALL TO ACTION */
 .call-to-action {
-  background: var(--accent-color);
+  background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
   color:#fff;
   text-align:center;
   padding:60px 20px;
@@ -202,7 +217,7 @@ nav a:hover {
 
 .call-to-action button {
   background:#fff;
-  color: var(--accent-color);
+  color: var(--accent-end);
   border:none;
   padding:12px 28px;
   font-size:18px;
@@ -211,93 +226,108 @@ nav a:hover {
   transition: transform 0.3s;
 }
 
-.call-to-action button:hover {
-  transform: scale(1.05);
-}
+.call-to-action button:hover { transform: scale(1.05); }
 
-/* =======================
-   FOOTER
-======================= */
+/* FOOTER */
 footer {
   background-color: var(--secondary-color);
   color: var(--text-color);
-  text-align:center;
+  text-align:left;
   padding:30px 20px;
   font-size:14px;
 }
 
-/* =======================
-   TRANSITIONS
-======================= */
-a, button {
-  transition: all 0.3s ease;
+footer a {
+  color: var(--text-color);
+  margin:0 10px;
+  text-decoration:none;
+  transition: color 0.3s;
 }
+
+footer a:hover { color: var(--accent-end); }
+
+/* ANIMATIONS */
+@keyframes fadeIn { to {opacity:1;} }
+@keyframes text-fade { from {opacity:0.6;} to {opacity:1;} }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo">Ne<span class="x">x</span>ora</div>
-  <button id="mode-toggle">🌙</button>
-  <div class="menu-btn" id="menu-btn">
-    <span></span>
-    <span></span>
-    <span></span>
+  <div class="logo">Nexora</div>
+  
+  <div class="toggle-container">
+    <span>Dark Mode</span>
+    <div class="toggle-btn" id="mode-toggle"></div>
   </div>
+  
+  <div class="menu-btn" id="menu-btn">
+    <span></span><span></span><span></span>
+  </div>
+  
   <nav id="nav">
-    <a href="#services">خدمات</a>
-    <a href="#cta">ثبت‌نام</a>
-    <a href="#footer">تماس</a>
+    <a href="#hero">Home</a>
+    <a href="#services">Services</a>
+    <a href="#support">Support</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+    <a href="#faq">FAQ</a>
+    <a href="#cta">Register</a>
   </nav>
 </header>
 
-<section class="hero">
-  <h1>به Nexora خوش آمدید</h1>
-  <p>راهکارهای اتوماسیون و تکنولوژی که کسب‌وکار شما را متحول می‌کند.</p>
-  <button class="cta">شروع کن</button>
+<section class="hero" id="hero">
+  <h1>Welcome to Nexora</h1>
+  <p>Smart automation and technology solutions that transform your business.</p>
+  <button class="cta">Get Started</button>
 </section>
+
+<div class="info-box">
+  <p>At Nexora, we specialize in creating fully customized websites and digital solutions that elevate your business to the next level. Our experienced team ensures quality, efficiency, and innovative strategies tailored to your needs.</p>
+</div>
 
 <section class="services" id="services">
-  <div class="card">
-    <i>⚙️</i>
-    <h3>اتوماسیون</h3>
-    <p>سیستم‌های هوشمند برای مدیریت آسان فرآیندها.</p>
-  </div>
-  <div class="card">
-    <i>💻</i>
-    <h3>تکنولوژی</h3>
-    <p>راهکارهای نوین و پیشرفته برای کسب‌وکار شما.</p>
-  </div>
-  <div class="card">
-    <i>🔒</i>
-    <h3>امنیت</h3>
-    <p>محافظت کامل از داده‌ها و اطلاعات حیاتی.</p>
-  </div>
+  <div class="card"><i>🌐</i><h3>Website Creation</h3><p>Professional website setup and deployment to get your business online effortlessly.</p></div>
+  <div class="card"><i>🎨</i><h3>Website Design</h3><p>Creative and responsive designs that captivate visitors and enhance user experience.</p></div>
+  <div class="card"><i>⚙️</i><h3>Website Automation</h3><p>Automate repetitive tasks and workflows to save time and increase productivity.</p></div>
+  <div class="card"><i>🏠</i><h3>Landing Page</h3><p>High-converting landing pages tailored for marketing campaigns and lead generation.</p></div>
+  <div class="card"><i>📈</i><h3>SEO Services</h3><p>Optimize your website to rank higher in search engines and attract more traffic.</p></div>
+  <div class="card"><i>🔒</i><h3>Website Security</h3><p>Implement advanced security measures to protect your site and customer data.</p></div>
 </section>
 
+<div class="info-box">
+  <p>Take advantage of our professional services to elevate your business efficiency and productivity. Nexora guarantees robust, secure, and innovative solutions tailored to help your company thrive in the digital world.</p>
+</div>
+
 <section class="call-to-action" id="cta">
-  <h2>همین حالا شروع کنید</h2>
-  <p>ثبت‌نام کنید و از خدمات پیشرفته Nexora بهره‌مند شوید.</p>
-  <button>ثبت‌نام</button>
+  <h2>Start Today</h2>
+  <p>Register now and enjoy Nexora's advanced services.</p>
+  <button>Register</button>
 </section>
 
 <footer id="footer">
-  &copy; 2025 Nexora. تمام حقوق محفوظ است.
+  <p>&copy; 2025 Nexora. All rights reserved.</p>
+  <div>
+    <a href="#about">About</a>|
+    <a href="#services">Services</a>|
+    <a href="#support">Support</a>|
+    <a href="#contact">Contact</a>|
+    <a href="#faq">FAQ</a>
+  </div>
 </footer>
 
 <script>
-/* DARK/LIGHT MODE */
+/* DARK/LIGHT MODE TOGGLE */
 const toggle = document.getElementById('mode-toggle');
-toggle.addEventListener('click', () => {
+toggle.addEventListener('click', ()=>{
   document.body.classList.toggle('dark-mode');
-  toggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+  toggle.classList.toggle('active');
 });
 
 /* HAMBURGER MENU */
 const menuBtn = document.getElementById('menu-btn');
 const nav = document.getElementById('nav');
-
-menuBtn.addEventListener('click', () => {
+menuBtn.addEventListener('click', ()=>{
   nav.classList.toggle('open');
   menuBtn.classList.toggle('open');
 });
