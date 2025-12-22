@@ -17,7 +17,9 @@
 }
 
 body{
-  background:linear-gradient(135deg,#0f0f0f,#1b1b1b);
+  background:
+    radial-gradient(circle at top right, rgba(255,0,60,.15), transparent 40%),
+    linear-gradient(135deg,#0f0f0f,#1b1b1b);
   color:#eaeaea;
   overflow-x:hidden;
 }
@@ -29,13 +31,14 @@ header{
   position:fixed;
   top:0;
   width:100%;
-  background:#111;
+  background:rgba(15,15,15,.9);
+  backdrop-filter: blur(8px);
   padding:18px 32px;
   display:flex;
   justify-content:space-between;
   align-items:center;
   z-index:1000;
-  box-shadow:0 2px 12px rgba(0,0,0,.6);
+  border-bottom:1px solid rgba(255,255,255,.05);
 }
 
 .logo{
@@ -72,7 +75,7 @@ header{
   right:-100%;
   width:300px;
   height:100%;
-  background:rgba(15,15,15,.98);
+  background:rgba(15,15,15,.97);
   padding:90px 28px;
   transition:.4s ease;
   z-index:999;
@@ -92,10 +95,8 @@ header{
   opacity:1;
 }
 
-/* ===== Sections ===== */
-section{
-  margin-bottom:120px;
-}
+/* ===== Layout ===== */
+section{margin-bottom:130px}
 
 .container{
   max-width:1100px;
@@ -105,7 +106,7 @@ section{
 
 /* ===== Intro ===== */
 .intro{
-  padding-top:160px;
+  padding-top:170px;
 }
 
 .intro p{
@@ -113,37 +114,81 @@ section{
   font-size:.95em;
   line-height:1.8;
   opacity:.9;
+  margin-bottom:26px;
+}
+
+/* ===== CTA Button ===== */
+.cta{
+  display:inline-block;
+  padding:12px 28px;
+  border-radius:30px;
+  background:linear-gradient(135deg,#ff003c,#ff3366);
+  color:#fff;
+  font-size:.9em;
+  font-weight:600;
+  box-shadow:0 10px 30px rgba(255,0,60,.35);
+  transition:.3s ease;
+}
+
+.cta:hover{
+  transform:translateY(-3px);
+  box-shadow:0 15px 40px rgba(255,0,60,.55);
 }
 
 /* ===== Services ===== */
 .services{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:50px;
-  margin-top:60px;
+  gap:55px;
+  margin-top:70px;
 }
 
 .service-box{
-  background:#1a1a1a;
-  border-radius:16px;
-  padding:28px;
-  text-align:left;
+  background:
+    linear-gradient(180deg,#1c1c1c,#141414);
+  border:1px solid rgba(255,255,255,.04);
+  border-radius:18px;
+  padding:30px;
   animation:fadeUp .9s ease forwards;
   opacity:0;
+  position:relative;
 }
+
+.service-box::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:18px;
+  background:radial-gradient(circle at top left, rgba(255,0,60,.18), transparent 60%);
+  opacity:0;
+  transition:.4s;
+}
+
+.service-box:hover::before{opacity:1}
 
 .service-box:nth-child(1){animation-delay:.1s}
 .service-box:nth-child(2){animation-delay:.25s}
 .service-box:nth-child(3){animation-delay:.4s}
 .service-box:nth-child(4){animation-delay:.55s}
 
-.service-box img{
-  width:42px;
+.icon{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  background:rgba(255,0,60,.12);
+  display:flex;
+  align-items:center;
+  justify-content:center;
   margin-bottom:18px;
 }
 
+.icon svg{
+  width:22px;
+  height:22px;
+  stroke:#ff003c;
+}
+
 .service-box h3{
-  color:#ff003c;
   font-size:1.05em;
   margin-bottom:10px;
 }
@@ -151,19 +196,19 @@ section{
 .service-box p{
   font-size:.88em;
   line-height:1.7;
-  opacity:.85;
+  opacity:.8;
 }
 
 /* ===== Brand ===== */
 .brand{
-  background:#151515;
-  border-left:3px solid #ff003c;
-  padding:34px;
-  border-radius:14px;
+  background:linear-gradient(135deg,#151515,#101010);
+  border-left:4px solid #ff003c;
+  padding:38px;
+  border-radius:18px;
 }
 
 .brand p{
-  max-width:700px;
+  max-width:720px;
   font-size:.9em;
   line-height:1.8;
   opacity:.9;
@@ -171,15 +216,15 @@ section{
 
 /* ===== Footer ===== */
 footer{
-  margin-top:140px;
-  padding:40px 24px;
+  margin-top:150px;
+  padding:45px 24px;
   border-top:1px solid rgba(255,0,60,.35);
 }
 
 .footer-links{
   display:flex;
   flex-wrap:wrap;
-  gap:22px;
+  gap:24px;
   font-size:.85em;
 }
 
@@ -228,45 +273,64 @@ footer{
 <section class="intro">
   <div class="container">
     <p>
-      Nexora delivers modern, scalable and automated web solutions with a strong
-      focus on clarity, performance and long-term growth.
+      Nexora delivers modern, scalable and automated web solutions
+      with a focus on clarity, performance and growth.
     </p>
+    <a href="#" class="cta">Start Now</a>
   </div>
 </section>
 
 <section>
   <div class="container services">
+
     <div class="service-box">
-      <img src="https://cdn-icons-png.flaticon.com/512/1828/1828884.png">
+      <div class="icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <path d="M3 5h18M3 12h18M3 19h18"/>
+        </svg>
+      </div>
       <h3>Website Development</h3>
-      <p>Clean, fast and responsive websites built with scalable structure.</p>
+      <p>Scalable and high-performance websites engineered for growth.</p>
     </div>
 
     <div class="service-box">
-      <img src="https://cdn-icons-png.flaticon.com/512/1006/1006771.png">
+      <div class="icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <path d="M4 4h16v16H4z"/>
+        </svg>
+      </div>
       <h3>UI / UX Design</h3>
-      <p>User-focused design with strong visual hierarchy and clarity.</p>
+      <p>Clean and structured design systems with clear hierarchy.</p>
     </div>
 
     <div class="service-box">
-      <img src="https://cdn-icons-png.flaticon.com/512/2920/2920277.png">
+      <div class="icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <path d="M12 2v20M2 12h20"/>
+        </svg>
+      </div>
       <h3>Automation Systems</h3>
-      <p>Workflow automation to reduce cost and increase efficiency.</p>
+      <p>Smart automation to reduce cost and manual operations.</p>
     </div>
 
     <div class="service-box">
-      <img src="https://cdn-icons-png.flaticon.com/512/3595/3595455.png">
+      <div class="icon">
+        <svg fill="none" viewBox="0 0 24 24" stroke-width="2">
+          <path d="M5 12h14M12 5v14"/>
+        </svg>
+      </div>
       <h3>Landing Pages</h3>
-      <p>Conversion-oriented landing pages with clear messaging.</p>
+      <p>High-conversion landing pages with focused messaging.</p>
     </div>
+
   </div>
 </section>
 
 <section>
   <div class="container brand">
     <p>
-      Nexora is built on precision, minimalism and long-term thinking.
-      We don’t just design websites — we engineer digital systems that grow with your business.
+      Nexora is built on precision, minimalism and system thinking.
+      We design digital products that evolve with your business.
     </p>
   </div>
 </section>
