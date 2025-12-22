@@ -4,324 +4,181 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nexora</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-:root {
-  --bg-color:#ffffff;
-  --text-color:#1f4d3f;
-  --accent-start:#05652d;
-  --accent-end:#00d084;
-  --secondary-color:#f0f9f4;
-}
-body.dark-mode {
-  --bg-color:#0d0d0d;
-  --text-color:#a3f7b5;
-  --accent-start:#05652d;
-  --accent-end:#00d084;
-  --secondary-color:#1a1a1a;
-}
-body{
-  margin:0;
-  font-family:'Poppins', sans-serif;
-  background-color:var(--bg-color);
-  color:var(--text-color);
-  transition: all 0.3s ease;
-}
+  :root {
+    --text-color: #00FFFF;          /* متن فیروزه‌ای روشن */
+    --accent-start: #00FFFF;        /* Gradient شروع */
+    --accent-end: #00BFCF;          /* Gradient پایان */
+    --bg-color-light: #FFFFFF;      /* پس‌زمینه لایت مود */
+    --bg-color-dark: #000000;       /* پس‌زمینه دارک مود */
+    --box-bg: #E0FFFF;              /* پس‌زمینه باکس‌ها */
+    --button-bg: #00D4FF;           /* دکمه‌ها */
+    --button-hover: #00BFCF;        /* هاور دکمه */
+  }
 
-/* HEADER */
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:20px 30px;
-  border-bottom:1px solid rgba(0,0,0,0.08);
-  position:relative;
-  z-index:1000;
-}
-.logo-box{
-  padding:10px 20px;
-  border:2px solid var(--accent-start);
-  border-radius:12px;
-  background: var(--secondary-color);
-}
-.logo{
-  font-size:36px;
-  font-weight:700;
-  letter-spacing:1px;
-  background:linear-gradient(90deg,var(--accent-start),var(--accent-end));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.menu-btn{
-  display:none;
-  flex-direction:column;
-  justify-content:space-between;
-  width:28px;
-  height:22px;
-  cursor:pointer;
-}
-.menu-btn span{
-  height:3px;
-  background-color: var(--text-color);
-  border-radius:2px;
-  transition:0.3s;
-}
-nav{
-  display:flex;
-  flex-direction:column;
-  position:fixed;
-  top:0;
-  right:-100%;
-  height:100%;
-  width:260px;
-  background-color:var(--bg-color);
-  padding-top:60px;
-  padding-left:20px;
-  transition:right 0.4s ease;
-  box-shadow:-2px 0 15px rgba(0,0,0,0.1);
-  z-index:999;
-}
-nav.open{ right:0; }
-.menu-header{
-  width:100%;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding-bottom:20px;
-  border-bottom:1px solid rgba(0,0,0,0.08);
-  margin-bottom:20px;
-}
-.menu-header span{
-  font-weight:600;
-  font-size:16px;
-}
-#close-menu{
-  background:none;
-  border:none;
-  font-size:22px;
-  color:var(--text-color);
-  cursor:pointer;
-}
-nav a{
-  text-decoration:none;
-  color:var(--text-color);
-  font-weight:600;
-  font-size:18px;
-  margin-bottom:15px;
-  transition: color 0.3s;
-}
-nav a:hover{ color: var(--accent-end); }
-.menu-darkmode{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  width:100%;
-  padding:10px 0;
-  border-top:1px solid rgba(0,0,0,0.08);
-  margin-top:10px;
-}
-.toggle-btn{
-  width:35px;
-  height:18px;
-  background:#ccc;
-  border-radius:10px;
-  position:relative;
-  cursor:pointer;
-  transition: background 0.3s;
-}
-.toggle-btn::after{
-  content:'';
-  position:absolute;
-  width:16px;
-  height:16px;
-  background:#fff;
-  border-radius:50%;
-  top:1px;
-  left:1px;
-  transition: all 0.3s;
-}
-.toggle-btn.active{ background: var(--accent-end); }
-.toggle-btn.active::after{ left:18px; }
+  /* Global Styles */
+  * {margin:0; padding:0; box-sizing:border-box; font-family: 'Arial', sans-serif;}
+  body {
+    background-color: var(--bg-color-light);
+    color: var(--text-color);
+    transition: all 0.3s ease;
+  }
 
-/* HERO */
-.hero{
-  padding:120px 20px 60px 20px;
-  text-align:left;
-}
-.hero h1{
-  font-size:50px;
-  font-weight:700;
-  background:linear-gradient(90deg,var(--accent-start),var(--accent-end));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:text-fade 2s ease-in-out infinite alternate;
-}
-.hero p{
-  font-size:20px;
-  max-width:650px;
-  margin-top:25px;
-  line-height:1.6;
-  opacity:0;
-  animation:fadeIn 1.5s forwards 0.5s;
-}
-.hero .cta{
-  background:linear-gradient(90deg,var(--accent-start),var(--accent-end));
-  color:#fff;
-  padding:14px 32px;
-  font-size:18px;
-  border:none;
-  border-radius:8px;
-  cursor:pointer;
-  margin-top:25px;
-  transition: transform 0.3s;
-}
-.hero .cta:hover{ transform: scale(1.05); }
+  /* Header */
+  header {
+    display:flex;
+    justify-content: space-between;
+    align-items:center;
+    padding:20px;
+    background-color: var(--box-bg);
+  }
 
-/* INFO BOX */
-.info-box{
-  background:var(--secondary-color);
-  padding:45px 25px;
-  margin:25px 0;
-  border-radius:16px;
-  line-height:1.7;
-  font-size:16px;
-}
+  .logo {
+    font-size:2rem;
+    font-weight:bold;
+    background: linear-gradient(to right, var(--accent-start), var(--accent-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-/* SERVICES */
-.services{
-  display:flex;
-  flex-wrap:wrap;
-  gap:30px;
-  justify-content:center;
-  padding:65px 20px;
-}
-.card{
-  background-color:var(--secondary-color);
-  padding:30px 20px;
-  border-radius:16px;
-  width:270px;
-  text-align:center;
-  transition:transform 0.3s,box-shadow 0.3s;
-}
-.card:hover{
-  transform:translateY(-12px);
-  box-shadow:0 12px 28px rgba(0,0,0,0.25);
-}
-.card i{
-  font-size:42px;
-  margin-bottom:15px;
-  display:block;
-  font-family: 'FontAwesome', sans-serif;
-  background:linear-gradient(90deg,var(--accent-start),var(--accent-end));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
+  .menu {
+    display:flex;
+    gap:20px;
+  }
 
-/* FOOTER */
-footer{
-  background:transparent;
-  color:inherit;
-  text-align:left;
-  padding:40px 20px;
-  font-size:14px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-footer a{
-  display:block;
-  color:inherit;
-  text-decoration:none;
-  transition: color 0.3s;
-}
-footer a:hover{ color: var(--accent-end); }
+  .menu button {
+    background: var(--button-bg);
+    color: #000;
+    border:none;
+    padding:10px 20px;
+    cursor:pointer;
+    transition: all 0.3s ease;
+  }
 
-/* ANIMATIONS */
-@keyframes fadeIn{ to{opacity:1;} }
-@keyframes text-fade{ from{opacity:0.6;} to{opacity:1;} }
+  .menu button:hover {background: var(--button-hover);}
 
-@media(max-width:768px){
-  .hero h1{ font-size:34px; }
-  .hero p{ font-size:17px; }
-  .hero .cta{ font-size:16px; padding:12px 24px; }
-  .menu-btn{ display:flex; }
-  .logo-box{ margin-right:auto; }
-}
+  /* Hero Section */
+  .hero {
+    text-align:center;
+    padding:100px 20px;
+    background: linear-gradient(to right, var(--accent-start), var(--accent-end));
+    color:#000;
+  }
+
+  .hero h1 {font-size:3rem; margin-bottom:20px;}
+  .hero p {font-size:1.2rem; max-width:700px; margin:0 auto 40px;}
+
+  .hero .start-btn {
+    padding:15px 40px;
+    background: var(--button-bg);
+    color:#000;
+    border:none;
+    font-size:1rem;
+    cursor:pointer;
+    transition: all 0.3s ease;
+  }
+  .hero .start-btn:hover {background: var(--button-hover);}
+
+  /* Services Section */
+  .services {
+    display:grid;
+    grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+    padding:80px 20px;
+  }
+
+  .service-card {
+    background: var(--box-bg);
+    padding:30px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+  }
+  .service-card:hover {transform: translateY(-10px);}
+  .service-card h3 {margin-bottom:15px;}
+  .service-card p {line-height:1.5; color:#000;}
+
+  /* Footer */
+  footer {
+    padding:40px 20px;
+    background:none;
+    color:#000;
+  }
+  footer ul {
+    list-style:none;
+    display:flex;
+    flex-direction: column;
+    gap:10px;
+  }
+  footer ul li a {text-decoration:none; color:#333;}
+  
+  /* Dark Mode */
+  .dark-mode {
+    background-color: var(--bg-color-dark);
+    color: #00FFFF;
+  }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="logo-box">
-    <div class="logo">Nexora</div>
+  <div class="logo">Nexora</div>
+  <div class="menu">
+    <button onclick="toggleMenu()">Menu</button>
+    <button onclick="toggleDarkMode()">Dark Mode</button>
   </div>
-  <div class="menu-btn" id="menu-btn"><span></span><span></span><span></span></div>
-  <nav id="nav">
-    <div class="menu-header">
-      <span>Menu</span>
-      <button id="close-menu">✕</button>
-    </div>
-    <a href="#hero">Home</a>
-    <a href="#services">Services</a>
-    <a href="#support">Support</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-    <a href="#faq">FAQ</a>
-    <a href="#cta">Register</a>
-    <div class="menu-darkmode">
-      <span>Dark Mode</span>
-      <div class="toggle-btn" id="mode-toggle"></div>
-    </div>
-  </nav>
 </header>
 
-<section class="hero" id="hero">
+<section class="hero">
   <h1>Welcome to Nexora</h1>
-  <p>Smart automation and technology solutions that transform your business. Build, design, and optimize your digital presence with our expert solutions.</p>
-  <button class="cta">Start</button>
+  <p>Your professional digital partner. We provide complete web solutions with a beautiful interface, responsive design, and advanced automation.</p>
+  <button class="start-btn">Get Started</button>
 </section>
 
-<div class="info-box">
-  <p>At Nexora, we specialize in creating fully customized websites and digital solutions that elevate your business to the next level. Our experienced team ensures quality, efficiency, and innovative strategies tailored to your needs.</p>
-</div>
-
-<section class="services" id="services">
-  <div class="card"><i>🌐</i><h3>Website Creation</h3><p>Professional website setup and deployment to get your business online effortlessly with attention to detail and modern design principles.</p></div>
-  <div class="card"><i>🎨</i><h3>Website Design</h3><p>Creative and responsive designs that captivate visitors, enhance user experience, and reflect your brand identity.</p></div>
-  <div class="card"><i>⚙️</i><h3>Website Automation</h3><p>Automate repetitive tasks and workflows to save time, reduce errors, and increase overall productivity efficiently.</p></div>
-  <div class="card"><i>🏠</i><h3>Landing Page</h3><p>High-converting landing pages tailored for marketing campaigns and lead generation, designed for optimal performance.</p></div>
-  <div class="card"><i>📈</i><h3>SEO Services</h3><p>Optimize your website to rank higher in search engines, attract more traffic, and increase your online visibility effectively.</p></div>
-  <div class="card"><i>🔒</i><h3>Website Security</h3><p>Implement advanced security measures to protect your website, safeguard customer data, and maintain trust and reliability.</p></div>
+<section class="services">
+  <div class="service-card">
+    <h3>Website Creation</h3>
+    <p>Create stunning websites tailored to your business needs with responsive design and interactive features.</p>
+  </div>
+  <div class="service-card">
+    <h3>Website Design</h3>
+    <p>Professional and creative designs that make your website stand out and attract more users effectively.</p>
+  </div>
+  <div class="service-card">
+    <h3>Automation</h3>
+    <p>Streamline your business processes with advanced automation tools to save time and increase efficiency.</p>
+  </div>
+  <div class="service-card">
+    <h3>Landing Pages</h3>
+    <p>High-converting landing pages with elegant designs and clear call-to-actions for better user engagement.</p>
+  </div>
+  <div class="service-card">
+    <h3>SEO Services</h3>
+    <p>Boost your search engine ranking and visibility with our expert SEO strategies tailored to your business.</p>
+  </div>
+  <div class="service-card">
+    <h3>Website Security</h3>
+    <p>Protect your digital assets with advanced security solutions ensuring your website is safe and reliable.</p>
+  </div>
 </section>
-
-<div class="info-box">
-  <p>Take advantage of our professional services to elevate your business efficiency and productivity. Nexora guarantees robust, secure, and innovative solutions tailored to help your company thrive in the digital world.</p>
-</div>
 
 <footer>
-  <a href="#about">About</a>
-  <a href="#services">Services</a>
-  <a href="#support">Support</a>
-  <a href="#contact">Contact</a>
-  <a href="#faq">FAQ</a>
-  <a href="#cta">Register</a>
+  <ul>
+    <li><a href="#">About Us</a></li>
+    <li><a href="#">Support</a></li>
+    <li><a href="#">FAQ</a></li>
+    <li><a href="#">Terms & Conditions</a></li>
+    <li><a href="#">Contact</a></li>
+  </ul>
 </footer>
 
 <script>
-const toggle = document.getElementById('mode-toggle');
-toggle.addEventListener('click', ()=>{
+function toggleDarkMode(){
   document.body.classList.toggle('dark-mode');
-  toggle.classList.toggle('active');
-});
-const menuBtn = document.getElementById('menu-btn');
-const nav = document.getElementById('nav');
-const closeMenu = document.getElementById('close-menu');
-menuBtn.addEventListener('click', ()=>{
-  nav.classList.toggle('open');
-});
-closeMenu.addEventListener('click', ()=>{
-  nav.classList.remove('open');
-});
+}
+function toggleMenu(){
+  alert("Menu clicked (implement sidebar if needed)");
+}
 </script>
 
 </body>
