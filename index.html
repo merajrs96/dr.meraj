@@ -1,362 +1,306 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nexora</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-*{
+/* =======================
+   VARIABLES
+======================= */
+:root {
+  --bg-color: #ffffff;
+  --text-color: #0d3f0d;
+  --accent-color: #1abc9c;
+  --secondary-color: #e6f2e6;
+}
+
+body.dark-mode {
+  --bg-color: #0d0d0d;
+  --text-color: #a3f7b5;
+  --accent-color: #2ecc71;
+  --secondary-color: #1a1a1a;
+}
+
+body {
   margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Roboto',sans-serif;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: all 0.3s ease;
 }
 
-body{
-  background:
-    radial-gradient(circle at 20% 20%, rgba(255,0,80,.18), transparent 45%),
-    radial-gradient(circle at 80% 10%, rgba(0,120,255,.15), transparent 45%),
-    linear-gradient(180deg,#0b0b0b,#141414);
-  color:#f2f2f2;
-  overflow-x:hidden;
+/* =======================
+   HEADER
+======================= */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  position: relative;
 }
 
-a{text-decoration:none;color:inherit}
-
-/* ===== Header ===== */
-header{
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:20px 40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:rgba(10,10,10,.85);
-  backdrop-filter:blur(10px);
-  z-index:1000;
+.logo {
+  font-size: 36px;
+  font-weight: 700;
+  letter-spacing: 1px;
 }
 
-.logo{
-  font-size:2em;
-  font-weight:700;
-  background:linear-gradient(90deg,#ff0055,#ff7a00);
-  -webkit-background-clip:text;
-  color:transparent;
+.logo .x {
+  color: var(--accent-color);
 }
 
-.slogan{
-  font-size:.8em;
-  opacity:.85;
+/* =======================
+   DARK/LIGHT TOGGLE
+======================= */
+#mode-toggle {
+  background:none;
+  border:none;
+  font-size:24px;
+  cursor:pointer;
+  color: var(--accent-color);
 }
 
-/* ===== Menu ===== */
-.hamburger{
-  width:30px;
-  height:22px;
+/* =======================
+   HAMBURGER MENU
+======================= */
+.menu-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 22px;
+  cursor: pointer;
+}
+
+.menu-btn span {
+  height:3px;
+  background-color: var(--text-color);
+  border-radius:2px;
+  transition: 0.3s;
+}
+
+nav {
+  display: flex;
+  gap:20px;
+}
+
+nav a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight:600;
+  transition: color 0.3s;
+}
+
+nav a:hover {
+  color: var(--accent-color);
+}
+
+/* Responsive */
+@media(max-width:768px){
+  .menu-btn {display:flex;}
+  nav {
+    position: fixed;
+    top:0;
+    right:-100%;
+    height:100%;
+    width:250px;
+    background-color: var(--bg-color);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:30px;
+    transition: right 0.4s ease;
+  }
+  nav.open {
+    right:0;
+  }
+}
+
+/* =======================
+   HERO SECTION
+======================= */
+.hero {
   display:flex;
   flex-direction:column;
-  justify-content:space-between;
-  cursor:pointer;
-}
-
-.hamburger span{
-  height:3px;
-  background:#fff;
-  border-radius:3px;
-}
-
-.menu{
-  position:fixed;
-  top:0;
-  right:-100%;
-  width:320px;
-  height:100%;
-  background:linear-gradient(180deg,#0f0f0f,#1a1a1a);
-  padding:100px 30px;
-  transition:.4s;
-}
-
-.menu.active{right:0}
-
-.menu a{
-  display:block;
-  margin-bottom:26px;
-  font-size:1.1em;
-  opacity:.85;
-}
-
-.menu a:hover{color:#ff0055}
-
-/* ===== Layout ===== */
-.container{
-  max-width:1200px;
-  margin:auto;
-  padding:0 30px;
-}
-
-section{margin-bottom:160px}
-
-/* ===== Hero ===== */
-.hero{
-  padding-top:200px;
-}
-
-.hero h1{
-  font-size:2.8em;
-  max-width:700px;
-  line-height:1.2;
-  margin-bottom:24px;
-}
-
-.hero h1 span{
-  background:linear-gradient(90deg,#ff0055,#ff7a00);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-
-.hero p{
-  max-width:720px;
-  font-size:1.05em;
-  line-height:1.9;
-  opacity:.9;
-  margin-bottom:40px;
-}
-
-.cta{
-  display:inline-block;
-  padding:14px 36px;
-  border-radius:40px;
-  background:linear-gradient(90deg,#ff0055,#ff7a00);
-  box-shadow:0 15px 50px rgba(255,0,80,.45);
-  font-weight:600;
-  transition:.3s;
-}
-
-.cta:hover{
-  transform:translateY(-4px);
-  box-shadow:0 25px 70px rgba(255,0,80,.65);
-}
-
-/* ===== Services ===== */
-.services{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:60px;
-  margin-top:100px;
-}
-
-.service-box{
-  background:
-    linear-gradient(180deg,#1b1b1b,#121212);
-  padding:40px;
-  border-radius:24px;
-  position:relative;
-  overflow:hidden;
-}
-
-.service-box::after{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:radial-gradient(circle at top left, rgba(255,0,80,.25), transparent 60%);
-  opacity:.6;
-}
-
-.service-icon{
-  width:60px;
-  height:60px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#ff0055,#ff7a00);
-  display:flex;
   align-items:center;
   justify-content:center;
-  margin-bottom:24px;
-  box-shadow:0 15px 40px rgba(255,0,80,.5);
+  text-align:center;
+  padding:100px 20px;
+  gap:20px;
 }
 
-.service-icon span{
-  font-size:26px;
+.hero h1 {
+  font-size:48px;
+  font-weight:700;
 }
 
-.service-box h3{
-  font-size:1.25em;
-  margin-bottom:14px;
+.hero p {
+  font-size:20px;
+  max-width:600px;
 }
 
-.service-box p{
-  font-size:.95em;
-  line-height:1.8;
-  opacity:.9;
+.hero .cta {
+  background: var(--accent-color);
+  color:#fff;
+  padding:12px 28px;
+  font-size:18px;
+  border:none;
+  border-radius:8px;
+  cursor:pointer;
+  transition: transform 0.3s;
 }
 
-/* ===== Brand ===== */
-.brand{
-  background:linear-gradient(135deg,#141414,#0e0e0e);
-  border-radius:26px;
-  padding:60px;
-  position:relative;
+.hero .cta:hover {
+  transform: scale(1.05);
 }
 
-.brand h2{
-  font-size:2em;
-  margin-bottom:22px;
-}
-
-.brand p{
-  max-width:800px;
-  font-size:1em;
-  line-height:1.9;
-  opacity:.9;
-}
-
-/* ===== Footer ===== */
-footer{
-  padding:60px 30px;
-  border-top:1px solid rgba(255,255,255,.08);
-}
-
-.footer-links{
+/* =======================
+   SERVICES SECTION
+======================= */
+.services {
   display:flex;
-  gap:30px;
   flex-wrap:wrap;
-  font-size:.9em;
+  gap:30px;
+  justify-content:center;
+  padding:60px 20px;
 }
 
-.footer-links a{
-  color:#ff0055;
-  opacity:.85;
+.card {
+  background-color: var(--secondary-color);
+  padding:30px 20px;
+  border-radius:16px;
+  width:260px;
+  text-align:center;
+  transition: transform 0.3s, box-shadow 0.3s;
 }
 
-/* ===== Responsive ===== */
-@media(max-width:700px){
-  .hero h1{font-size:2.2em}
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+}
+
+.card i {
+  font-size:40px;
+  margin-bottom:15px;
+  color: var(--accent-color);
+}
+
+/* =======================
+   CTA SECTION
+======================= */
+.call-to-action {
+  background: var(--accent-color);
+  color:#fff;
+  text-align:center;
+  padding:60px 20px;
+  border-radius:16px;
+  margin:60px 20px;
+}
+
+.call-to-action button {
+  background:#fff;
+  color: var(--accent-color);
+  border:none;
+  padding:12px 28px;
+  font-size:18px;
+  border-radius:8px;
+  cursor:pointer;
+  transition: transform 0.3s;
+}
+
+.call-to-action button:hover {
+  transform: scale(1.05);
+}
+
+/* =======================
+   FOOTER
+======================= */
+footer {
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  text-align:center;
+  padding:30px 20px;
+  font-size:14px;
+}
+
+/* =======================
+   TRANSITIONS
+======================= */
+a, button {
+  transition: all 0.3s ease;
 }
 </style>
 </head>
-
 <body>
 
 <header>
-  <div>
-    <div class="logo">NEXORA</div>
-    <div class="slogan">engineering digital growth</div>
+  <div class="logo">Ne<span class="x">x</span>ora</div>
+  <button id="mode-toggle">🌙</button>
+  <div class="menu-btn" id="menu-btn">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
-  <div class="hamburger" onclick="toggleMenu()">
-    <span></span><span></span><span></span>
-  </div>
+  <nav id="nav">
+    <a href="#services">خدمات</a>
+    <a href="#cta">ثبت‌نام</a>
+    <a href="#footer">تماس</a>
+  </nav>
 </header>
 
-<nav class="menu" id="menu">
-  <a href="#">Start</a>
-  <a href="#">Services</a>
-  <a href="#">About</a>
-  <a href="#">Case Studies</a>
-  <a href="#">Contact</a>
-</nav>
-
 <section class="hero">
-  <div class="container">
-    <h1>
-      We build <span>powerful digital systems</span><br>
-      that scale businesses globally
-    </h1>
-    <p>
-      Nexora is a full-service digital agency specializing in high-performance websites,
-      advanced automation systems and conversion-driven user experiences.
-      We don't just design interfaces — we architect digital ecosystems that grow with your brand.
-    </p>
-    <a href="#" class="cta">Start Now</a>
+  <h1>به Nexora خوش آمدید</h1>
+  <p>راهکارهای اتوماسیون و تکنولوژی که کسب‌وکار شما را متحول می‌کند.</p>
+  <button class="cta">شروع کن</button>
+</section>
+
+<section class="services" id="services">
+  <div class="card">
+    <i>⚙️</i>
+    <h3>اتوماسیون</h3>
+    <p>سیستم‌های هوشمند برای مدیریت آسان فرآیندها.</p>
+  </div>
+  <div class="card">
+    <i>💻</i>
+    <h3>تکنولوژی</h3>
+    <p>راهکارهای نوین و پیشرفته برای کسب‌وکار شما.</p>
+  </div>
+  <div class="card">
+    <i>🔒</i>
+    <h3>امنیت</h3>
+    <p>محافظت کامل از داده‌ها و اطلاعات حیاتی.</p>
   </div>
 </section>
 
-<section>
-  <div class="container services">
-
-    <div class="service-box">
-      <div class="service-icon"><span>💻</span></div>
-      <h3>Advanced Web Development</h3>
-      <p>
-        High-performance websites built with modern technologies,
-        optimized for speed, scalability and security.
-      </p>
-    </div>
-
-    <div class="service-box">
-      <div class="service-icon"><span>🎨</span></div>
-      <h3>UI / UX & Product Design</h3>
-      <p>
-        User-centered design systems focused on usability,
-        conversion and emotional engagement.
-      </p>
-    </div>
-
-    <div class="service-box">
-      <div class="service-icon"><span>📜</span></div>
-      <h3>Automation & CRM Systems</h3>
-      <p>
-        Smart automation, API integrations and CRM workflows
-        to scale operations efficiently.
-      </p>
-    </div>
-
-    <div class="service-box">
-      <div class="service-icon"><span>🚀</span></div>
-      <h3>Landing Pages & Funnels</h3>
-      <p>
-        Conversion-optimized landing pages and sales funnels
-        designed to turn visitors into customers.
-      </p>
-    </div>
-
-    <div class="service-box">
-      <div class="service-icon"><span>📈</span></div>
-      <h3>SEO & Performance</h3>
-      <p>
-        Technical SEO, performance optimization and analytics
-        to increase visibility and organic growth.
-      </p>
-    </div>
-
-    <div class="service-box">
-      <div class="service-icon"><span>🛡️</span></div>
-      <h3>Support & Scaling</h3>
-      <p>
-        Ongoing support, monitoring and scaling solutions
-        to ensure long-term stability and growth.
-      </p>
-    </div>
-
-  </div>
+<section class="call-to-action" id="cta">
+  <h2>همین حالا شروع کنید</h2>
+  <p>ثبت‌نام کنید و از خدمات پیشرفته Nexora بهره‌مند شوید.</p>
+  <button>ثبت‌نام</button>
 </section>
 
-<section>
-  <div class="container brand">
-    <h2>Why Nexora?</h2>
-    <p>
-      We combine engineering precision with creative vision.
-      Our approach is strategic, data-driven and focused on building systems
-      that deliver real business impact — not just beautiful screens.
-    </p>
-  </div>
-</section>
-
-<footer>
-  <div class="container footer-links">
-    <a href="#">About</a>
-    <a href="#">Services</a>
-    <a href="#">Careers</a>
-    <a href="#">Contact</a>
-  </div>
+<footer id="footer">
+  &copy; 2025 Nexora. تمام حقوق محفوظ است.
 </footer>
 
 <script>
-function toggleMenu(){
-  document.getElementById('menu').classList.toggle('active');
-}
+/* DARK/LIGHT MODE */
+const toggle = document.getElementById('mode-toggle');
+toggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+  toggle.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+});
+
+/* HAMBURGER MENU */
+const menuBtn = document.getElementById('menu-btn');
+const nav = document.getElementById('nav');
+
+menuBtn.addEventListener('click', () => {
+  nav.classList.toggle('open');
+  menuBtn.classList.toggle('open');
+});
 </script>
 
 </body>
