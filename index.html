@@ -8,9 +8,9 @@
 <style>
 :root {
   --bg-color: #ffffff;
-  --text-color: #0d3f0d;
-  --accent-start: #05652d; /* سبز تیره حرفه‌ای */
-  --accent-end: #00d084;   /* سبز روشن حرفه‌ای */
+  --text-color: #1b3a2e; /* سبز دلنشین متن */
+  --accent-start: #05652d; 
+  --accent-end: #00d084;   
   --secondary-color: #f0f9f4;
 }
 
@@ -122,9 +122,9 @@ nav a:hover { color: var(--accent-end); }
     width:250px;
     background-color: var(--bg-color);
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap:30px;
+    align-items: flex-start;
+    padding-top:50px;
+    gap:20px;
     transition: right 0.4s ease;
   }
   nav.open { right:0; }
@@ -148,6 +148,7 @@ nav a:hover { color: var(--accent-end); }
 .hero p {
   font-size:20px;
   max-width:600px;
+  margin-top:20px;
   opacity:0;
   animation: fadeIn 1.5s forwards 0.5s;
 }
@@ -160,6 +161,7 @@ nav a:hover { color: var(--accent-end); }
   border:none;
   border-radius:8px;
   cursor:pointer;
+  margin-top:20px;
   transition: transform 0.3s;
 }
 
@@ -190,6 +192,7 @@ nav a:hover { color: var(--accent-end); }
   width:260px;
   text-align:center;
   transition: transform 0.3s, box-shadow 0.3s;
+  font-family: inherit;
 }
 
 .card:hover {
@@ -200,6 +203,8 @@ nav a:hover { color: var(--accent-end); }
 .card i {
   font-size:40px;
   margin-bottom:15px;
+  display:block;
+  font-family: 'FontAwesome', sans-serif; /* جدا کردن فونت آیکون */
   background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -230,25 +235,32 @@ nav a:hover { color: var(--accent-end); }
 
 /* FOOTER */
 footer {
-  background-color: var(--secondary-color);
-  color: var(--text-color);
+  background: linear-gradient(90deg, var(--accent-start), var(--accent-end));
+  color: #fff;
   text-align:left;
   padding:30px 20px;
   font-size:14px;
 }
 
 footer a {
-  color: var(--text-color);
-  margin:0 10px;
+  display:block;
+  color: #fff;
+  margin:10px 0;
   text-decoration:none;
   transition: color 0.3s;
 }
 
-footer a:hover { color: var(--accent-end); }
+footer a:hover { color: var(--secondary-color); }
 
 /* ANIMATIONS */
 @keyframes fadeIn { to {opacity:1;} }
 @keyframes text-fade { from {opacity:0.6;} to {opacity:1;} }
+
+@media(max-width:768px){
+  .hero h1 { font-size:32px; }
+  .hero p { font-size:16px; }
+  .hero .cta { font-size:16px; padding:10px 20px; }
+}
 </style>
 </head>
 <body>
@@ -273,12 +285,13 @@ footer a:hover { color: var(--accent-end); }
     <a href="#contact">Contact</a>
     <a href="#faq">FAQ</a>
     <a href="#cta">Register</a>
+    <a href="#" id="close-menu">Close ✖</a>
   </nav>
 </header>
 
 <section class="hero" id="hero">
   <h1>Welcome to Nexora</h1>
-  <p>Smart automation and technology solutions that transform your business.</p>
+  <p>Smart automation and technology solutions that transform your business. Build, design, and optimize your digital presence with our expert solutions.</p>
   <button class="cta">Get Started</button>
 </section>
 
@@ -289,10 +302,10 @@ footer a:hover { color: var(--accent-end); }
 <section class="services" id="services">
   <div class="card"><i>🌐</i><h3>Website Creation</h3><p>Professional website setup and deployment to get your business online effortlessly.</p></div>
   <div class="card"><i>🎨</i><h3>Website Design</h3><p>Creative and responsive designs that captivate visitors and enhance user experience.</p></div>
-  <div class="card"><i>⚙️</i><h3>Website Automation</h3><p>Automate repetitive tasks and workflows to save time and increase productivity.</p></div>
-  <div class="card"><i>🏠</i><h3>Landing Page</h3><p>High-converting landing pages tailored for marketing campaigns and lead generation.</p></div>
+  <div class="card"><i>📜</i><h3>Website Automation</h3><p>Automate repetitive tasks and workflows to save time and increase productivity.</p></div>
+  <div class="card"><i>📌</i><h3>Landing Page</h3><p>High-converting landing pages tailored for marketing campaigns and lead generation.</p></div>
   <div class="card"><i>📈</i><h3>SEO Services</h3><p>Optimize your website to rank higher in search engines and attract more traffic.</p></div>
-  <div class="card"><i>🔒</i><h3>Website Security</h3><p>Implement advanced security measures to protect your site and customer data.</p></div>
+  <div class="card"><i>🛡️</i><h3>Website Security</h3><p>Implement advanced security measures to protect your site and customer data.</p></div>
 </section>
 
 <div class="info-box">
@@ -306,14 +319,12 @@ footer a:hover { color: var(--accent-end); }
 </section>
 
 <footer id="footer">
-  <p>&copy; 2025 Nexora. All rights reserved.</p>
-  <div>
-    <a href="#about">About</a>|
-    <a href="#services">Services</a>|
-    <a href="#support">Support</a>|
-    <a href="#contact">Contact</a>|
-    <a href="#faq">FAQ</a>
-  </div>
+  <a href="#about">About</a>
+  <a href="#services">Services</a>
+  <a href="#support">Support</a>
+  <a href="#contact">Contact</a>
+  <a href="#faq">FAQ</a>
+  <a href="#cta">Register</a>
 </footer>
 
 <script>
@@ -327,9 +338,16 @@ toggle.addEventListener('click', ()=>{
 /* HAMBURGER MENU */
 const menuBtn = document.getElementById('menu-btn');
 const nav = document.getElementById('nav');
+const closeMenu = document.getElementById('close-menu');
+
 menuBtn.addEventListener('click', ()=>{
   nav.classList.toggle('open');
   menuBtn.classList.toggle('open');
+});
+
+closeMenu.addEventListener('click', ()=>{
+  nav.classList.remove('open');
+  menuBtn.classList.remove('open');
 });
 </script>
 
