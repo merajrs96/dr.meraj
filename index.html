@@ -44,13 +44,17 @@ header.hide {
   transform: translateY(-100%);
   opacity: 0;
 }
-
 .logo {
   font-size: 26px;
   font-weight: bold;
-  color: #ff4d4d;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px #ff2e2e;
+  background: linear-gradient(135deg, #ff2e2e, #ff7e5f); /* گرادیانت قرمز به نارنجی */
+  -webkit-background-clip: text; /* کلپ کردن گرادیانت روی متن */
+  color: transparent; /* رنگ متن رو شفاف کنیم تا فقط گرادیانت دیده بشه */
+  letter-spacing: 1px;
+  border-radius: 10px; /* گوشه‌های گرد */
+  padding: 3px 12px; /* فضای داخلی برای ایجاد یک فاصله و بهتر شدن جلوه */
+  display: inline-block; /* برای استفاده از padding */
+}
 }
 
 .hamburger {
@@ -110,8 +114,9 @@ header.hide {
 }
 
 .hero-box {
-  max-width: 600px;
+  max-width: 400px;
   padding: 40px;
+  margin:10px 10px;
   border: 1px solid #222;
   text-align: center;
   animation: fadeUp 1.2s ease forwards;
@@ -423,6 +428,7 @@ window.addEventListener("scroll", () => {
 
 </body>
 </html>
+
 
 
 
