@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nexora</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <!-- Favicon -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906343.png">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ================= HEADER ================= */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      transition: all 0.4s ease;
+    }
+
+    header.hide {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      background: linear-gradient(135deg, #ff2e2e, #ff6a00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+    }
+
+    .hamburger {
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    .menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100vh;
+      background: #000;
+      padding: 40px;
+      transition: all 0.6s ease;
+      z-index: 2000;
+    }
+
+    .menu.active {
+      left: 0;
+    }
+
+    .close {
+      position: absolute;
+      top: 25px;
+      right: 35px;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    .menu ul {
+      margin-top: 100px;
+      list-style: none;
+    }
+
+    .menu ul li {
+      padding: 20px 0;
+      border-bottom: 1px solid #222;
+      font-size: 22px;
+      transition: 0.3s;
+    }
+
+    .menu ul li:hover {
+      color: #ff2e2e;
+      transform: translateX(10px);
+    }
+
+    /* ================= SIGNUP HERO ================= */
+    .signup-hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 120px;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .signup-hero h1 {
+      font-size: 40px;
+      margin-bottom: 10px;
+      background: linear-gradient(135deg, #ff2e2e, #ff6a00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .signup-hero p {
+      font-size: 16px;
+      opacity: 0.9;
+      margin-bottom: 40px;
+    }
+
+    /* ================= FORM BOX ================= */
+    .form-box {
+      background: linear-gradient(135deg, #111, #222);
+      padding: 40px 30px;
+      border-radius: 16px;
+      max-width: 400px;
+      width: 90%;
+      margin: 0 auto;
+      box-shadow: 0 0 20px rgba(255,46,46,0.4);
+    }
+
+    .form-box h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 28px;
+      color: #ff2e2e;
+      background: linear-gradient(135deg, #ff2e2e, #ff6a00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .form-box input {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ff2e2e;
+      background: #111;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .form-box input:focus {
+      outline: none;
+      border-color: #ff6a00;
+      box-shadow: 0 0 8px #ff6a00;
+    }
+
+    .form-box button {
+      width: 100%;
+      padding: 12px;
+      background: linear-gradient(135deg, #ff2e2e, #ff6a00);
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .form-box button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .form-box button:hover:not(:disabled) {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px rgba(255,46,46,0.7);
+    }
+
+    .form-box .login-link {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .form-box .login-link a {
+      color: #ff2e2e;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    /* ================= FOOTER ================= */
+    .footer {
+      background: #000;
+      border-top: 2px solid #ff2e2e;
+      box-shadow: 0 -10px 40px rgba(255,46,46,0.3);
+      margin-top: 50px;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      padding: 80px 60px;
+    }
+
+    .footer-box h2, .footer-box h3 {
+      color: #ff2e2e;
+      margin-bottom: 15px;
+    }
+
+    .footer-box p, .footer-box ul li {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    .footer-box ul {
+      list-style: none;
+    }
+
+    .footer-box ul li a {
+      color: #fff;
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+
+    .footer-box ul li a:hover {
+      color: #ff2e2e;
+      padding-left: 6px;
+    }
+
+    .socials {
+      margin-top: 15px;
+    }
+
+    .socials a {
+      display: inline-block;
+      margin-right: 12px;
+      font-size: 20px;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    .socials a:hover {
+      color: #ff2e2e;
+      transform: scale(1.2);
+      text-shadow: 0 0 15px #ff2e2e;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      border-top: 1px solid #222;
+      opacity: 0.6;
+    }
+
+    @media(max-width: 768px) {
+      .form-box {
+        padding: 30px 20px;
+      }
+      header {
+        padding: 15px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header id="header">
+    <div class="logo">NEXORA</div>
+    <div class="hamburger" onclick="openMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+  </header>
+
+  <!-- MENU -->
+  <div class="menu" id="menu">
+    <div class="close" onclick="closeMenu()">
+      <i class="fas fa-times"></i>
+    </div>
+    <ul>
+      <li><a href="#">Home</a></li>
+      <li><a href="#">My Projects</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">FAQ</a></li>
+      <li><a href="#">Support</a></li>
+    </ul>
+  </div>
+
+  <!-- SIGNUP HERO -->
+  <section class="signup-hero">
+    <h1>Join Nexora</h1>
+    <p>Sign up Nexora to get all web services</p>
+
+    <div class="form-box">
+      <h2>Sign Up</h2>
+      <input type="text" id="fullName" placeholder="Full Name" />
+      <input type="text" id="phone" placeholder="Phone Number" />
+      <input type="password" id="password" placeholder="Password" />
+      <input type="password" id="repeatPassword" placeholder="Repeat Password" />
+      <button id="signupBtn" disabled>Sign Up</button>
+      <div class="login-link">
+        Have an account? <a href="#">Login</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-box brand">
+        <h2>NEXORA</h2>
+        <p>Nexora is a new generation of web solutions, focused on design, performance, and business growth.</p>
+      </div>
+      <div class="footer-box">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Sign Up / Sign In</a></li>
+          <li><a href="#">My Projects</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-box">
+        <h3>Services</h3>
+        <ul>
+          <li>Create Web</li>
+          <li>Web Design</li>
+          <li>Landing Page</li>
+          <li>Automation CRM</li>
+          <li>SEO</li>
+          <li>Web Security</li>
+        </ul>
+      </div>
+      <div class="footer-box">
+        <h3>Contact</h3>
+        <p>Email: support@nexora.com</p>
+        <p>Available: 24/7</p>
+        <div class="socials">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-telegram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2022 Nexora. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const menu = document.getElementById("menu");
+    const header = document.querySelector("header");
+    const signupBtn = document.getElementById("signupBtn");
+    const fullName = document.getElementById("fullName");
+    const phone = document.getElementById("phone");
+    const password = document.getElementById("password");
+    const repeatPassword = document.getElementById("repeatPassword");
+
+    // Menu functions
+    function openMenu() {
+      menu.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+    function closeMenu() {
+      menu.classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+
+    // Scroll hide header
+    let lastScroll = 0;
+    window.addEventListener("scroll", () => {
+      if (menu.classList.contains("active")) return;
+      let currentScroll = window.pageYOffset;
+      if (currentScroll > lastScroll) {
+        header.classList.add("hide");
+      } else {
+        header.classList.remove("hide");
+      }
+      lastScroll = currentScroll;
+    });
+
+    // Enable/disable signup button
+    function checkForm() {
+      if (
+        fullName.value.trim() &&
+        phone.value.trim() &&
+        password.value &&
+        repeatPassword.value &&
+        password.value === repeatPassword.value
+      ) {
+        signupBtn.disabled = false;
+      } else {
+        signupBtn.disabled = true;
+      }
+    }
+
+    fullName.addEventListener("input", checkForm);
+    phone.addEventListener("input", checkForm);
+    password.addEventListener("input", checkForm);
+    repeatPassword.addEventListener("input", checkForm);
+
+    signupBtn.addEventListener("click", () => {
+      if (password.value !== repeatPassword.value) {
+        alert("Passwords do not match!");
+        return;
+      }
+      alert("Sign up successful! (Demo)");
+      // اینجا میتونی ذخیره‌سازی LocalStorage یا API اضافه کنی
+    });
+  </script>
+</body>
+  </html>
