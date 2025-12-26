@@ -2,263 +2,313 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Nexora</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nexora</title>
+  <!-- Favicon -->
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906343.png">
+  <!-- Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    body {
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial,Helvetica,sans-serif;
-}
-body{
-  background:#000;
-  color:#fff;
-}
-a{color:inherit;text-decoration:none}
+    /* ================= HEADER ================= */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      transition: all 0.4s ease;
+    }
 
-/* HEADER */
-header{
-  position:fixed;
-  top:0;
-  width:100%;
-  padding:20px 40px;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:rgba(0,0,0,.8);
-  z-index:1000;
-}
-.logo{
-  font-size:26px;
-  font-weight:bold;
-  background:linear-gradient(135deg,#ff2e2e,#ff6a00);
-  -webkit-background-clip:text;
-  color:transparent;
-}
-.hamburger{font-size:26px;cursor:pointer}
+    header.hide {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
 
-/* MENU */
-.menu{
-  position:fixed;
-  top:0;
-  left:-100%;
-  width:100%;
-  height:100vh;
-  background:#000;
-  padding:40px;
-  transition:.6s;
-  z-index:2000;
-}
-.menu.active{left:0}
-.close{
-  position:absolute;
-  top:25px;
-  right:35px;
-  font-size:30px;
-  cursor:pointer;
-}
-.menu ul{
-  margin-top:100px;
-  list-style:none;
-}
-.menu ul li{
-  padding:20px 0;
-  border-bottom:1px solid #222;
-  font-size:22px;
-}
-.menu ul li:hover{
-  color:#ff2e2e;
-  transform:translateX(10px);
-}
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      color: #ff2e2e;
+      letter-spacing: 2px;
+    }
 
-/* HERO */
-.hero{
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding-top:120px;
-}
-.hero-box{
-  max-width:420px;
-  width:100%;
-  padding:40px;
-  background:linear-gradient(135deg,#111,#000);
-  border-radius:20px;
-  border:1px solid #222;
-}
-.hero-box h1{
-  text-align:center;
-  font-size:34px;
-  margin-bottom:10px;
-}
-.hero-box p{
-  text-align:center;
-  font-size:14px;
-  opacity:.8;
-  margin-bottom:30px;
-}
+    .hamburger {
+      font-size: 26px;
+      cursor: pointer;
+    }
 
-/* FORM */
-.form-title{
-  text-align:center;
-  margin-bottom:20px;
-  font-size:22px;
-  color:#ff2e2e;
-}
-form{
-  display:flex;
-  flex-direction:column;
-  gap:15px;
-}
-input{
-  padding:14px;
-  border-radius:12px;
-  border:none;
-  outline:none;
-  background:#111;
-  color:#fff;
-}
-button{
-  padding:14px;
-  border-radius:30px;
-  border:none;
-  background:linear-gradient(135deg,#ff2e2e,#ff6a00);
-  color:#fff;
-  font-weight:bold;
-  cursor:pointer;
-}
-button:disabled{
-  opacity:.4;
-  cursor:not-allowed;
-}
-.captcha-box{
-  display:flex;
-  gap:10px;
-  align-items:center;
-}
-.captcha-q{
-  background:#111;
-  padding:12px;
-  border-radius:10px;
-  font-weight:bold;
-}
-.error{
-  color:#ff2e2e;
-  font-size:13px;
-  text-align:center;
-  display:none;
-}
-.form-links{
-  margin-top:15px;
-  text-align:center;
-  font-size:13px;
-  opacity:.8;
-}
-.form-links a:hover{color:#ff2e2e}
+    /* ================= HAMBURGER MENU ================= */
+    .menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100vh;
+      background: #000;
+      padding: 40px;
+      transition: all 0.6s ease;
+      z-index: 2000;
+    }
 
-/* FOOTER */
-.footer{
-  border-top:1px solid #222;
-  text-align:center;
-  padding:20px;
-  font-size:13px;
-  opacity:.6;
-}
-</style>
+    .menu.active {
+      left: 0;
+    }
+
+    .close {
+      position: absolute;
+      top: 25px;
+      right: 35px;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    .menu ul {
+      margin-top: 100px;
+      list-style: none;
+    }
+
+    .menu ul li {
+      padding: 20px 0;
+      border-bottom: 1px solid #222;
+      font-size: 22px;
+      transition: 0.3s;
+    }
+
+    .menu ul li:hover {
+      color: #ff2e2e;
+      transform: translateX(10px);
+    }
+
+    /* ================= HERO ================= */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding-top: 120px;
+      background: linear-gradient(135deg, #ff2e2e, #ff6a00);
+    }
+
+    .hero-box {
+      max-width: 800px;
+      padding: 40px;
+      border-radius: 10px;
+      border: 1px solid #222;
+      text-align: center;
+      background: rgba(0, 0, 0, 0.7);
+      box-shadow: 0 0 20px rgba(255,46,46,0.4);
+    }
+
+    .hero-box h1 {
+      font-size: 46px;
+      margin-bottom: 20px;
+      color: #fff;
+      -webkit-text-stroke: 2px #ff2e2e;
+      font-weight: 900;
+    }
+
+    .hero-box p {
+      font-size: 16px;
+      line-height: 1.8;
+      opacity: 0.9;
+    }
+
+    /* ================= FORM ================= */
+    .form-box {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 30px;
+      background: #111;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(255,46,46,0.6);
+    }
+
+    .form-box h3 {
+      text-align: center;
+      color: #ff2e2e;
+      margin-bottom: 20px;
+    }
+
+    .form-box input {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #222;
+      background: #333;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .form-box button {
+      width: 100%;
+      padding: 12px;
+      border-radius: 5px;
+      border: 1px solid #222;
+      background: #ff2e2e;
+      color: #fff;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .form-box button:hover {
+      background: #ff6a00;
+    }
+
+    .form-box a {
+      color: #ff2e2e;
+      text-align: center;
+      display: block;
+      margin-top: 20px;
+    }
+
+    .footer {
+      background: #000;
+      border-top: 2px solid #ff2e2e;
+      box-shadow: 0 -10px 40px rgba(255,46,46,0.3);
+      padding: 40px 0;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      padding: 40px 60px;
+      color: #fff;
+    }
+
+    .footer-box h2 {
+      color: #ff2e2e;
+      letter-spacing: 2px;
+      margin-bottom: 15px;
+    }
+
+    .footer-box ul {
+      list-style: none;
+    }
+
+    .footer-box ul li {
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .footer-box ul li a {
+      color: #fff;
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+
+    .footer-box ul li a:hover {
+      color: #ff2e2e;
+      padding-left: 6px;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      border-top: 1px solid #222;
+      opacity: 0.6;
+    }
+
+    /* ================= CAPTCHA ================= */
+    .captcha {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 10px 0;
+    }
+
+    .captcha input {
+      width: 60%;
+      padding: 12px;
+      margin: 0;
+      background: #333;
+      border: 1px solid #222;
+      color: #fff;
+    }
+
+    .captcha img {
+      width: 30%;
+      height: auto;
+      cursor: pointer;
+    }
+  </style>
 </head>
-
 <body>
+  <!-- HEADER -->
+  <header id="header">
+    <div class="logo">NEXORA</div>
+    <div class="hamburger" onclick="openMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+  </header>
 
-<header>
-  <div class="logo">NEXORA</div>
-  <div class="hamburger" onclick="openMenu()">
-    <i class="fas fa-bars"></i>
+  <!-- MENU -->
+  <div class="menu" id="menu">
+    <div class="close" onclick="closeMenu()">
+      <i class="fas fa-times"></i>
+    </div>
+    <ul>
+      <li><a href="#">Sign Up / Sign In</a></li>
+      <li><a href="#">My Projects</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">FAQ</a></li>
+      <li><a href="#">Support</a></li>
+    </ul>
   </div>
-</header>
 
-<div class="menu" id="menu">
-  <div class="close" onclick="closeMenu()">
-    <i class="fas fa-times"></i>
-  </div>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="signup.html">Sign Up</a></li>
-    <li><a href="#">About Us</a></li>
-    <li><a href="#">FAQ</a></li>
-    <li><a href="#">Support</a></li>
-  </ul>
-</div>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-box">
+      <h1>Login to Nexora</h1>
+      <p>Sign in for use Nexora services</p>
+    </div>
+  </section>
 
-<section class="hero">
-  <div class="hero-box">
-    <h1>Login to Nexora</h1>
-    <p>Sign in for use Nexora services</p>
-
-    <div class="form-title">Log In</div>
-
+  <!-- LOGIN FORM -->
+  <section class="form-box">
+    <h3>Log In</h3>
     <form id="loginForm">
-      <input type="tel" placeholder="Phone Number" required>
-      <input type="password" placeholder="Password" required>
-
-      <div class="captcha-box">
-        <div class="captcha-q" id="captchaQuestion"></div>
-        <input type="number" id="captchaInput" placeholder="Answer" required>
+      <input type="text" id="phone" placeholder="Phone Number" required>
+      <input type="password" id="password" placeholder="Password" required>
+      <div class="captcha">
+        <input type="text" id="captcha" placeholder="Enter CAPTCHA" required>
+        <img src="captcha_image.jpg" alt="CAPTCHA" onclick="reloadCaptcha()">
       </div>
-
-      <div class="error" id="captchaError">Captcha is incorrect</div>
-
       <button type="submit">Log In</button>
     </form>
+    <a href="#">Forgot password?</a>
+  </section>
 
-    <div class="form-links">
-      <a href="#">Forgot password?</a>
-    </div>
-  </div>
-</section>
-
-<footer class="footer">
-  © 2022 Nexora. All rights reserved.
-</footer>
-
-<script>
-const menu = document.getElementById("menu");
-function openMenu(){
-  menu.classList.add("active");
-  document.body.style.overflow="hidden";
-}
-function closeMenu(){
-  menu.classList.remove("active");
-  document.body.style.overflow="auto";
-}
-
-/* CAPTCHA LOGIC */
-let a,b,answer;
-const q = document.getElementById("captchaQuestion");
-const input = document.getElementById("captchaInput");
-const error = document.getElementById("captchaError");
-
-function generateCaptcha(){
-  a = Math.floor(Math.random()*10)+1;
-  b = Math.floor(Math.random()*10)+1;
-  answer = a+b;
-  q.innerText = `${a} + ${b} = ?`;
-}
-generateCaptcha();
-
-document.getElementById("loginForm").addEventListener("submit",e=>{
-  if(Number(input.value)!==answer){
-    e.preventDefault();
-    error.style.display="block";
-    generateCaptcha();
-    input.value="";
-  }
-});
-</script>
-
-</body>
-</html>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-box">
+        <h2>NEXORA</h2>
+        <p>
+          Nexora is a new generation of web solutions,
+          focused on design, performance, and business growth.
+        </p>
+      </div>
+      <div class="footer-box">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href
