@@ -211,6 +211,63 @@
       alert("Login Successful! (Demo)");
       // میتونی اینجا LocalStorage یا API اضافه کنی
     });
-  </script>
+  <script>
+    const menu = document.getElementById("menu");
+    const header = document.getElementById("header");
+    const loginBtn = document.getElementById("loginBtn");
+    const phone = document.getElementById("phone");
+    const password = document.getElementById("password");
+
+    // Menu functions
+    function openMenu() { 
+        menu.classList.add("active"); 
+        document.body.style.overflow = "hidden"; 
+    }
+    function closeMenu() { 
+        menu.classList.remove("active"); 
+        document.body.style.overflow = "auto"; 
+    }
+
+    // Scroll hide header
+    let lastScroll = 0;
+    window.addEventListener("scroll", () => {
+        if(menu.classList.contains("active")) return;
+        let currentScroll = window.pageYOffset;
+        if(currentScroll > lastScroll) { 
+            header.classList.add("hide"); 
+        } else { 
+            header.classList.remove("hide"); 
+        }
+        lastScroll = currentScroll;
+    });
+
+    // Enable/disable login button
+    function checkForm() {
+        if(phone.value.trim() && password.value.trim()) loginBtn.disabled = false;
+        else loginBtn.disabled = true;
+    }
+
+    phone.addEventListener("input", checkForm);
+    password.addEventListener("input", checkForm);
+
+    // Login with LocalStorage
+    loginBtn.addEventListener("click", () => {
+        const storedUser = JSON.parse(localStorage.getItem("user"));
+
+        if(!storedUser) {
+            alert("No user found! Please sign up first.");
+            return;
+        }
+
+        if(phone.value === storedUser.phone && password.value === storedUser.password) {
+            // ورود موفق
+            localStorage.setItem("loggedIn", "true"); // علامت برای ورود کاربر
+            alert("Login successful!");
+            window.location.href = "dashboard.html"; // هدایت به داشبورد
+        } else {
+            alert("Phone number or password is incorrect!");
+        }
+    });
+</script>
 </body>
 </html>
