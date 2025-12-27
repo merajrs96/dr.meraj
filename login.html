@@ -183,32 +183,19 @@
             font-weight: bold;
         }
 
-        /* FOOTER */
-        .footer {
-            background: #000;
-            color: #fff;
-            padding: 40px;
-            text-align: center;
-        }
-        .footer .socials {
-            margin-top: 20px;
-        }
-        .footer .socials a {
-            margin-right: 15px;
-            color: #fff;
-            font-size: 20px;
-            transition: 0.3s;
-        }
-        .footer .socials a:hover {
-            color: #ff2e2e;
-            transform: scale(1.2);
-        }
-        .footer .footer-bottom {
-            margin-top: 20px;
-            font-size: 14px;
-            opacity: 0.7;
-        }
+.footer {
+      background: #000;
+      border-top: 2px solid #ff2e2e;
+      box-shadow: 0 -10px 40px rgba(255,46,46,0.3);
+      margin-top: 50px;
+    }
 
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      padding: 80px 60px;
+    }
         /* ANIMATIONS */
         @keyframes fadeUp {
             from {
@@ -269,17 +256,46 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="footer">
+      <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-box brand">
+        <h2>NEXORA</h2>
+        <p>Nexora is a new generation of web solutions, focused on design, performance, and business growth.</p>
+      </div>
+      <div class="footer-box">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Sign Up / Sign In</a></li>
+          <li><a href="#">My Projects</a></li>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-box">
+        <h3>Services</h3>
+        <ul>
+          <li>Create Web</li>
+          <li>Web Design</li>
+          <li>Landing Page</li>
+          <li>Automation CRM</li>
+          <li>SEO</li>
+          <li>Web Security</li>
+        </ul>
+      </div>
+      <div class="footer-box">
+        <h3>Contact</h3>
+        <p>Email: support@nexora.com</p>
+        <p>Available: 24/7</p>
         <div class="socials">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-telegram"></i></a>
-            <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-telegram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
         </div>
-        <div class="footer-bottom">
-            © 2022 Nexora. All rights reserved.
-        </div>
-    </footer>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2022 Nexora. All rights reserved.</div>
+      </footer>
 
     <script>
         function openMenu() {
