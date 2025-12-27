@@ -1,324 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<title>Nexora</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexora Dashboard</title>
 <!-- Favicon -->
 <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906343.png">
-<!-- Icons -->
+<!-- Font Awesome -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 <style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-body {
-  background: #0a0a0a;
-  color: #fff;
-  overflow-x: hidden;
-}
-
-a { text-decoration: none; color: inherit; }
+* { margin:0; padding:0; box-sizing:border-box; font-family: Arial, Helvetica, sans-serif; }
+body { background:#0a0a0a; color:#fff; overflow-x:hidden; }
+a { text-decoration:none; color:inherit; }
 
 /* ================= HEADER ================= */
-header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  padding: 20px 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  backdrop-filter: blur(10px);
-  background: rgba(0,0,0,0.6);
-  box-shadow: 0 5px 20px rgba(255,46,46,0.2);
-  z-index: 1000;
-  transition: all 0.4s ease;
-}
-
-header.hide {
-  transform: translateY(-100%);
-  opacity: 0;
-}
-.logo {
-  font-size: 26px;
-  font-weight: bold;
-  background: linear-gradient(135deg, #ff2e2e, #ff7e5f); /* گرادیانت قرمز به نارنجی */
-  -webkit-background-clip: text; /* کلپ کردن گرادیانت روی متن */
-  color: transparent; /* رنگ متن رو شفاف کنیم تا فقط گرادیانت دیده بشه */
-  letter-spacing: 1px;
-  border-radius: 10px; /* گوشه‌های گرد */
-  padding: 3px 12px; /* فضای داخلی برای ایجاد یک فاصله و بهتر شدن جلوه */
-  display: inline-block; /* برای استفاده از padding */
-}
-}
-
-.hamburger {
-  font-size: 26px;
-  cursor: pointer;
-  color: #ff4d4d;
-}
+header { position:fixed; top:0; width:100%; padding:20px 40px; display:flex; justify-content:space-between; align-items:center; backdrop-filter:blur(10px); background:rgba(0,0,0,0.6); box-shadow:0 5px 20px rgba(255,46,46,0.2); z-index:1000; transition:0.4s ease; }
+header.hide { transform:translateY(-100%); opacity:0; }
+.logo { font-size:26px; font-weight:bold; background:linear-gradient(135deg,#ff2e2e,#ff7e5f); -webkit-background-clip:text; color:transparent; letter-spacing:1px; border-radius:10px; padding:3px 12px; display:inline-block; }
+.hamburger { font-size:26px; cursor:pointer; color:#ff4d4d; }
 
 /* ================= HAMBURGER MENU ================= */
-.menu {
-  position: fixed;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100vh;
-  background: linear-gradient(180deg, #111, #000);
-  padding: 50px 40px;
-  transition: all 0.6s ease;
-  z-index: 2000;
-}
+.menu { position:fixed; top:0; left:-100%; width:100%; height:100vh; background:linear-gradient(180deg,#111,#000); padding:50px 40px; transition:0.6s ease; z-index:2000; }
+.menu.active { left:0; }
+.close { position:absolute; top:25px; right:35px; font-size:30px; cursor:pointer; color:#ff4d4d; }
+.menu ul { margin-top:100px; list-style:none; }
+.menu ul li { padding:20px 0; border-bottom:1px solid #222; font-size:22px; transition:0.3s; }
+.menu ul li:hover { color:#ff4d4d; transform:translateX(10px); }
 
-.menu.active { left: 0; }
+/* ================= DASHBOARD BOX ================= */
+.dashboard-box { max-width:800px; margin:120px auto 40px; background:#111827; border-radius:25px; padding:30px; text-align:center; position:relative; }
+.avatar-circle { width:80px; height:80px; border-radius:50%; background:#000; margin:0 auto 15px; display:flex; justify-content:center; align-items:center; cursor:pointer; font-size:36px; border:2px solid #ff0000; transition:0.3s; }
+.avatar-list { display:none; justify-content:center; gap:10px; margin-bottom:15px; }
+.avatar-list div { width:50px; height:50px; border-radius:50%; display:flex; justify-content:center; align-items:center; cursor:pointer; font-size:24px; background:#111827; color:#ff0000; transition:0.3s; border:2px solid #ff0000; }
+.avatar-list div:hover { transform:scale(1.1); }
 
-.close {
-  position: absolute;
-  top: 25px;
-  right: 35px;
-  font-size: 30px;
-  cursor: pointer;
-  color: #ff4d4d;
-}
+/* ================= INFO ================= */
+.info-field { margin:10px 0; }
+button { margin-top:20px; padding:10px 20px; border:none; border-radius:8px; background:#ff0000; color:#fff; cursor:pointer; font-size:16px; transition:0.3s; }
+button:hover { background:#ff4d4d; }
 
-.menu ul {
-  margin-top: 100px;
-  list-style: none;
-}
+/* ================= TABS ================= */
+.tabs { display:flex; justify-content:center; gap:40px; margin-top:30px; border-top:1px solid #333; padding-top:20px; }
+.tab { cursor:pointer; padding:10px 20px; border-radius:8px; background:#111827; transition:0.3s; }
+.tab.active { background:#38bdf8; color:#000; }
+.tab-content { margin-top:20px; }
+.projects-empty { display:flex; justify-content:center; align-items:center; flex-direction:column; color:#777; height:100px; }
 
-.menu ul li {
-  padding: 20px 0;
-  border-bottom: 1px solid #222;
-  font-size: 22px;
-  transition: 0.3s;
-}
-
-.menu ul li:hover {
-  color: #ff4d4d;
-  transform: translateX(10px);
-}
-
-/* ================= HERO ================= */
-.hero {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding-top: 10px;
-}
-
-.hero-box {
-  max-width: 400px;
-  padding: 40px;
-  margin:10px 10px;
-  margin-top:10px;
-  border: 1px solid #222;
-  text-align: center;
-  animation: fadeUp 1.2s ease forwards;
-  background: linear-gradient(135deg, #ff2e2e, #ff6a00);
-  border-radius: 50px;
-  box-shadow: 0 10px 25px rgba(255,46,46,0.3);
-}
-
-.hero-box h1 {
-  font-size: 46px;
-  margin-bottom: 20px;
-  color: #000; /* رنگ داخل متن */
-  -webkit-text-stroke: 0.1px #ff2e2e; /* خط دور متن */
-  -webkit-text-fill-color: #fff; /* رنگ اصلی متن داخل خط */
-font-weight:900;
- text-shadow: 0 0 7px white;
-}
-
-.hero-box p {
-  font-size: 18px;
-  line-height: 1.9;
-  color: #eee;
-}
-
-/* ================= SERVICES ================= */
-.services {
-  padding-top: 15px;    /* خیلی نزدیک به هیرو */
-  padding-bottom: 40px;
-  padding-left: 50px;
-  padding-right: 50px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-}
-
-.service-box {
-  background: linear-gradient(145deg, #111, #222);
-  padding: 30px;
-  border-radius: 50px;
-  border: none;
-  text-align: center;
-  transition: transform 0.4s, box-shadow 0.4s, background 0.4s;
-  cursor: pointer;
-  box-shadow: 0 10px 25px rgba(255,46,46,0.3);
-}
-
-.service-box i {
-  font-size: 36px;
-  color: #ff4d4d;
-  margin-bottom: 15px;
-}
-
-.service-box h3 { margin-bottom: 10px; }
-
-.service-box p { font-size: 14px; opacity: 0.85; }
-
-.service-box:hover {
-  transform: translateY(-15px) scale(1.05);
-  box-shadow: 0 20px 35px rgba(255,46,46,0.6);
-  background: linear-gradient(145deg, #ff2e2e, #ff6a00);
-}
-
-/* ================= TRUST ================= */
-.trust {
-  padding: 60px 30px;
-  padding-top: 15px;
-}
-
-
-.trust-box {
-  background: linear-gradient(135deg, #222, #000);
-  border-radius: 15px;
-  padding: 50px;
-  border: 1px solid rgba(255,46,46,0.7);
-  box-shadow: 0 0 20px rgba(255,46,46,0.5);
-  animation: fadeUp 1.5s ease forwards;
-}
-
-.trust-box h2 {
-  color: #ff4d4d;
-  margin-bottom: 15px;
-  text-shadow: 0 0 10px #ff2e2e;
-}
-
-.trust-box p {
-  color: #eee;
-  font-weight: bold;
-  line-height: 1.6;
-  margin-bottom: 25px;
-}
-
-.trust-box a {
-  display: inline-block;
-  padding: 14px 35px;
-  background: linear-gradient(135deg, #ff2e2e, #ff6a00);
-  border-radius: 30px;
-  color: #fff;
-  font-weight: bold;
-  transition: 0.3s;
-}
-
-.trust-box a:hover {
-  transform: scale(1.1);
-  box-shadow: 0 0 20px rgba(255,46,46,0.8);
-}
-
-/* ================= ANIMATIONS ================= */
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(50px) rotateX(10deg); }
-  to { opacity: 1; transform: translateY(0) rotateX(0deg); }
-}
+/* ================= OVERLAY FORM ================= */
+.overlay { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.85); display:none; justify-content:center; align-items:center; z-index:200; }
+.overlay form { background:#111827; padding:30px; border-radius:15px; width:300px; text-align:center; }
+.overlay input, .overlay select { width:90%; margin:10px 0; padding:8px; border-radius:5px; border:none; text-align:center; }
+.overlay button { margin-top:10px; background:#ff0000; color:#fff; }
 
 /* ================= FOOTER ================= */
-.footer {
-  background: #0a0a0a;
-  border-top: 2px solid #ff2e2e;
-  box-shadow: 0 -10px 40px rgba(255,46,46,0.3);
-}
+footer { background:#0a0a0a; border-top:2px solid #ff2e2e; box-shadow:0 -10px 40px rgba(255,46,46,0.3); margin-top:50px; padding-bottom:20px; }
 
-.footer-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 40px;
-  padding: 80px 60px;
-}
-
-.footer-box h2, .footer-box h3 { color: #ff4d4d; }
-
-.footer-box p {
-  font-size: 14px;
-  opacity: 0.85;
-  line-height: 1.7;
-}
-
-.footer-box ul { list-style: none; }
-
-.footer-box ul li {
-  margin-bottom: 10px;
-  font-size: 14px;
-}
-
-.footer-box ul li a {
-  color: #fff;
-  opacity: 0.8;
-  transition: 0.3s;
-}
-
-.footer-box ul li a:hover {
-  color: #ff4d4d;
-  padding-left: 6px;
-}
-
-.socials {
-  margin-top: 15px;
-}
-
-.socials a {
-  display: inline-block;
-  margin-right: 12px;
-  font-size: 20px;
-  color: #fff;
-  transition: 0.3s;
-}
-
-.socials a:hover {
-  color: #ff4d4d;
-  transform: scale(1.2);
-  text-shadow: 0 0 15px #ff2e2e;
-}
-
-.footer-bottom {
-  text-align: center;
-  padding: 20px;
-  font-size: 13px;
-  border-top: 1px solid #222;
-  opacity: 0.6;
-}
-
-/* ================= RESPONSIVE ================= */
-@media(max-width: 768px) {
-  .hero-box h1 { font-size: 36px; }
-  header { padding: 15px 20px; }
-  .footer-container { padding: 60px 25px; }
+@media(max-width:768px){
+  .dashboard-box { margin:150px 15px 40px; padding:20px; }
+  .avatar-circle { width:70px; height:70px; font-size:28px; }
+  .avatar-list div { width:40px; height:40px; font-size:20px; }
+  .tabs { flex-direction:column; gap:15px; }
 }
 </style>
 </head>
-
 <body>
+
 <!-- HEADER -->
 <header id="header">
   <div class="logo">NEXORA</div>
-  <div class="hamburger" onclick="openMenu()">
-    <i class="fas fa-bars"></i>
-  </div>
+  <div class="hamburger" onclick="openMenu()"><i class="fas fa-bars"></i></div>
 </header>
 
 <!-- MENU -->
 <div class="menu" id="menu">
-  <div class="close" onclick="closeMenu()">
-    <i class="fas fa-times"></i>
-  </div>
+  <div class="close" onclick="closeMenu()"><i class="fas fa-times"></i></div>
   <ul>
     <li><a href="signup.html">Sign Up / Sign In</a></li>
     <li><a href="dashboard.html">My Projects</a></li>
@@ -328,63 +83,50 @@ font-weight:900;
   </ul>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-box">
-    <h1>Nexora<br>New era of website design</h1>
-    <p>
-      With many years of experience, a strong team, and 24-hour support,
-      Nexora is proud to support you in providing all website services,
-      from site creation to sales management and SEO.
-    </p>
+<!-- DASHBOARD -->
+<div class="dashboard-box">
+  <div class="avatar-circle" id="avatarCircle">🐺</div>
+  <div class="avatar-list" id="avatarList">
+    <div data-icon="🐺">🐺</div>
+    <div data-icon="🦁">🦁</div>
+    <div data-icon="🐯">🐯</div>
+    <div data-icon="🐻">🐻</div>
+    <div data-icon="🦇">🦇</div>
   </div>
-</section>
 
-<!-- SERVICES -->
-<section class="services">
-  <div class="service-box"><i class="fas fa-code"></i><h3>Create Web</h3><p>Professional website development</p></div>
-  <div class="service-box"><i class="fas fa-paint-brush"></i><h3>Web Design</h3><p>Modern UI/UX design</p></div>
-  <div class="service-box"><i class="fas fa-bolt"></i><h3>Landing Page</h3><p>High conversion landing pages</p></div>
-  <div class="service-box"><i class="fas fa-network-wired"></i><h3>Automation CRM</h3><p>Smart business automation</p></div>
-  <div class="service-box"><i class="fas fa-chart-line"></i><h3>SEO</h3><p>Search engine optimization</p></div>
-  <div class="service-box"><i class="fas fa-shield-alt"></i><h3>Web Security</h3><p>Maximum protection & safety</p></div>
-</section>
-
-<!-- TRUST -->
-<section class="trust">
-  <div class="trust-box">
-    <h2>How to trust Nexora?</h2>
-    <p>
-      Our team works hard to improve and adapt your idea for implementation
-      on your site, and you will implement your idea with great precision.
-    </p>
-    <a href="#">Start Now</a>
+  <div class="info" id="infoBox">
+    <div class="info-field">Name: Meraj Rastegar</div>
+    <div class="info-field">Phone: 09xx</div>
+    <div class="info-field"><input placeholder="Job"></div>
+    <div class="info-field"><input placeholder="Gender"></div>
+    <div class="info-field"><input placeholder="Age"></div>
+    <div class="info-field"><input placeholder="Country"></div>
   </div>
-</section>
+  <button id="completeProfileBtn">Complete Your Profile</button>
 
-<script>
-const menu = document.getElementById("menu");
-const header = document.querySelector("header");
-let lastScroll = 0;
+  <div class="tabs">
+    <div class="tab active" data-tab="projects">Projects</div>
+    <div class="tab" data-tab="newProject">New Project</div>
+    <div class="tab" data-tab="history">History</div>
+  </div>
 
-function openMenu() {
-  menu.classList.add("active");
-  document.body.style.overflow = "hidden";
-}
+  <div class="tab-content" id="tabContent">
+    <div class="projects-empty">📦 No projects yet</div>
+  </div>
+</div>
 
-function closeMenu() {
-  menu.classList.remove("active");
-  document.body.style.overflow = "auto";
-}
-
-window.addEventListener("scroll", () => {
-  if (menu.classList.contains("active")) return;
-  let currentScroll = window.pageYOffset;
-  if (currentScroll > lastScroll) { header.classList.add("hide"); } 
-  else { header.classList.remove("hide"); }
-  lastScroll = currentScroll;
-});
-</script>
+<!-- OVERLAY FORM -->
+<div class="overlay" id="profileOverlay">
+  <form id="profileForm">
+    <h3>Complete Your Profile</h3>
+    <input placeholder="Job">
+    <input placeholder="Gender">
+    <input placeholder="Age">
+    <input placeholder="Country">
+    <button type="button" id="saveProfileBtn">Confirm & Save</button>
+    <button type="button" id="closeOverlayBtn">Cancel</button>
+  </form>
+</div>
 
 <!-- FOOTER -->
 <footer class="footer">
@@ -425,24 +167,110 @@ window.addEventListener("scroll", () => {
       </div>
     </div>
   </div>
-  <div class="footer-bottom">made by ∆meraj rastegar∆<br>
-    © 2022 Nexora. All rights reserved.</div>
+  <div class="footer-bottom">made by ∆meraj rastegar∆<br>© 2025 Nexora. All rights reserved.</div>
 </footer>
+
+<script>
+// ==== Hamburger Menu ====
+const menu = document.getElementById("menu");
+function openMenu(){ menu.classList.add("active"); document.body.style.overflow="hidden"; }
+function closeMenu(){ menu.classList.remove("active"); document.body.style.overflow="auto"; }
+const header = document.querySelector("header");
+let lastScroll = 0;
+window.addEventListener("scroll", ()=>{
+  if(menu.classList.contains("active")) return;
+  let currentScroll = window.pageYOffset;
+  if(currentScroll>lastScroll){ header.classList.add("hide"); } 
+  else{ header.classList.remove("hide"); }
+  lastScroll = currentScroll;
+});
+
+// ==== Avatar selection ====
+const avatarCircle = document.getElementById("avatarCircle");
+const avatarList = document.getElementById("avatarList");
+avatarCircle.addEventListener("click", ()=>{ avatarList.style.display="flex"; });
+avatarList.querySelectorAll("div").forEach(a=>{
+  a.addEventListener("click", ()=>{
+    avatarCircle.textContent = a.dataset.icon;
+    avatarList.style.display="none";
+    localStorage.setItem("avatar", a.dataset.icon);
+  });
+});
+const savedAvatar = localStorage.getItem("avatar");
+if(savedAvatar){ avatarCircle.textContent = savedAvatar; }
+
+// ==== Complete Profile Overlay ====
+const completeBtn = document.getElementById("completeProfileBtn");
+const overlay = document.getElementById("profileOverlay");
+const closeOverlayBtn = document.getElementById("closeOverlayBtn");
+const saveProfileBtn = document.getElementById("saveProfileBtn");
+const infoBox = document.getElementById("infoBox");
+
+completeBtn.onclick = ()=> overlay.style.display="flex";
+closeOverlayBtn.onclick = ()=> overlay.style.display="none";
+saveProfileBtn.onclick = ()=>{
+  const inputs = overlay.querySelectorAll("input");
+  const profileData = {};
+  inputs.forEach(input=>profileData[input.placeholder]=input.value);
+  localStorage.setItem("profile", JSON.stringify(profileData));
+  infoBox.innerHTML = `
+    <div class="info-field">Name: Meraj Rastegar</div>
+    <div class="info-field">Phone: 09xx</div>
+    <div class="info-field">Job: ${profileData["Job"]}</div>
+    <div class="info-field">Gender: ${profileData["Gender"]}</div>
+    <div class="info-field">Age: ${profileData["Age"]}</div>
+    <div class="info-field">Country: ${profileData["Country"]}</div>
+  `;
+  overlay.style.display="none";
+  completeBtn.style.display="none";
+};
+
+// ==== Tabs & Projects ====
+const tabBtns = document.querySelectorAll(".tab");
+const tabContent = document.getElementById("tabContent");
+let projects = JSON.parse(localStorage.getItem("projects") || "[]");
+
+function renderProjects(){
+  if(projects.length===0){ tabContent.innerHTML='<div class="projects-empty">📦 No projects yet</div>'; }
+  else{ tabContent.innerHTML='<ul>'+projects.map(p=>`<li>📁 ${p}</li>`).join('')+'</ul>'; }
+}
+
+tabBtns.forEach(tab=>{
+  tab.onclick=()=>{
+    tabBtns.forEach(t=>t.classList.remove("active"));
+    tab.classList.add("active");
+    if(tab.dataset.tab==="projects"){ renderProjects(); }
+    else if(tab.dataset.tab==="newProject"){ tabContent.innerHTML='<button id="newProjBtn">+ New Project</button>'; }
+    else{ tabContent.innerHTML='<div>History log will appear here</div>'; }
+
+    // New Project button listener
+    const newBtn = document.getElementById("newProjBtn");
+    if(newBtn){
+      newBtn.onclick=()=>{
+        let name=prompt("Project Name:");
+        if(name){ projects.push(name); localStorage.setItem("projects", JSON.stringify(projects)); renderProjects(); }
+      };
+    }
+  };
+});
+
+// ==== Load saved profile ====
+const savedProfile = JSON.parse(localStorage.getItem("profile"));
+if(savedProfile){
+  infoBox.innerHTML = `
+    <div class="info-field">Name: Meraj Rastegar</div>
+    <div class="info-field">Phone: 09xx</div>
+    <div class="info-field">Job: ${savedProfile["Job"]}</div>
+    <div class="info-field">Gender: ${savedProfile["Gender"]}</div>
+    <div class="info-field">Age: ${savedProfile["Age"]}</div>
+    <div class="info-field">Country: ${savedProfile["Country"]}</div>
+  `;
+  completeBtn.style.display="none";
+}
+
+// ==== Initial render Projects ====
+renderProjects();
+</script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
