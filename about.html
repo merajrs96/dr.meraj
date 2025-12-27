@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Nexora</title>
+  <!-- Favicon -->
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906343.png">
+  <!-- Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      background: #000;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    a { text-decoration: none; color: inherit; }
+
+    /* ================= HEADER ================= */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+      transition: all 0.4s ease;
+    }
+
+    header.hide {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+
+    .logo {
+      font-size: 26px;
+      font-weight: bold;
+      background: linear-gradient(135deg, #ff2e2e, #ff6a00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      letter-spacing: 2px;
+    }
+
+    .hamburger {
+      font-size: 26px;
+      cursor: pointer;
+    }
+
+    .menu {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100vh;
+      background: #000;
+      padding: 40px;
+      transition: all 0.6s ease;
+      z-index: 2000;
+    }
+
+    .menu.active {
+      left: 0;
+    }
+
+    .close {
+      position: absolute;
+      top: 25px;
+      right: 35px;
+      font-size: 30px;
+      cursor: pointer;
+    }
+
+    .menu ul {
+      margin-top: 100px;
+      list-style: none;
+    }
+
+    .menu ul li {
+      padding: 20px 0;
+      border-bottom: 1px solid #222;
+      font-size: 22px;
+      transition: 0.3s;
+    }
+
+    .menu ul li:hover {
+      color: #ff2e2e;
+      transform: translateX(10px);
+    }
+
+    /* ================= ABOUT SECTION ================= */
+    .about-section {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+      padding: 120px 20px 50px;
+    }
+
+    .about-section h1 {
+      font-size: 40px;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #ff2e2e, #ff6a00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .about-section p {
+      font-size: 16px;
+      opacity: 0.9;
+      margin-bottom: 40px;
+    }
+
+    .features {
+      display: flex;
+      justify-content: space-around;
+      width: 100%;
+    }
+
+    .feature-box {
+      max-width: 300px;
+      margin: 0 20px;
+      text-align: center;
+    }
+
+    .feature-box h3 {
+      font-size: 24px;
+      color: #ff2e2e;
+    }
+
+    .feature-box p {
+      font-size: 14px;
+      color: #fff;
+    }
+
+    /* ================= FOOTER ================= */
+    .footer {
+      background: #000;
+      border-top: 2px solid #ff2e2e;
+      box-shadow: 0 -10px 40px rgba(255,46,46,0.3);
+      margin-top: 50px;
+    }
+
+    .footer-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 40px;
+      padding: 80px 60px;
+    }
+
+    .footer-box h2, .footer-box h3 {
+      color: #ff2e2e;
+      margin-bottom: 15px;
+    }
+
+    .footer-box p, .footer-box ul li {
+      font-size: 14px;
+      opacity: 0.85;
+    }
+
+    .footer-box ul {
+      list-style: none;
+    }
+
+    .footer-box ul li a {
+      color: #fff;
+      opacity: 0.8;
+      transition: 0.3s;
+    }
+
+    .footer-box ul li a:hover {
+      color: #ff2e2e;
+      padding-left: 6px;
+    }
+
+    .socials {
+      margin-top: 15px;
+    }
+
+    .socials a {
+      display: inline-block;
+      margin-right: 12px;
+      font-size: 20px;
+      color: #fff;
+      transition: 0.3s;
+    }
+
+    .socials a:hover {
+      color: #ff2e2e;
+      transform: scale(1.2);
+      text-shadow: 0 0 15px #ff2e2e;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding: 20px;
+      font-size: 13px;
+      border-top: 1px solid #222;
+      opacity: 0.6;
+    }
+
+    @media(max-width: 768px) {
+      header {
+        padding: 15px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header id="header">
+    <div class="logo">NEXORA</div>
+    <div class="hamburger" onclick="openMenu()">
+      <i class="fas fa-bars"></i>
+    </div>
+  </header>
+
+  <!-- MENU -->
+  <div class="menu" id="menu">
+    <div class="close" onclick="closeMenu()">
+      <i class="fas fa-times"></i>
+    </div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="signup.html">Sign Up</a></li>
+      <li><a href="login.html">Sign In</a></li>
+      <li><a href="#">My Projects</a></li>
+      <li><a href="#">About Us</a></li>
+      <li><a href="#">FAQ</a></li>
+      <li><a href="#">Support</a></li>
+    </ul>
+  </div>
+
+  <!-- ABOUT SECTION -->
+  <section class="about-section">
+    <h1>About Nexora</h1>
+    <p>
+      Nexora is a leading company in the field of web design and digital services that has been committed to providing the best solutions and innovations in the tech industry since its inception. Our team is composed of skilled and creative professionals who strive to create unique experiences for clients using the latest technologies and industry trends. From designing beautiful, user-friendly websites to creating advanced SEO strategies, we help businesses grow online and benefit from digital marketing solutions.
+    </p>
+    <p>
+      With Nexora, you gain access to a range of digital services that allow you to have a professional and user-friendly online presence. We place great importance on website security, employing the latest security measures to protect your data. Our goal is not only to meet your digital needs but also to help your business grow and provide you with a unique online service experience.
+    </p>
+
+    <div class="features">
+      <div class="feature-box">
+        <h3>Web Design</h3>
+        <p>We create modern and user-friendly websites that offer excellent user experiences.</p>
+      </div>
+      <div class="feature-box">
+        <h3>SEO</h3>
+        <p>Advanced SEO strategies to improve your site's ranking on search engines and drive more traffic.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Web Security</h3>
+        <p>We take your website security to the next level, ensuring your users' privacy is protected.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-box brand">
+        <h2>NEXORA</h2>
+        <p>Nexora is a new generation of web solutions, focused on design, performance, and business growth.</p>
+      </div>
+      <div class="footer-box">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="#">Sign Up / Sign In</a></li>
+          <li><a href="#">My
