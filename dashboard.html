@@ -2,219 +2,191 @@
 <html lang="fa">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Nexora Dashboard</title>
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906343.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 <style>
-  body {
-    margin:0; font-family:'Arial',sans-serif;
-    background:#0f172a; color:#fff;
-  }
-  a {color:#38bdf8; text-decoration:none;}
-  header {
-    position:fixed; top:0; left:0; right:0;
-    height:60px; background:#111827; display:flex;
-    justify-content:space-between; align-items:center;
-    padding:0 20px; z-index:100;
-  }
-  .menu-toggle {cursor:pointer; font-size:24px;}
-  .dashboard-box {
-    max-width:800px; margin:100px auto 40px;
-    background:#111827; border-radius:15px;
-    padding:30px; text-align:center; position:relative;
-  }
-  .avatar-circle {
-    width:80px; height:80px; border-radius:50%;
-    background:#000; margin:0 auto 15px;
-    display:flex; justify-content:center; align-items:center;
-    cursor:pointer; font-size:36px;
-  }
-  .avatar-circle.selected {border:3px solid #ff0000;}
-  .info-field {margin:10px 0;}
-  input {width:60%; padding:8px; border-radius:5px; border:none; text-align:center;}
-  button {margin-top:20px;padding:10px 20px;border:none;border-radius:8px;background:#ff0000;color:#fff;cursor:pointer;font-size:16px;}
-  .tabs {display:flex; justify-content:center; gap:40px; margin-top:30px; border-top:1px solid #333; padding-top:20px;}
-  .tab {cursor:pointer; padding:10px 20px; border-radius:8px; background:#111827; transition:0.3s;}
-  .tab.active {background:#38bdf8; color:#000;}
-  .tab-content {margin-top:20px;}
-  .projects-empty {display:flex; justify-content:center; align-items:center; flex-direction:column; color:#777; height:100px;}
-  .overlay {
-    position:fixed; top:0; left:0; width:100%; height:100%;
-    background:rgba(0,0,0,0.8); display:none;
-    justify-content:center; align-items:center; z-index:200;
-  }
-  .overlay form {background:#111827; padding:30px; border-radius:15px; width:300px; text-align:center;}
-  .overlay input, .overlay select {width:90%; margin:10px 0; padding:8px; border-radius:5px; border:none;}
-  .overlay button {background:#ff0000;}
-  footer {
-    position:fixed; bottom:0; left:0; right:0; height:50px;
-    background:#111827; display:flex; justify-content:center;
-    align-items:center; color:#fff; font-size:14px;
-  }
-  .avatar-list {display:flex; justify-content:center; gap:10px; margin-bottom:15px;}
-  .avatar-list div {width:50px; height:50px; border-radius:50%; display:flex; justify-content:center; align-items:center; cursor:pointer; font-size:24px; background:#111827; color:#ff0000; transition:0.3s;}
-  .avatar-list div.selected {border:2px solid #ff0000;}
+/* ================== GLOBAL ================== */
+* { margin:0; padding:0; box-sizing:border-box; font-family:Arial, sans-serif; }
+body { background:#0a0a0a; color:#fff; overflow-x:hidden; }
+
+/* ================== HEADER ================== */
+header { position:fixed; top:0; width:100%; padding:20px 40px; display:flex; justify-content:space-between; align-items:center; backdrop-filter:blur(10px); background:rgba(0,0,0,0.6); box-shadow:0 5px 20px rgba(255,46,46,0.2); z-index:1000; }
+header .logo { font-size:26px; font-weight:bold; background:linear-gradient(135deg,#ff2e2e,#ff7e5f); -webkit-background-clip:text; color:transparent; letter-spacing:1px; border-radius:10px; padding:3px 12px; }
+.hamburger { font-size:26px; cursor:pointer; color:#ff4d4d; }
+
+/* ================== MENU ================== */
+.menu { position:fixed; top:0; left:-100%; width:100%; height:100vh; background:linear-gradient(180deg,#111,#000); padding:50px 40px; transition:all 0.6s ease; z-index:2000; }
+.menu.active { left:0; }
+.menu ul { margin-top:100px; list-style:none; }
+.menu ul li { padding:20px 0; border-bottom:1px solid #222; font-size:22px; transition:0.3s; }
+.menu ul li:hover { color:#ff4d4d; transform:translateX(10px); }
+
+/* ================== PROFILE BOX ================== */
+.profile-box { margin:140px auto 50px; background:linear-gradient(145deg,#111,#222); border-radius:20px; padding:40px; text-align:center; box-shadow:0 10px 25px rgba(255,46,46,0.3); width:90%; max-width:400px; }
+.profile-box .avatar { width:100px; height:100px; background:#ff4d4d; border-radius:50%; margin:0 auto 20px; cursor:pointer; }
+.profile-box h3 { color:#ff4d4d; margin-bottom:20px; font-size:24px; }
+.profile-box p { color:#eee; font-size:16px; line-height:1.6; }
+.profile-box button { margin-top:30px; background:linear-gradient(135deg,#ff2e2e,#ff6a00); color:#fff; border:none; border-radius:30px; padding:14px 35px; font-weight:bold; cursor:pointer; }
+.profile-box button:hover { background:linear-gradient(135deg,#ff4d4d,#ff8c42); }
+
+/* ================== PROFILE FORM ================== */
+.profile-form { display:none; position:fixed; top:0; left:0; width:100%; height:100vh; background:rgba(0,0,0,0.7); z-index:3000; justify-content:center; align-items:center; }
+.profile-form .form-container { background:#222; padding:40px; border-radius:20px; width:90%; max-width:400px; text-align:center; }
+.profile-form input, .profile-form select { margin-bottom:20px; padding:10px; width:100%; border-radius:10px; border:none; background:#333; color:#fff; }
+.profile-form button { margin-top:20px; background:linear-gradient(135deg,#ff2e2e,#ff6a00); color:#fff; border:none; padding:14px 35px; border-radius:30px; font-weight:bold; cursor:pointer; }
+.profile-form button:hover { background:linear-gradient(135deg,#ff4d4d,#ff8c42); }
+
+/* ================== DASHBOARD TABS ================== */
+.dashboard-tabs { margin:40px auto; text-align:center; }
+.tab-btn { padding:12px 25px; margin:0 5px; background:#222; border:none; border-radius:25px; cursor:pointer; color:#fff; transition:0.3s; }
+.tab-btn.active, .tab-btn:hover { background:linear-gradient(135deg,#ff2e2e,#ff6a00); }
+.tab-content { display:none; margin-top:20px; text-align:center; }
+.tab-content p, .tab-content button { font-size:16px; }
+
+/* ================== FOOTER ================== */
+.footer { background:#0a0a0a; border-top:2px solid #ff2e2e; box-shadow:0 -10px 40px rgba(255,46,46,0.3); margin-top:50px; }
+.footer-container { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:40px; padding:80px 60px; }
+.footer-box h2, .footer-box h3 { color:#ff4d4d; }
+.footer-box p { font-size:14px; opacity:0.85; line-height:1.7; }
+.footer-box ul { list-style:none; }
+.footer-box ul li { margin-bottom:10px; font-size:14px; }
+.footer-box ul li a { color:#fff; opacity:0.8; transition:0.3s; }
+.footer-box ul li a:hover { color:#ff4d4d; padding-left:6px; }
+.socials a { display:inline-block; margin-right:12px; font-size:20px; color:#fff; transition:0.3s; }
+.socials a:hover { color:#ff4d4d; transform:scale(1.2); text-shadow:0 0 15px #ff2e2e; }
+.footer-bottom { text-align:center; padding:20px; font-size:13px; border-top:1px solid #222; opacity:0.6; }
+
+/* ================== RESPONSIVE ================== */
+@media(max-width:768px){ header{padding:15px 20px;} .footer-container{padding:60px 25px;} }
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-  <div class="menu-toggle">☰</div>
-  <div>Nexora Dashboard</div>
-  <div>👤 Meraj</div>
+    <div class="logo">NEXORA</div>
+    <div class="hamburger" onclick="openMenu()"><i class="fas fa-bars"></i></div>
 </header>
 
-<div class="dashboard-box">
-  <!-- Avatar انتخابی -->
-  <div class="avatar-list" id="avatarList">
-    <div data-icon="🐺">🐺</div>
-    <div data-icon="🦁">🦁</div>
-    <div data-icon="🐯">🐯</div>
-    <div data-icon="🐻">🐻</div>
-    <div data-icon="🦇">🦇</div>
-  </div>
-  <div class="avatar-circle" id="avatar">🐺</div>
-
-  <div class="info" id="infoBox">
-    <div class="info-field">Name: Meraj Rastegar</div>
-    <div class="info-field">Phone: 09xx</div>
-    <div class="info-field"><input placeholder="Job"></div>
-    <div class="info-field"><input placeholder="Gender"></div>
-    <div class="info-field"><input placeholder="Age"></div>
-    <div class="info-field"><input placeholder="Country"></div>
-  </div>
-  <button id="completeProfileBtn">Complete Your Profile</button>
-
-  <div class="tabs">
-    <div class="tab active" data-tab="projects">Projects</div>
-    <div class="tab" data-tab="newProject">New Project</div>
-    <div class="tab" data-tab="history">History</div>
-  </div>
-
-  <div class="tab-content" id="tabContent">
-    <div class="projects-empty">📦 No projects yet</div>
-  </div>
+<!-- MENU -->
+<div class="menu" id="menu">
+    <div class="close" onclick="closeMenu()"><i class="fas fa-times"></i></div>
+    <ul>
+        <li><a href="#">Sign Up / Sign In</a></li>
+        <li><a href="#">My Projects</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Support</a></li>
+    </ul>
 </div>
 
-<div class="overlay" id="profileOverlay">
-  <form id="profileForm">
-    <h3>Complete Your Profile</h3>
-    <input placeholder="Job">
-    <input placeholder="Gender">
-    <input placeholder="Age">
-    <input placeholder="Country">
-    <button type="button" id="saveProfileBtn">Confirm & Save</button>
-    <button type="button" id="closeOverlayBtn">Cancel</button>
-  </form>
+<!-- PROFILE BOX -->
+<section class="profile-box">
+    <div class="avatar" onclick="selectAvatar()"></div>
+    <h3>Your Profile</h3>
+    <p>Click to choose your avatar and update your profile information.</p>
+    <button onclick="openProfileForm()">Complete Your Profile</button>
+</section>
+
+<!-- PROFILE FORM -->
+<div class="profile-form" id="profileForm">
+    <div class="form-container">
+        <h3>Complete Your Profile</h3>
+        <input type="text" id="job" placeholder="شغل">
+        <input type="text" id="gender" placeholder="جنسیت">
+        <input type="number" id="age" placeholder="سن">
+        <input type="text" id="country" placeholder="کشور">
+        <div style="display:flex; justify-content:space-between;">
+            <button onclick="saveProfile()">تایید</button>
+            <button onclick="closeProfileForm()">انصراف</button>
+        </div>
+    </div>
 </div>
 
-<footer>
-  © 2025 Nexora - All rights reserved
+<!-- DASHBOARD TABS -->
+<section class="dashboard-tabs">
+    <button class="tab-btn active" onclick="showTab('projects')">Projects</button>
+    <button class="tab-btn" onclick="showTab('newProject')">New Project</button>
+    <button class="tab-btn" onclick="showTab('history')">History</button>
+</section>
+
+<!-- TAB CONTENT -->
+<section id="projects" class="tab-content" style="display:block;">
+    <p><i class="fas fa-folder-open"></i> هنوز پروژه‌ای ثبت نشده است.</p>
+</section>
+<section id="newProject" class="tab-content">
+    <button onclick="alert('صفحه پروژه جدید بعداً اضافه می‌شود')">New Project</button>
+</section>
+<section id="history" class="tab-content">
+    <p>تاریخچه فعالیت‌ها در سایت در این بخش نمایش داده می‌شود.</p>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="footer-container">
+        <div class="footer-box brand">
+            <h2>NEXORA</h2>
+            <p>Nexora is a new generation of web solutions focused on design, performance, and business growth.</p>
+        </div>
+        <div class="footer-box">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="#">Sign Up / Sign In</a></li>
+                <li><a href="#">My Projects</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </div>
+        <div class="footer-box socials">
+            <h3>Social</h3>
+            <a href="#"><i class="fab fa-telegram"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fas fa-envelope"></i></a>
+        </div>
+    </div>
+    <div class="footer-bottom">&copy; 2025 Nexora. All rights reserved.</div>
 </footer>
 
 <script>
-const completeBtn = document.getElementById('completeProfileBtn');
-const overlay = document.getElementById('profileOverlay');
-const closeOverlayBtn = document.getElementById('closeOverlayBtn');
-const saveProfileBtn = document.getElementById('saveProfileBtn');
-const tabBtns = document.querySelectorAll('.tab');
-const tabContent = document.getElementById('tabContent');
-const infoBox = document.getElementById('infoBox');
-const avatarList = document.getElementById('avatarList');
-const avatarCircle = document.getElementById('avatar');
+    // HAMBURGER MENU
+    function openMenu(){ document.getElementById('menu').classList.add('active'); }
+    function closeMenu(){ document.getElementById('menu').classList.remove('active'); }
 
-// ==== Avatar انتخاب ====
-avatarList.querySelectorAll('div').forEach(a=>{
-  a.onclick = ()=>{
-    avatarList.querySelectorAll('div').forEach(av=>av.classList.remove('selected'));
-    a.classList.add('selected');
-    avatarCircle.textContent = a.dataset.icon;
-    localStorage.setItem('avatar', a.dataset.icon);
-  }
-});
-// بارگذاری avatar ذخیره شده
-const savedAvatar = localStorage.getItem('avatar');
-if(savedAvatar){ avatarCircle.textContent = savedAvatar; }
+    // PROFILE FORM
+    function openProfileForm(){ document.getElementById('profileForm').style.display='flex'; }
+    function closeProfileForm(){ document.getElementById('profileForm').style.display='none'; }
 
-// Complete Profile overlay
-completeBtn.onclick = ()=> overlay.style.display='flex';
-closeOverlayBtn.onclick = ()=> overlay.style.display='none';
-
-saveProfileBtn.onclick = ()=>{
-  const inputs = document.querySelectorAll('#profileForm input');
-  const profileData = {};
-  inputs.forEach(input => { profileData[input.placeholder] = input.value; });
-
-  // ذخیره در localStorage
-  localStorage.setItem('profile', JSON.stringify(profileData));
-
-  // بروزرسانی Info Box
-  infoBox.innerHTML = `
-    <div class="info-field">Name: Meraj Rastegar</div>
-    <div class="info-field">Phone: 09xx</div>
-    <div class="info-field">Job: ${profileData['Job']}</div>
-    <div class="info-field">Gender: ${profileData['Gender']}</div>
-    <div class="info-field">Age: ${profileData['Age']}</div>
-    <div class="info-field">Country: ${profileData['Country']}</div>
-  `;
-
-  // حذف دکمه Complete
-  completeBtn.style.display = 'none';
-  overlay.style.display = 'none';
-};
-
-// ==== Projects ====
-let projects = JSON.parse(localStorage.getItem('projects') || '[]');
-
-function renderProjects(){
-  if(projects.length === 0){
-    tabContent.innerHTML = '<div class="projects-empty">📦 No projects yet</div>';
-  } else {
-    tabContent.innerHTML = '<ul>' + projects.map(p=>`<li>📁 ${p}</li>`).join('') + '</ul>';
-  }
-}
-
-// New Project دکمه
-tabContent.addEventListener('click', e=>{
-  if(e.target.tagName==='BUTTON' && e.target.textContent==='+ New Project'){
-    let newProj = prompt('Project Name:');
-    if(newProj){
-      projects.push(newProj);
-      localStorage.setItem('projects', JSON.stringify(projects));
-      renderProjects();
+    function saveProfile(){
+        const job=document.getElementById('job').value;
+        const gender=document.getElementById('gender').value;
+        const age=document.getElementById('age').value;
+        const country=document.getElementById('country').value;
+        localStorage.setItem('profile', JSON.stringify({job,gender,age,country}));
+        closeProfileForm();
+        document.querySelector('.profile-box button').style.display='none';
+        alert('اطلاعات پروفایل ذخیره شد!');
     }
-  }
-});
 
-// Tabs
-tabBtns.forEach(tab=>{
-  tab.onclick = ()=>{
-    tabBtns.forEach(t=>t.classList.remove('active'));
-    tab.classList.add('active');
-    if(tab.dataset.tab==='projects'){ renderProjects(); }
-    else if(tab.dataset.tab==='newProject'){
-      tabContent.innerHTML = '<button>+ New Project</button>';
-    } else{
-      tabContent.innerHTML = '<div>History log will appear here</div>';
+    // TAB FUNCTION
+    function showTab(tab){
+        document.querySelectorAll('.tab-content').forEach(c=>c.style.display='none');
+        document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+        document.getElementById(tab).style.display='block';
+        event.currentTarget.classList.add('active');
     }
-  }
-});
 
-// بار اول رندر
-renderProjects();
+    // LOAD SAVED PROFILE
+    window.onload = function(){
+        let saved=localStorage.getItem('profile');
+        if(saved){
+            document.querySelector('.profile-box button').style.display='none';
+        }
+    }
 
-// ==== بارگذاری پروفایل ذخیره شده ====
-const savedProfile = JSON.parse(localStorage.getItem('profile'));
-if(savedProfile){
-  infoBox.innerHTML = `
-    <div class="info-field">Name: Meraj Rastegar</div>
-    <div class="info-field">Phone: 09xx</div>
-    <div class="info-field">Job: ${savedProfile['Job']}</div>
-    <div class="info-field">Gender: ${savedProfile['Gender']}</div>
-    <div class="info-field">Age: ${savedProfile['Age']}</div>
-    <div class="info-field">Country: ${savedProfile['Country']}</div>
-  `;
-  completeBtn.style.display = 'none';
-}
+    // AVATAR CLICK (SAMPLE)
+    function selectAvatar(){ alert('انتخاب آواتار بعداً اضافه می‌شود'); }
 </script>
 
 </body>
-</html>
+  </html>
