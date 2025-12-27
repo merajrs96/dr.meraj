@@ -54,7 +54,15 @@
       padding:40px 30px; border-radius:16px; max-width:400px; width:90%;
       margin:0 auto; box-shadow:0 0 20px rgba(255,46,46,0.4); text-align:center;
     }
-
+ .form-box h2 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 28px;
+  color: #ff2e2e;
+  background: linear-gradient(135deg, #ff2e2e, #ff6a00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+ }
     .form-box input {
       width:100%; padding:12px 15px; margin-bottom:20px; border-radius:8px;
       border:1px solid #ff2e2e; background:#111; color:#fff; font-size:14px;
@@ -64,6 +72,7 @@
     }
 
     .form-box button {
+    
       width:100%; padding:12px; background: linear-gradient(135deg,#ff2e2e,#ff6a00);
       border:none; border-radius:8px; color:#fff; font-size:16px;
       cursor:pointer; font-weight:bold; transition:0.3s;
@@ -117,6 +126,7 @@
     <p>Sign in to use Nexora services</p>
 
     <div class="form-box">
+      <h2>sign in </h2>
       <input type="text" id="phone" placeholder="Phone Number" />
       <input type="password" id="password" placeholder="Password" />
       <button id="loginBtn" disabled>Sign In</button>
