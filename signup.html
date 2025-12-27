@@ -354,8 +354,7 @@
     </div>
     <div class="footer-bottom">© 2022 Nexora. All rights reserved.</div>
   </footer>
-
-  <script>
+<script>
     const menu = document.getElementById("menu");
     const header = document.querySelector("header");
     const signupBtn = document.getElementById("signupBtn");
@@ -407,14 +406,29 @@
     password.addEventListener("input", checkForm);
     repeatPassword.addEventListener("input", checkForm);
 
+    // Sign Up click event with LocalStorage
     signupBtn.addEventListener("click", () => {
       if (password.value !== repeatPassword.value) {
         alert("Passwords do not match!");
         return;
       }
-      alert("Sign up successful! (Demo)");
-      // اینجا میتونی ذخیره‌سازی LocalStorage یا API اضافه کنی
+
+      // ساخت آبجکت کاربر
+      const user = {
+        fullName: fullName.value,
+        phone: phone.value,
+        password: password.value
+      };
+
+      // ذخیره در LocalStorage
+      localStorage.setItem("user", JSON.stringify(user));
+
+      alert("Sign up successful! You can now login.");
+
+      // هدایت به صفحه Login
+      window.location.href = "login.html";
     });
-  </script>
+</script>
+  
 </body>
   </html>
