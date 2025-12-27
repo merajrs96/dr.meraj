@@ -1,190 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dashboard - Nexora</title>
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906343.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
-  <style>
-    * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, Helvetica, sans-serif; }
-    body { background:#000; color:#fff; overflow-x:hidden; }
-    a { text-decoration:none; color:inherit; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nexora Dashboard</title>
+<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906343.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; font-family: Arial, Helvetica, sans-serif;}
+body { background:#000; color:#fff; overflow-x:hidden;}
+a { text-decoration:none; color:inherit; }
 
-    /* HEADER */
-    header { position:fixed; top:0; width:100%; padding:20px 40px; display:flex; justify-content:space-between; align-items:center; background:rgba(0,0,0,0.8); z-index:1000; transition: all 0.4s ease; }
-    header.hide { transform:translateY(-100%); opacity:0; }
-    .logo { font-size:26px; font-weight:bold; background:linear-gradient(135deg,#ff2e2e,#ff6a00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:2px; }
-    .hamburger { font-size:26px; cursor:pointer; }
+/* HEADER */
+header { position:fixed; top:0; width:100%; padding:20px 40px; display:flex; justify-content:space-between; align-items:center; background: rgba(0,0,0,0.8); z-index:1000; transition:all 0.4s ease; }
+header.hide { transform:translateY(-100%); opacity:0; }
+.logo { font-size:26px; font-weight:bold; background: linear-gradient(135deg,#ff2e2e,#ff6a00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:2px; }
+.hamburger { font-size:26px; cursor:pointer; }
 
-    /* MENU */
-    .menu { position:fixed; top:0; left:-100%; width:100%; height:100vh; background:#000; padding:40px; transition:all 0.6s ease; z-index:2000; }
-    .menu.active { left:0; }
-    .close { position:absolute; top:25px; right:35px; font-size:30px; cursor:pointer; }
-    .menu ul { margin-top:100px; list-style:none; }
-    .menu ul li { padding:20px 0; border-bottom:1px solid #222; font-size:22px; transition:0.3s; }
-    .menu ul li:hover { color:#ff2e2e; transform:translateX(10px); }
+/* MENU */
+.menu { position:fixed; top:0; left:-100%; width:100%; height:100vh; background:#000; padding:40px; transition: all 0.6s ease; z-index:2000;}
+.menu.active { left:0; }
+.close { position:absolute; top:25px; right:35px; font-size:30px; cursor:pointer; }
+.menu ul { margin-top:100px; list-style:none; }
+.menu ul li { padding:20px 0; border-bottom:1px solid #222; font-size:22px; transition:0.3s;}
+.menu ul li:hover { color:#ff2e2e; transform:translateX(10px); }
 
-    /* DASHBOARD HERO */
-    .dashboard-hero { min-height:100vh; padding-top:120px; display:flex; flex-direction:column; align-items:center; text-align:center; }
-    .user-box { background: linear-gradient(135deg,#111,#222); padding:30px; border-radius:16px; max-width:600px; width:90%; box-shadow:0 0 20px rgba(255,46,46,0.4); margin-bottom:40px; }
-    .user-box h2 { font-size:28px; background:linear-gradient(135deg,#ff2e2e,#ff6a00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; margin-bottom:15px; }
-    .user-box p { font-size:16px; opacity:0.9; margin-bottom:10px; }
+/* DASHBOARD HERO */
+.dashboard-hero { padding-top:140px; text-align:center; }
+.dashboard-hero h1 { font-size:42px; margin-bottom:10px; background: linear-gradient(135deg,#ff2e2e,#ff6a00); -webkit-background-clip:text; -webkit-text-fill-color:transparent;}
+.dashboard-hero p { font-size:16px; opacity:0.9; margin-bottom:40px; }
 
-    .projects-box { background: linear-gradient(135deg,#111,#222); padding:20px; border-radius:16px; max-width:800px; width:90%; box-shadow:0 0 20px rgba(255,46,46,0.4); margin-bottom:40px; }
-    .projects-box h3 { font-size:24px; margin-bottom:20px; color:#ff2e2e; background:linear-gradient(135deg,#ff2e2e,#ff6a00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
-    .project-item { background:#111; padding:15px; border-radius:8px; margin-bottom:10px; border:1px solid #ff2e2e; display:flex; justify-content:space-between; align-items:center; }
-    .project-item span { font-size:16px; }
-    .no-project { font-size:18px; opacity:0.7; margin-top:20px; }
+/* USER PANEL */
+.user-panel { max-width:800px; margin:0 auto 40px; padding:30px; background: linear-gradient(135deg,#111,#222); border-radius:16px; box-shadow:0 0 20px rgba(255,46,46,0.4);}
+.user-panel h2 { font-size:28px; margin-bottom:15px; color:#ff2e2e; background: linear-gradient(135deg,#ff2e2e,#ff6a00); -webkit-background-clip:text; -webkit-text-fill-color:transparent;}
+.user-panel p { font-size:16px; opacity:0.9; margin-bottom:5px;}
 
-    button.logout-btn { padding:12px 20px; font-size:16px; border:none; border-radius:8px; cursor:pointer; background:linear-gradient(135deg,#ff2e2e,#ff6a00); color:#fff; transition:0.3s; margin-top:10px; }
-    button.logout-btn:hover { transform:scale(1.05); box-shadow:0 0 15px rgba(255,46,46,0.7); }
+/* PROJECTS */
+.projects { max-width:900px; margin:0 auto; display:grid; grid-template-columns: repeat(auto-fit,minmax(250px,1fr)); gap:20px;}
+.project-card { padding:20px; background: linear-gradient(135deg,#111,#222); border-radius:12px; box-shadow:0 0 15px rgba(255,46,46,0.4); text-align:center;}
+.project-card h3 { font-size:20px; color:#ff2e2e; margin-bottom:10px;}
+.project-card p { font-size:14px; opacity:0.8; }
 
-    /* FOOTER */
-    .footer { background:#000; border-top:2px solid #ff2e2e; box-shadow:0 -10px 40px rgba(255,46,46,0.3); margin-top:50px; }
-    .footer-container { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:40px; padding:80px 60px; }
-    .footer-box h2, .footer-box h3 { color:#ff2e2e; margin-bottom:15px; }
-    .footer-box p, .footer-box ul li { font-size:14px; opacity:0.85; }
-    .footer-box ul { list-style:none; }
-    .footer-box ul li a { color:#fff; opacity:0.8; transition:0.3s; }
-    .footer-box ul li a:hover { color:#ff2e2e; padding-left:6px; }
-    .socials { margin-top:15px; }
-    .socials a { display:inline-block; margin-right:12px; font-size:20px; color:#fff; transition:0.3s; }
-    .socials a:hover { color:#ff2e2e; transform:scale(1.2); text-shadow:0 0 15px #ff2e2e; }
+/* EMPTY PROJECT LOGO */
+.empty-logo { font-size:80px; color:#ff2e2e; opacity:0.3; margin-top:40px; text-align:center; }
 
-    @media(max-width:768px) {
-      .user-box, .projects-box { padding:20px; }
-      header { padding:15px 20px; }
-    }
-  </style>
+/* FOOTER */
+.footer { background:#000; border-top:2px solid #ff2e2e; box-shadow:0 -10px 40px rgba(255,46,46,0.3); margin-top:50px;}
+.footer-container { display:grid; grid-template-columns: repeat(auto-fit, minmax(220px,1fr)); gap:40px; padding:80px 60px;}
+.footer-box h2, .footer-box h3 { color:#ff2e2e; margin-bottom:15px; }
+.footer-box p, .footer-box ul li { font-size:14px; opacity:0.85; }
+.footer-box ul { list-style:none; }
+.footer-box ul li a { color:#fff; opacity:0.8; transition:0.3s;}
+.footer-box ul li a:hover { color:#ff2e2e; padding-left:6px; }
+.socials { margin-top:15px; }
+.socials a { display:inline-block; margin-right:12px; font-size:20px; color:#fff; transition:0.3s;}
+.socials a:hover { color:#ff2e2e; transform:scale(1.2); text-shadow:0 0 15px #ff2e2e;}
+.footer-bottom { text-align:center; padding:20px; font-size:13px; border-top:1px solid #222; opacity:0.6;}
+
+@media(max-width:768px){ .user-panel, .projects { padding:20px;} header{padding:15px 20px;} }
+</style>
 </head>
 <body>
-  <!-- HEADER -->
-  <header id="header">
-    <div class="logo">NEXORA</div>
-    <div class="hamburger" onclick="openMenu()">
-      <i class="fas fa-bars"></i>
-    </div>
-  </header>
 
-  <!-- MENU -->
-  <div class="menu" id="menu">
-    <div class="close" onclick="closeMenu()">
-      <i class="fas fa-times"></i>
+<header id="header">
+  <div class="logo">NEXORA</div>
+  <div class="hamburger" onclick="openMenu()"><i class="fas fa-bars"></i></div>
+</header>
+
+<div class="menu" id="menu">
+  <div class="close" onclick="closeMenu()"><i class="fas fa-times"></i></div>
+  <ul>
+    <li><a href="index.html">Home</a></li>
+    <li><a href="#">My Projects</a></li>
+    <li><a href="#">About Us</a></li>
+    <li><a href="#">FAQ</a></li>
+    <li><a href="#">Support</a></li>
+  </ul>
+</div>
+
+<section class="dashboard-hero">
+  <h1>Welcome to Your Dashboard</h1>
+  <p>Here you can see your profile information and projects.</p>
+</section>
+
+<div class="user-panel" id="userPanel">
+  <h2>User Profile</h2>
+  <p id="fullNameDisplay">Full Name: </p>
+  <p id="phoneDisplay">Phone: </p>
+</div>
+
+<section class="projects" id="projectsSection">
+  <!-- Project cards will be injected here -->
+</section>
+
+<div class="empty-logo" id="emptyLogo">🎨</div>
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-box brand">
+      <h2>NEXORA</h2>
+      <p>Nexora is a new generation of web solutions, focused on design, performance, and business growth.</p>
     </div>
-    <ul>
-      <li><a href="dashboard.html">Dashboard</a></li>
-      <li><a href="#">My Projects</a></li>
-      <li><a href="#">About Us</a></li>
-      <li><a href="#">FAQ</a></li>
-      <li><a href="#">Support</a></li>
-    </ul>
+    <div class="footer-box">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="#">Sign Up / Sign In</a></li>
+        <li><a href="#">My Projects</a></li>
+        <li><a href="#">About Us</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Support</a></li>
+      </ul>
+    </div>
+    <div class="footer-box">
+      <h3>Services</h3>
+      <ul>
+        <li>Create Web</li>
+        <li>Web Design</li>
+        <li>Landing Page</li>
+        <li>Automation CRM</li>
+        <li>SEO</li>
+        <li>Web Security</li>
+      </ul>
+    </div>
+    <div class="footer-box">
+      <h3>Contact</h3>
+      <p>Email: support@nexora.com</p>
+      <p>Available: 24/7</p>
+      <div class="socials">
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-telegram"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+      </div>
+    </div>
   </div>
+  <div class="footer-bottom">© 2022 Nexora. All rights reserved.</div>
+</footer>
 
-  <!-- DASHBOARD -->
-  <section class="dashboard-hero">
-    <div class="user-box">
-      <h2 id="userName">User Name</h2>
-      <p id="userPhone">Phone Number: </p>
-      <button class="logout-btn" onclick="logout()">Logout</button>
-    </div>
+<script>
+window.addEventListener("DOMContentLoaded", () => {
+  const menu = document.getElementById("menu");
+  const header = document.getElementById("header");
+  const userPanel = document.getElementById("userPanel");
+  const fullNameDisplay = document.getElementById("fullNameDisplay");
+  const phoneDisplay = document.getElementById("phoneDisplay");
+  const projectsSection = document.getElementById("projectsSection");
+  const emptyLogo = document.getElementById("emptyLogo");
 
-    <div class="projects-box">
-      <h3>My Projects</h3>
-      <div id="projectsList"></div>
-    </div>
-  </section>
+  // Menu
+  document.querySelector(".hamburger").addEventListener("click", () => {
+    menu.classList.add("active"); document.body.style.overflow = "hidden";
+  });
+  document.querySelector(".close").addEventListener("click", () => {
+    menu.classList.remove("active"); document.body.style.overflow = "auto";
+  });
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer-container">
-      <div class="footer-box brand">
-        <h2>NEXORA</h2>
-        <p>Nexora is a new generation of web solutions, focused on design, performance, and business growth.</p>
-      </div>
-      <div class="footer-box">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a href="signup.html">Sign Up / Sign In</a></li>
-          <li><a href="#">My Projects</a></li>
-          <li><a href="#">About Us</a></li>
-          <li><a href="#">FAQ</a></li>
-          <li><a href="#">Support</a></li>
-        </ul>
-      </div>
-      <div class="footer-box">
-        <h3>Services</h3>
-        <ul>
-          <li>Create Web</li>
-          <li>Web Design</li>
-          <li>Landing Page</li>
-          <li>Automation CRM</li>
-          <li>SEO</li>
-          <li>Web Security</li>
-        </ul>
-      </div>
-      <div class="footer-box">
-        <h3>Contact</h3>
-        <p>Email: support@nexora.com</p>
-        <p>Available: 24/7</p>
-        <div class="socials">
-          <a href="#"><i class="fab fa-instagram"></i></a>
-          <a href="#"><i class="fab fa-telegram"></i></a>
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-        </div>
-      </div>
-    </div>
-    <div class="footer-bottom">© 2022 Nexora. All rights reserved.</div>
-  </footer>
+  // Scroll hide header
+  let lastScroll = 0;
+  window.addEventListener("scroll", () => {
+    if(menu.classList.contains("active")) return;
+    let currentScroll = window.pageYOffset;
+    if(currentScroll > lastScroll) header.classList.add("hide");
+    else header.classList.remove("hide");
+    lastScroll = currentScroll;
+  });
 
-  <script>
-    const menu = document.getElementById("menu");
-    const header = document.getElementById("header");
-    const userName = document.getElementById("userName");
-    const userPhone = document.getElementById("userPhone");
-    const projectsList = document.getElementById("projectsList");
+  // Load user data
+  const storedUser = JSON.parse(localStorage.getItem("user"));
+  const loggedIn = localStorage.getItem("loggedIn");
+  if(!storedUser || loggedIn !== "true") {
+    alert("You are not logged in! Redirecting to login page.");
+    window.location.href = "login.html";
+    return;
+  }
 
-    // Menu functions
-    function openMenu() { menu.classList.add("active"); document.body.style.overflow="hidden"; }
-    function closeMenu() { menu.classList.remove("active"); document.body.style.overflow="auto"; }
+  fullNameDisplay.textContent = "Full Name: " + storedUser.fullName;
+  phoneDisplay.textContent = "Phone: " + storedUser.phone;
 
-    // Scroll hide header
-    let lastScroll = 0;
-    window.addEventListener("scroll", () => {
-      if(menu.classList.contains("active")) return;
-      let currentScroll = window.pageYOffset;
-      if(currentScroll > lastScroll) { header.classList.add("hide"); }
-      else { header.classList.remove("hide"); }
-      lastScroll = currentScroll;
+  // Load projects
+  const projects = storedUser.projects || [];
+  if(projects.length > 0){
+    emptyLogo.style.display = "none";
+    projects.forEach((p, idx) => {
+      const card = document.createElement("div");
+      card.className = "project-card";
+      card.innerHTML = `<h3>Project ${idx+1}</h3><p>${p}</p>`;
+      projectsSection.appendChild(card);
     });
+  } else {
+    projectsSection.style.display = "none";
+    emptyLogo.style.display = "block";
+  }
+});
+</script>
 
-    // Load user data
-    const loggedUser = JSON.parse(localStorage.getItem("loggedIn"));
-    if(!loggedUser) { 
-      alert("Please login first!"); 
-      window.location.href = "login.html"; 
-    } else {
-      userName.textContent = loggedUser.fullName;
-      userPhone.textContent = "Phone Number: " + loggedUser.phone;
-
-      // Load projects if exists
-      const projects = JSON.parse(localStorage.getItem("projects_" + loggedUser.phone)) || [];
-      if(projects.length > 0){
-        projects.forEach((p,i)=>{
-          const div = document.createElement("div");
-          div.className = "project-item";
-          div.innerHTML = `<span>${i+1}. ${p}</span>`;
-          projectsList.appendChild(div);
-        });
-      } else {
-        projectsList.innerHTML = `<p class="no-project">You have no projects yet. <i class="fas fa-box-open"></i></p>`;
-      }
-    }
-
-    function logout() {
-      localStorage.removeItem("loggedIn");
-      window.location.href = "login.html";
-    }
-  </script>
 </body>
 </html>
