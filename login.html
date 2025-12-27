@@ -14,26 +14,83 @@
 
     /* ================= HEADER ================= */
     header {
-      position: fixed; top:0; width:100%; padding:20px 40px;
-      display:flex; justify-content:space-between; align-items:center;
-      background: rgba(0,0,0,0.8); z-index:1000; transition: all 0.4s ease;
-    }
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  backdrop-filter: blur(10px);
+  background: rgba(0,0,0,0.6);
+  box-shadow: 0 5px 20px rgba(255,46,46,0.2);
+  z-index: 1000;
+  transition: all 0.4s ease;
+}
 
-    header.hide { transform: translateY(-100%); opacity:0; }
+header.hide {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+.logo {
+  font-size: 26px;
+  font-weight: bold;
+  background: linear-gradient(135deg, #ff2e2e, #ff7e5f); /* گرادیانت قرمز به نارنجی */
+  -webkit-background-clip: text; /* کلپ کردن گرادیانت روی متن */
+  color: transparent; /* رنگ متن رو شفاف کنیم تا فقط گرادیانت دیده بشه */
+  letter-spacing: 1px;
+  border-radius: 10px; /* گوشه‌های گرد */
+  padding: 3px 12px; /* فضای داخلی برای ایجاد یک فاصله و بهتر شدن جلوه */
+  display: inline-block; /* برای استفاده از padding */
+}
+}
 
-    .logo { font-size:26px; font-weight:bold; background: linear-gradient(135deg, #ff2e2e, #ff6a00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; letter-spacing:2px; }
-    .hamburger { font-size:26px; cursor:pointer; }
+.hamburger {
+  font-size: 26px;
+  cursor: pointer;
+  color: #ff4d4d;
+}
 
-    .menu {
-      position: fixed; top:0; left:-100%; width:100%; height:100vh;
-      background:#000; padding:40px; transition: all 0.6s ease; z-index:2000;
-    }
-    .menu.active { left:0; }
-    .close { position:absolute; top:25px; right:35px; font-size:30px; cursor:pointer; }
-    .menu ul { margin-top:100px; list-style:none; }
-    .menu ul li { padding:20px 0; border-bottom:1px solid #222; font-size:22px; transition:0.3s; }
-    .menu ul li:hover { color:#ff2e2e; transform: translateX(10px); }
+/* ================= HAMBURGER MENU ================= */
+.menu {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100vh;
+  background: linear-gradient(180deg, #111, #000);
+  padding: 50px 40px;
+  transition: all 0.6s ease;
+  z-index: 2000;
+}
 
+.menu.active { left: 0; }
+
+.close {
+  position: absolute;
+  top: 25px;
+  right: 35px;
+  font-size: 30px;
+  cursor: pointer;
+  color: #ff4d4d;
+}
+
+.menu ul {
+  margin-top: 100px;
+  list-style: none;
+}
+
+.menu ul li {
+  padding: 20px 0;
+  border-bottom: 1px solid #222;
+  font-size: 22px;
+  transition: 0.3s;
+}
+
+.menu ul li:hover {
+  color: #ff4d4d;
+  transform: translateX(10px);
+}
     /* ================= LOGIN HERO ================= */
     .login-hero {
       min-height:100vh; display:flex; justify-content:center; align-items:center;
