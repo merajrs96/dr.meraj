@@ -84,7 +84,23 @@ header .logo { font-size:26px; font-weight:bold; background:linear-gradient(135d
 
 <!-- PROFILE BOX -->
 <section class="profile-box">
-    <div class="avatar" onclick="selectAvatar()"></div>
+    <div class="dashboard-box">
+
+  <!-- Selected Avatar -->
+  <div class="selected-avatar" id="selectedAvatar">
+    <div class="avatar-icon lion"></div> <!-- آواتار پیش‌فرض -->
+  </div>
+
+  <!-- Avatar List (مخفی از اول) -->
+  <div class="avatar-list" id="avatarList">
+    <div class="avatar-icon lion" data-name="Lion"></div>
+    <div class="avatar-icon wolf" data-name="Wolf"></div>
+    <div class="avatar-icon elephant" data-name="Elephant"></div>
+    <div class="avatar-icon eagle" data-name="Eagle"></div>
+    <div class="avatar-icon shark" data-name="Shark"></div>
+  </div>
+
+    </div>
     <h3>Your Profile</h3>
     <p>Click to choose your avatar and update your profile information.</p>
     <button onclick="openProfileForm()">Complete Your Profile</button>
@@ -114,13 +130,13 @@ header .logo { font-size:26px; font-weight:bold; background:linear-gradient(135d
 
 <!-- TAB CONTENT -->
 <section id="projects" class="tab-content" style="display:block;">
-    <p><i class="fas fa-folder-open"></i> هنوز پروژه‌ای ثبت نشده است.</p>
-</section>
-<section id="newProject" class="tab-content">
+    <p><i class="fas fa-folder-open"></i> No projects yet.</p>
+</section>ش
+<section id="newProject" class="tab-contentش">
     <button onclick="alert('صفحه پروژه جدید بعداً اضافه می‌شود')">New Project</button>
 </section>
 <section id="history" class="tab-content">
-    <p>تاریخچه فعالیت‌ها در سایت در این بخش نمایش داده می‌شود.</p>
+    <p>don't find anything</p>
 </section>
 
 <!-- FOOTER -->
