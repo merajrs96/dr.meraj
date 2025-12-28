@@ -25,7 +25,48 @@ header .logo { font-size:26px; font-weight:bold; background:linear-gradient(135d
 
 /* ================== PROFILE BOX ================== */
 .profile-box { margin:140px auto 50px; background:linear-gradient(145deg,#111,#222); border-radius:20px; padding:40px; text-align:center; box-shadow:0 10px 25px rgba(255,46,46,0.3); width:90%; max-width:400px; }
-.profile-box .avatar { width:100px; height:100px; background:#ff4d4d; border-radius:50%; margin:0 auto 20px; cursor:pointer; }
+..avatar-section {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.selected-avatar {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 15px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #333;
+}
+
+.avatar-list {
+  display: none; /* مخفی از اول */
+  margin-top: 15px;
+}
+
+.avatar-list .avatar-icon {
+  width: 70px;
+  height: 70px;
+  display: inline-block;
+  margin: 8px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.avatar-icon.lion { background: gold; }
+.avatar-icon.wolf { background: gray; }
+.avatar-icon.elephant { background: #b0c4de; }
+.avatar-icon.eagle { background: brown; }
+.avatar-icon.shark { background: #1e90ff; }
+
+.avatar-list .avatar-icon:hover {
+  transform: scale(1.1);
+}
 .profile-box h3 { color:#ff4d4d; margin-bottom:20px; font-size:24px; }
 .profile-box p { color:#eee; font-size:16px; line-height:1.6; }
 .profile-box button { margin-top:30px; background:linear-gradient(135deg,#ff2e2e,#ff6a00); color:#fff; border:none; border-radius:30px; padding:14px 35px; font-weight:bold; cursor:pointer; }
@@ -165,6 +206,26 @@ header .logo { font-size:26px; font-weight:bold; background:linear-gradient(135d
 </footer>
 
 <script>
+ 
+const selectedAvatar = document.getElementById('selectedAvatar');
+const avatarList = document.getElementById('avatarList');
+
+selectedAvatar.addEventListener('click', () => {
+  // هر بار کلیک، لیست نمایش/مخفی میشه
+  avatarList.style.display =
+    avatarList.style.display === 'block' ? 'none' : 'block';
+});
+
+avatarList.querySelectorAll('.avatar-icon').forEach(avatar => {
+  avatar.addEventListener('click', () => {
+    // جایگزینی آواتار انتخاب شده
+    selectedAvatar.innerHTML = '';
+    const clone = avatar.cloneNode(true);
+    selectedAvatar.appendChild(clone);
+    // مخفی کردن لیست بعد از انتخاب
+    avatarList.style.display = 'none';
+  });
+});
     // HAMBURGER MENU
     function openMenu(){ document.getElementById('menu').classList.add('active'); }
     function closeMenu(){ document.getElementById('menu').classList.remove('active'); }
