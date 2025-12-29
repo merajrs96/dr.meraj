@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nexora - Project Wizard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/906/906343.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, Helvetica, sans-serif; }
+    body { background:#000; color:#fff; overflow-x:hidden; }
+    a { text-decoration:none; color:inherit; }
+
+    /* HEADER */
+    header { position:fixed; top:0; width:100%; padding:20px 40px; display:flex; justify-content:space-between; align-items:center; backdrop-filter:blur(10px); background:rgba(0,0,0,0.6); box-shadow:0 5px 20px rgba(255,46,46,0.2); z-index:1000; transition: all 0.4s ease; }
+    header.hide { transform:translateY(-100%); opacity:0; }
+    .logo { font-size:26px; font-weight:bold; background: linear-gradient(135deg, #ff2e2e, #ff7e5f); -webkit-background-clip: text; color:transparent; letter-spacing:1px; border-radius:10px; padding:3px 12px; display:inline-block; }
+    .hamburger { font-size:26px; cursor:pointer; color:#ff4d4d; }
+
+    /* HAMBURGER MENU */
+    .menu { position:fixed; top:0; left:-100%; width:100%; height:100vh; background: linear-gradient(180deg, #111, #000); padding:50px 40px; transition: all 0.6s ease; z-index:2000; }
+    .menu.active { left:0; }
+    .close { position:absolute; top:25px; right:35px; font-size:30px; cursor:pointer; color:#ff4d4d; }
+    .menu ul { margin-top:100px; list-style:none; }
+    .menu ul li { padding:20px 0; border-bottom:1px solid #222; font-size:22px; transition:0.3s; }
+    .menu ul li:hover { color:#ff4d4d; transform:translateX(10px); }
+
+    /* PROJECT WIZARD HERO */
+    .wizard-hero { min-height:100vh; display:flex; justify-content:center; align-items:center; padding-top:120px; flex-direction:column; text-align:center; }
+    .wizard-box { background: linear-gradient(135deg, #111, #222); padding:40px 30px; border-radius:16px; max-width:500px; width:90%; margin:20px auto; box-shadow:0 0 20px rgba(255,46,46,0.4); display:none; flex-direction:column; align-items:center; text-align:center; }
+    .wizard-box.active { display:flex; }
+    .wizard-box h2 { margin-bottom:25px; font-size:26px; background: linear-gradient(135deg,#ff2e2e,#ff6a00); -webkit-background-clip:text; -webkit-text-fill-color:transparent; }
+    .wizard-box button, .wizard-box input, .wizard-box textarea { margin-bottom:20px; }
+    .wizard-box button { padding:12px 20px; border:none; border-radius:8px; background: linear-gradient(135deg,#ff2e2e,#ff6a00); color:#fff; font-size:16px; cursor:pointer; font-weight:bold; transition:0.3s; }
+    .wizard-box button:hover { transform:scale(1.05); box-shadow:0 0 15px rgba(255,46,46,0.7); }
+    .service-options { display:flex; flex-wrap:wrap; gap:15px; justify-content:center; }
+    .service-option { padding:10px 15px; border:1px solid #ff2e2e; border-radius:8px; cursor:pointer; transition:0.3s; }
+    .service-option:hover, .service-option.active { background:#ff2e2e; color:#000; }
+
+    .slider-container { width:100%; }
+    input[type=range] { width:100%; }
+
+    textarea { width:100%; padding:10px; border-radius:8px; border:1px solid #ff2e2e; background:#111; color:#fff; resize:none; }
+
+    /* FOOTER */
+    .footer { background:#000; border-top:2px solid #ff2e2e; box-shadow:0 -10px 40px rgba(255,46,46,0.3); margin-top:50px; }
+    .footer-container { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:40px; padding:80px 60px; }
+    .footer-box h2,.footer-box h3 { color:#ff2e2e; margin-bottom:15px; }
+    .footer-box p,.footer-box ul li { font-size:14px; opacity:0.85; }
+    .footer-box ul { list-style:none; }
+    .footer-box ul li a { color:#fff; opacity:0.8; transition:0.3s; }
+    .footer-box ul li a:hover { color:#ff2e2e; padding-left:6px; }
+    .socials { margin-top:15px; }
+    .socials a { display:inline-block; margin-right:12px; font-size:20px; color:#fff; transition:0.3s; }
+    .socials a:hover { color:#ff2e2e; transform:scale(1.2); text-shadow:0 0 15px #ff2e2e; }
+
+    .footer-bottom { text-align:center; padding:20px; font-size:13px; border-top:1px solid #222; opacity:0.6; }
+
+    @media(max-width:768px){ .wizard-box{padding:30px 20px;} header{padding:15px 20px;} }
+
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header id="header">
+    <div class="logo">NEXORA</div>
+    <div class="hamburger" onclick="openMenu()"><i class="fas fa-bars"></i></div>
+  </header>
+
+  <!-- MENU -->
+  <div class="menu" id="menu">
+    <div class="close" onclick="closeMenu()"><i class="fas fa-times"></i></div>
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="dashboard.html">My Projects</a></li>
+      <li><a href="about.html">About Us</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="support.html">Support</a></li>
+    </ul>
+  </div>
+
+  <!-- WIZARD HERO -->
+  <section class="wizard-hero">
+    <!-- Box 1: Welcome -->
+    <div class="wizard-box active" id="box1">
+      <h2>Customize Your Web</h2>
+      <button onclick="nextBox(2)">Start</button>
+    </div>
+
+    <!-- Box 2: Select Service -->
+    <div class="wizard-box" id="box2">
+      <h2>What services do you need?</h2>
+      <div class="service-options">
+        <div class="service-option" onclick="selectService('landing')">Web Landing Page</div>
+        <div class="service-option" onclick="selectService('webdesign')">Create Web Design</div>
+        <div class="service-option" onclick="selectService('automation')">Web Automation</div>
+        <div class="service-option" onclick="selectService('seo')">SEO</div>
+        <div class="service-option" onclick="selectService('security')">Security</div>
+        <div class="service-option" onclick="selectService('other')">Other</div>
+      </div>
+    </div>
+
+    <!-- Box 3: Subservice (dynamic based on previous selection) -->
+    <div class="wizard-box" id="box3">
+      <h2>Select Specific Option</h2>
+      <div class="service-options" id="subservices"></div>
+      <button id="box3-next" onclick="nextBox(4)" style="display:none;">Next</button>
+    </div>
+
+    <!-- Box 4: Time Slider -->
+    <div class="wizard-box" id="box4">
+      <h2>How much time do you have?</h2>
+      <div class="slider-container">
+        <input type="range" id="timeRange" min="2" max="60" value="10" oninput="timeOutput.value = this.value">
+        <output id="timeOutput">10</output> Days
+      </div>
+      <button onclick="nextBox(5)">Next</button>
+    </div>
+
+    <!-- Box 5: Budget Slider -->
+    <div class="wizard-box" id="box5">
+      <h2>How much budget do you have?</h2>
+      <div class="slider-container">
+        <input type="range" id="budgetRange" min="5" max="2000" value="100" oninput="budgetOutput.value = this.value">
+        <output id="budgetOutput">100</output> $ 
+      </div>
+      <button onclick="nextBox(6)">Next</button>
+    </div>
+
+    <!-- Box 6: Additional Notes -->
+    <div class="wizard-box" id="box6">
+      <h2>Additional Notes (Optional)</h2>
+      <textarea id="notes" rows="4" placeholder="Write any extra details here..."></textarea>
+      <button onclick="nextBox(7)">Next</button>
+    </div>
+
+    <!-- Box 7: Contact -->
+    <div class="wizard-box" id="box7">
+      <h2>Contact Information</h2>
+      <input type="text" id="whatsapp" placeholder="WhatsApp Number" />
+      <input type="text" id="otp" placeholder="OTP Code" />
+      <button onclick="submitProject()">Submit</button>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-box brand">
+        <h2>NEXORA</h2>
+        <p>Nexora is a new generation of web solutions, focused on design, performance, and business growth.</p>
+      </div>
+      <div class="footer-box">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="signup.html">Sign Up / Sign In</a></li>
+          <li><a href="dashboard.html">My Projects</a></li>
+          <li><a href="about.html">About Us</a></li>
+          <li><a href="faq.html">FAQ</a></li>
+          <li><a href="support.html">Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-box">
+        <h3>Services</h3>
+        <ul>
+          <li>Create Web</li>
+          <li>Web Design</li>
+          <li>Landing Page</li>
+          <li>Automation CRM</li>
+          <li>SEO</li>
+          <li>Web Security</li>
+        </ul>
+      </div>
+      <div class="footer-box">
+        <h3>Contact</h3>
+        <p>Email: support@nexora.com</p>
+        <p>Available: 24/7</p>
+        <div class="socials">
+          <a href="https://www.instagram.com/meraj._.ak47?igsh=MWU3NHI0cjMwa2F5Yg=="><i class="fab fa-instagram"></i></a>
+          <a href="https://t.me/richkiid1"><i class="fab fa-telegram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2022 Nexora. All rights reserved.</div>
+  </footer>
+
+  <script>
+    const menu = document.getElementById("menu");
+    const header = document.querySelector("header");
+
+    function openMenu() { menu.classList.add("active"); document.body.style.overflow="hidden"; }
+    function closeMenu() { menu.classList.remove("active"); document.body.style.overflow="auto"; }
+
+    // Scroll hide header
+    let lastScroll = 0;
+    window.addEventListener("scroll", ()=>{
+      if(menu.classList.contains("active")) return;
+      let currentScroll = window.pageYOffset;
+      if(currentScroll > lastScroll) header.classList.add("hide");
+      else header.classList.remove("hide");
+      lastScroll=currentScroll;
+    });
+
+    // Step navigation
+    function nextBox(boxNum){
+      document.querySelectorAll('.wizard-box').forEach(b=>b.classList.remove('active'));
+      document.getElementById('box'+boxNum).classList.add('active');
+    }
+
+    // Dynamic Subservices based on selection
+    const subservicesData = {
+      landing: ['Marketing Page','Blog Page','Portfolio Page'],
+      webdesign: ['Business Web','Blog Web','Online Shop'],
+      automation: ['CRM Automation','Email Automation','Workflow Automation'],
+      seo: ['On-page SEO','Off-page SEO','Technical SEO'],
+      security: ['Penetration Test','Audit','Firewall Setup'],
+      other: ['Custom Request']
+    };
+
+    function selectService(service){
+      document.querySelectorAll('.service-option').forEach(opt=>opt.classList.remove('active'));
+      event.target.classList.add('active');
+      const subDiv = document.getElementById('subservices');
+      subDiv.innerHTML='';
+      subservicesData[service].forEach(s=>{
+        const btn = document.createElement('div');
+        btn.className='service-option';
+        btn.innerText=s;
+        btn.onclick=()=>{ document.getElementById('box3-next').style.display='block'; };
+        subDiv.appendChild(btn);
+      });
+      nextBox(3);
+    }
+
+    function submitProject(){
+      const projectData = {
+        service: document.querySelector('.service-option.active')?.innerText || '',
+        subservice: Array.from(document.getElementById('subservices').children).find(b=>b.classList.contains('active'))?.innerText || '',
+        time: document.getElementById('timeRange').value,
+        budget: document.getElementById('budgetRange').value,
+        notes: document.getElementById('notes').value,
+        whatsapp: document.getElementById('whatsapp').value,
+        otp: document.getElementById('otp').value
+      };
+      console.log(projectData);
+      alert("پروژه شما ثبت شد و در حال بررسی است.\nدر صورت تایید اطلاعات تکمیلی از طریق واتساپ دریافت خواهد شد.\nاز انتخاب شما متشکریم ❤️");
+      // Reset or redirect if needed
+      nextBox(1);
+    }
+  </script>
+</body>
+</html>
