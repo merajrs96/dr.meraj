@@ -74,6 +74,23 @@ header .logo { font-size:26px; font-weight:bold; background:linear-gradient(135d
 .avatar-list .avatar-icon:hover {
   transform: scale(1.1);
 }
+  /* بخش اطلاعات داخل باکس */
+.profile-info p {
+  margin: 5px 0;
+  font-size: 16px;
+  color: #fff;          /* متن سفید */
+  text-align: left;     /* متن مرتب از سمت چپ */
+  width: 100%;
+}
+
+.profile-info .initial {
+  font-weight: bold;    /* اطلاعات اولیه کمی برجسته */
+}
+
+.profile-info .additional {
+  font-style: italic;   /* اطلاعات تکمیلی اول خالیه، بعد پر میشه */
+  color: #ccc;          /* خاکستری روشن وقتی هنوز پر نشده */
+}
 .profile-box h3 { color:#ff4d4d; margin-bottom:20px; font-size:24px; }
 .profile-box p { color:#eee; font-size:16px; line-height:1.6; }
 .profile-box button { margin-top:30px; background:linear-gradient(135deg,#ff2e2e,#ff6a00); color:#fff; border:none; border-radius:30px; padding:14px 35px; font-weight:bold; cursor:pointer; }
@@ -197,7 +214,16 @@ header .logo { font-size:26px; font-weight:bold; background:linear-gradient(135d
     <h3>Your Profile</h3>
     <p>Click to choose your avatar and update your profile information.</p>
     <button onclick="openProfileForm()">Complete Your Profile</button>
+<div class="profile-info">
+  <p class="initial">نام: Meraj</p>
+  <p class="initial">شماره تماس: 0912xxxxxxx</p>
+  <p class="additional">سن: </p>
+  <p class="additional">کشور: </p>
+  <p class="additional">شغل: </p>
+  <p class="additional">جنسیت: </p>
+</div>
 </section>
+ 
 
 <!-- PROFILE FORM -->
 <div class="profile-form" id="profileForm">
@@ -296,7 +322,36 @@ avatarList.querySelectorAll('.avatar-icon').forEach(avatar => {
         document.querySelector('.profile-box button').style.display='none';
         alert('اطلاعات پروفایل ذخیره شد!');
     }
+// اطلاعات اولیه که موقع ثبت نام گرفته شده
+const userInitial = {
+  name: "Meraj",
+  phone: "09123456789"
+};
 
+// نمایش اطلاعات اولیه
+document.getElementById('name').textContent = "نام: " + userInitial.name;
+document.getElementById('phone').textContent = "شماره تماس: " + userInitial.phone;
+
+// دکمه Complete Your Profile برای نمایش فرم تکمیل
+document.getElementById('completeProfile').addEventListener('click', () => {
+  document.getElementById('profileForm').style.display = 'block';
+});
+
+// ذخیره اطلاعات تکمیلی و نمایش داخل باکس
+document.getElementById('saveProfile').addEventListener('click', () => {
+  const age = document.getElementById('inputAge').value;
+  const country = document.getElementById('inputCountry').value;
+  const job = document.getElementById('inputJob').value;
+  const gender = document.getElementById('inputGender').value;
+
+  document.getElementById('age').textContent = "سن: " + age;
+  document.getElementById('country').textContent = "کشور: " + country;
+  document.getElementById('job').textContent = "شغل: " + job;
+  document.getElementById('gender').textContent = "جنسیت: " + gender;
+
+  // بعد از ذخیره فرم مخفی بشه
+  document.getElementById('profileForm').style.display = 'none';
+});
     // TAB FUNCTION
     function showTab(tab){
         document.querySelectorAll('.tab-content').forEach(c=>c.style.display='none');
